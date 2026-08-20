@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EM Tinting CRM</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="crm.css">
+</head>
+<body>
+  <main class="crm-shell">
+    <section id="loginView" class="auth-card">
+      <div class="brand"><span>EM</span>TINTING CRM</div>
+      <h1>Owner Login</h1>
+      <p>Enter the business email to receive a secure sign-in link.</p>
+      <form id="loginForm">
+        <input id="loginEmail" type="email" value="emtinting@yahoo.com" autocomplete="email" required>
+        <button type="submit">Send login link</button>
+      </form>
+      <p id="loginStatus" class="status"></p>
+    </section>
+
+    <section id="appView" class="app hidden">
+      <header class="topbar">
+        <div><div class="brand"><span>EM</span>TINTING CRM</div><small id="ownerEmail"></small></div>
+        <button id="logoutBtn" class="ghost">Sign out</button>
+      </header>
+
+      <section class="stats-grid">
+        <article><span>Upcoming</span><strong id="statUpcoming">0</strong></article>
+        <article><span>New Requests</span><strong id="statNew">0</strong></article>
+        <article><span>Completed</span><strong id="statCompleted">0</strong></article>
+        <article><span>Booked Revenue</span><strong id="statRevenue">$0</strong></article>
+      </section>
+
+      <section class="panel toolbar">
+        <div>
+          <h2>Bookings</h2>
+          <p>Website requests and manually added jobs.</p>
+        </div>
+        <div class="toolbar-actions">
+          <input id="searchInput" type="search" placeholder="Search customer, phone, vehicle…">
+          <select id="statusFilter"><option value="">All statuses</option><option value="booked">Booked</option><option value="confirmed">Confirmed</option><option value="in_progress">In progress</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select>
+          <button id="refreshBtn" class="ghost">Refresh</button>
+        </div>
+      </section>
+
+      <section class="panel table-wrap">
+        <table>
+          <thead><tr><th>Date</th><th>Customer</th><th>Vehicle</th><th>Service</th><th>Status</th><th>Quote</th><th></th></tr></thead>
+          <tbody id="bookingRows"><tr><td colspan="7">Loading…</td></tr></tbody>
+        </table>
+      </section>
+
+      <section id="detailPanel" class="panel detail hidden">
+        <div class="detail-head"><div><p class="eyebrow">JOB DETAILS</p><h2 id="detailTitle">Booking</h2></div><button id="closeDetail" class="ghost">Close</button></div>
+        <div class="detail-grid">
+          <label>Status<select id="detailStatus"><option value="booked">Booked</option><option value="confirmed">Confirmed</option><option value="in_progress">In progress</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></label>
+          <label>Quoted price<input id="detailPrice" type="number" min="0" step="1" placeholder="0"></label>
+          <label>Deposit<input id="detailDeposit" type="number" min="0" step="1" placeholder="0"></label>
+          <label>Appointment<input id="detailAppointment" type="text" disabled></label>
+        </div>
+        <label>Notes<textarea id="detailNotes" rows="5"></textarea></label>
+        <div class="detail-actions"><a id="detailCall" class="button-link" href="#">Call customer</a><a id="detailText" class="button-link ghost-link" href="#">Text customer</a><button id="saveDetail">Save changes</button></div>
+        <p id="detailStatusMsg" class="status"></p>
+      </section>
+    </section>
+  </main>
+  <script type="module" src="crm.js"></script>
+</body>
+</html>
