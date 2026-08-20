@@ -1,0 +1,323 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #080808;
+  color: #f5f5f2;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* NAVIGATION */
+
+header {
+  height: 78px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(8, 8, 8, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #222;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: #aaa;
+  font-weight: 400;
+  margin-left: 3px;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: white;
+}
+
+/* BUTTONS */
+
+.btn {
+  display: inline-block;
+  background: #f1f0e8;
+  color: #080808;
+  padding: 14px 22px;
+  border-radius: 4px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* HERO */
+
+.hero {
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  padding: 90px 8%;
+  background:
+    radial-gradient(
+      circle at 75% 35%,
+      #292929 0%,
+      #111 35%,
+      #080808 70%
+    );
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #999;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(50px, 8vw, 94px);
+  line-height: 0.98;
+  letter-spacing: -5px;
+  margin: 0 0 28px;
+}
+
+.hero h1 i {
+  font-style: normal;
+  color: #bdbdb5;
+}
+
+.lead {
+  max-width: 620px;
+  color: #aaa;
+  font-size: 19px;
+}
+
+.actions {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 35px;
+}
+
+/* SECTIONS */
+
+.section {
+  padding: 100px 8%;
+}
+
+.light {
+  background: #f1f0e8;
+  color: #101010;
+}
+
+.section h2 {
+  font-size: clamp(40px, 5vw, 66px);
+  line-height: 1.05;
+  letter-spacing: -3px;
+  margin: 0 0 45px;
+}
+
+/* SERVICE CARDS */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.cards article {
+  background: white;
+  padding: 38px;
+  min-height: 300px;
+  border: 1px solid #ddd;
+}
+
+.cards small {
+  color: #777;
+}
+
+.cards h3 {
+  font-size: 25px;
+  margin-top: 45px;
+  margin-bottom: 12px;
+}
+
+.cards p {
+  color: #666;
+}
+
+/* WHY US */
+
+.dark {
+  background: #0b0b0b;
+  color: #f4f4ef;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.points {
+  padding-top: 30px;
+}
+
+.points p {
+  border-top: 1px solid #303030;
+  padding: 22px 0;
+  margin: 0;
+  color: #aaa;
+}
+
+/* GALLERY */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.gallery div {
+  height: 330px;
+  background: #d5d4cc;
+  display: grid;
+  place-items: center;
+  color: #777;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.note {
+  color: #777;
+  font-size: 12px;
+}
+
+/* QUOTE */
+
+.quote {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+
+.quote p:not(.eyebrow) {
+  color: #666;
+}
+
+form {
+  display: grid;
+  gap: 12px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background: white;
+  color: #111;
+  font: inherit;
+  border-radius: 3px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* CONTACT */
+
+.contact {
+  text-align: center;
+  padding: 90px 6%;
+  background: #deddd5;
+  color: #111;
+}
+
+.contact h2 {
+  font-size: 55px;
+  margin: 0;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 28px;
+  color: #666;
+  background: #080808;
+  font-size: 12px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  header {
+    padding: 0 5%;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .hero {
+    min-height: 650px;
+    padding: 70px 6%;
+  }
+
+  .hero h1 {
+    letter-spacing: -3px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section {
+    padding: 75px 6%;
+  }
+
+  .cards,
+  .gallery,
+  .dark,
+  .quote {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery div {
+    height: 250px;
+  }
+
+  .contact h2 {
+    font-size: 42px;
+  }
+}
