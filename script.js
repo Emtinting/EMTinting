@@ -1,0 +1,16 @@
+// EM Tinting - smooth scrolling and simple site behavior
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", function (event) {
+    const target = document.querySelector(this.getAttribute("href"));
+
+    if (target) {
+      event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  });
+});
