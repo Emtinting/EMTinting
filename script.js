@@ -34,7 +34,6 @@ if (tintSelect) {
 const bookingSection = document.querySelector('#book');
 const servicesSection = document.querySelector('#services');
 
-// Weekly availability CTA - intentionally does not claim a number of openings until CRM availability is connected.
 if (servicesSection && !document.querySelector('#availabilityBar')) {
   const bar = document.createElement('section');
   bar.id = 'availabilityBar';
@@ -43,7 +42,6 @@ if (servicesSection && !document.querySelector('#availabilityBar')) {
   servicesSection.parentNode.insertBefore(bar, servicesSection);
 }
 
-// Houston heat education / comparison section.
 if (bookingSection && !document.querySelector('#houstonHeat')) {
   const heat = document.createElement('section');
   heat.id = 'houstonHeat';
@@ -63,7 +61,6 @@ if (bookingSection && !document.querySelector('#houstonHeat')) {
   bookingSection.parentNode.insertBefore(heat, bookingSection);
 }
 
-// Interactive price selector.
 if (bookingSection && !document.querySelector('#quickPrice')) {
   const section = document.createElement('section');
   section.id = 'quickPrice';
@@ -91,7 +88,6 @@ if (bookingSection && !document.querySelector('#quickPrice')) {
   });
 }
 
-// Referral callout. Offer is deliberately non-monetary until the business chooses the exact incentive.
 const faq = document.querySelector('.faq');
 if (faq && !document.querySelector('#referral')) {
   const referral = document.createElement('section');
@@ -101,16 +97,23 @@ if (faq && !document.querySelector('#referral')) {
   faq.parentNode.insertBefore(referral, faq);
 }
 
-// Instagram / recent work placeholder without inventing a social handle.
 if (faq && !document.querySelector('#recentWork')) {
   const recent = document.createElement('section');
   recent.id = 'recentWork';
   recent.className = 'section recent-work-section';
-  recent.innerHTML = `<div class="section-heading light-heading"><div><p class="kicker">RECENT WORK</p><h2>Follow the latest EM Tinting installs.</h2></div><p class="section-intro">Recent vehicle installs and social updates are coming here next. Until then, text us to see examples of current work on a vehicle like yours.</p></div><a class="btn" href="sms:+13468049135?body=Hi%20EM%20Tinting%2C%20can%20you%20send%20me%20some%20examples%20of%20your%20recent%20work%3F">See Recent Work</a>`;
+  recent.innerHTML = `
+    <div class="section-heading light-heading">
+      <div><p class="kicker">RECENT WORK</p><h2>Fresh installs from EM Tinting.</h2></div>
+      <p class="section-intro">A look at recent vehicles and the clean, dark finish customers can expect.</p>
+    </div>
+    <div class="gallery-pro">
+      <figure class="gallery-main"><img src="media/recent-silvia.jpg" alt="White coupe with dark window tint installed by EM Tinting" loading="lazy"><figcaption>Recent tint install</figcaption></figure>
+      <figure><img src="media/recent-tesla.jpg" alt="Black Tesla with dark window tint installed by EM Tinting" loading="lazy"><figcaption>Dark tint finish</figcaption></figure>
+    </div>
+  `;
   faq.parentNode.insertBefore(recent, faq);
 }
 
-// Mobile sticky conversion button.
 if (!document.querySelector('.sticky-book-now')) {
   const sticky = document.createElement('a');
   sticky.className = 'sticky-book-now';
