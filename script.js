@@ -108,7 +108,7 @@ if (faq && !document.querySelector('#recentWork')) {
     </div>
     <div class="gallery-pro">
       <figure class="gallery-main"><img src="media/recent-silvia.jpg" alt="White coupe with dark window tint installed by EM Tinting" loading="lazy"><figcaption>Recent tint install</figcaption></figure>
-      <figure><img src="media/recent-tesla.jpg" alt="Black Tesla with dark window tint installed by EM Tinting" loading="lazy"><figcaption>Dark tint finish</figcaption></figure>
+      <figure><img src="media/recent-tesla.jpg" alt="Black Tesla with dark window tint installed by EM Tinting" loading="lazy"><figcaption>Black vehicle tint finish</figcaption></figure>
     </div>
   `;
   faq.parentNode.insertBefore(recent, faq);
