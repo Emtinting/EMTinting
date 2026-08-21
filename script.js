@@ -29,19 +29,19 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   style.textContent = `
     .hero{background:#050505!important;isolation:isolate}
     .hero-card{display:none!important}
-    .em-hero-slideshow{position:absolute;inset:0;z-index:0;overflow:hidden}
-    .em-hero-slide{position:absolute;inset:0;background-size:cover;background-position:center 56%;opacity:0;transform:scale(1.025);transition:opacity 1s ease,transform 6s ease}
-    .em-hero-slide.active{opacity:1;transform:scale(1)}
-    .hero-overlay{z-index:1!important;background:linear-gradient(90deg,rgba(0,0,0,.98) 0%,rgba(0,0,0,.88) 34%,rgba(0,0,0,.48) 62%,rgba(0,0,0,.18) 100%),linear-gradient(0deg,rgba(5,5,5,.95) 0%,rgba(5,5,5,.15) 32%,transparent 62%)!important}
+    .em-hero-slideshow{position:absolute;inset:0;z-index:0;overflow:hidden;background:#050505}
+    .em-hero-slide{position:absolute;inset:0;background-size:cover;background-position:center 55%;background-repeat:no-repeat;opacity:0;transform:none;filter:brightness(1.08) contrast(1.04) saturate(1.04);transition:opacity .85s ease}
+    .em-hero-slide.active{opacity:1;transform:none}
+    .hero-overlay{z-index:1!important;background:linear-gradient(90deg,rgba(0,0,0,.86) 0%,rgba(0,0,0,.67) 31%,rgba(0,0,0,.28) 52%,rgba(0,0,0,.04) 76%,rgba(0,0,0,0) 100%),linear-gradient(0deg,rgba(5,5,5,.68) 0%,rgba(5,5,5,.06) 27%,transparent 52%)!important}
     .em-hero-controls{position:absolute;z-index:5;left:max(6vw,28px);right:max(6vw,28px);bottom:34px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
-    .em-hero-arrow{pointer-events:auto;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.45);color:#fff;font-size:28px;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px)}
+    .em-hero-arrow{pointer-events:auto;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.34);color:#fff;font-size:28px;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(6px)}
     .em-hero-arrow:hover{border-color:#e21a22;color:#ff3b42}
     .em-hero-dots{pointer-events:auto;display:flex;gap:9px;align-items:center}
-    .em-hero-dot{width:9px;height:9px;border-radius:50%;border:0;background:#8a8a8a;padding:0;cursor:pointer;opacity:.75}
+    .em-hero-dot{width:9px;height:9px;border-radius:50%;border:0;background:#b5b5b5;padding:0;cursor:pointer;opacity:.82}
     .em-hero-dot.active{background:#e21a22;opacity:1}
-    .em-hero-label{position:absolute;z-index:5;right:max(6vw,28px);bottom:94px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#cfcfcf}
+    .em-hero-label{position:absolute;z-index:5;right:max(6vw,28px);bottom:94px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.8)}
     @media(max-width:900px){
-      .em-hero-slide{background-position:center 58%}
+      .em-hero-slide{background-position:center 57%;filter:brightness(1.12) contrast(1.03) saturate(1.05)}
       .em-hero-controls{left:22px;right:22px;bottom:22px}
       .em-hero-label{right:22px;bottom:84px}
       .hero{min-height:720px!important}
@@ -49,9 +49,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
     @media(max-width:620px){
       .hero{min-height:760px!important;padding-top:72px!important}
-      .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.97),rgba(0,0,0,.78) 58%,rgba(0,0,0,.32)),linear-gradient(0deg,#070707 0%,rgba(7,7,7,.18) 34%,transparent 66%)!important}
-      .em-hero-slide{background-position:58% center}
-      .em-hero-arrow{width:42px;height:42px;font-size:24px}
+      .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.84) 0%,rgba(0,0,0,.68) 39%,rgba(0,0,0,.26) 64%,rgba(0,0,0,.03) 100%),linear-gradient(0deg,rgba(7,7,7,.62) 0%,rgba(7,7,7,.08) 30%,transparent 58%)!important}
+      .em-hero-slide{background-position:61% center;filter:brightness(1.14) contrast(1.03) saturate(1.06)}
+      .em-hero-arrow{width:42px;height:42px;font-size:24px;background:rgba(0,0,0,.28)}
       .em-hero-label{font-size:9px;bottom:78px}
     }
   `;
