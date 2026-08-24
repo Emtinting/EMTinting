@@ -69,30 +69,18 @@
         </div>
       </section>
 
-      <section id="bookingsView" class="view">
-        <div class="panel"><div class="panel-head"><h3>Bookings</h3><input id="bookingSearch" class="search" placeholder="Search booking..." /></div><div id="bookingsTable" class="table-wrap"></div></div>
-      </section>
-
-      <section id="customersView" class="view">
-        <div class="panel"><div class="panel-head"><h3>Customers</h3><div class="head-actions"><input id="customerSearch" class="search" placeholder="Search customer..." /><button class="btn primary small" data-open="customerModal">New customer</button></div></div><div id="customersTable" class="table-wrap"></div></div>
-      </section>
-
-      <section id="quotesView" class="view">
-        <div class="panel"><div class="panel-head"><h3>Quotes</h3><button class="btn primary small" data-open="quoteModal">New quote</button></div><div id="quotesTable" class="table-wrap"></div></div>
-      </section>
-
-      <section id="jobsView" class="view">
-        <div class="panel"><div class="panel-head"><h3>Jobs</h3><button class="btn primary small" data-open="jobModal">New job</button></div><div id="jobsTable" class="table-wrap"></div></div>
-      </section>
-
-      <section id="paymentsView" class="view">
-        <div class="panel"><div class="panel-head"><h3>Payments</h3><button class="btn primary small" data-open="paymentModal">Add payment</button></div><div id="paymentsTable" class="table-wrap"></div></div>
-      </section>
+      <section id="bookingsView" class="view"><div class="panel"><div class="panel-head"><h3>Bookings</h3><input id="bookingSearch" class="search" placeholder="Search booking..." /></div><div id="bookingsTable" class="table-wrap"></div></div></section>
+      <section id="customersView" class="view"><div class="panel"><div class="panel-head"><h3>Customers</h3><div class="head-actions"><input id="customerSearch" class="search" placeholder="Search customer..." /><button class="btn primary small" data-open="customerModal">New customer</button></div></div><div id="customersTable" class="table-wrap"></div></div></section>
+      <section id="quotesView" class="view"><div class="panel"><div class="panel-head"><h3>Quotes</h3><button class="btn primary small" data-open="quoteModal">New quote</button></div><div id="quotesTable" class="table-wrap"></div></div></section>
+      <section id="jobsView" class="view"><div class="panel"><div class="panel-head"><h3>Jobs</h3><button class="btn primary small" data-open="jobModal">New job</button></div><div id="jobsTable" class="table-wrap"></div></div></section>
+      <section id="paymentsView" class="view"><div class="panel"><div class="panel-head"><h3>Payments</h3><button class="btn primary small" data-open="paymentModal">Add payment</button></div><div id="paymentsTable" class="table-wrap"></div></div></section>
     </main>
   </div>
 
   <dialog id="customerModal" class="modal"><form id="customerForm"><header><h3>New customer</h3><button type="button" class="x" data-close="customerModal">×</button></header><label>First name<input id="customerFirst" required /></label><label>Last name<input id="customerLast" /></label><label>Phone<input id="customerPhone" required /></label><label>Email<input id="customerEmail" type="email" /></label><button class="btn primary" type="submit">Save customer</button></form></dialog>
-  <dialog id="quoteModal" class="modal"><form id="quoteForm"><header><h3>New quote</h3><button type="button" class="x" data-close="quoteModal">×</button></header><label>Customer<select id="quoteCustomer" required></select></label><label>Service<input id="quoteService" required placeholder="Full vehicle tint" /></label><label>Film package<input id="quoteFilm" placeholder="Carbon IR / Ceramic IR" /></label><label>Amount<input id="quoteAmount" type="number" min="0" step="0.01" required /></label><label>Notes<textarea id="quoteNotes"></textarea></label><button class="btn primary" type="submit">Save quote</button></form></dialog>
+
+  <dialog id="quoteModal" class="modal"><form id="quoteForm"><header><h3>New quote</h3><button type="button" class="x" data-close="quoteModal">×</button></header><label>Customer<select id="quoteCustomer" required></select></label><label>Service<input id="quoteService" required placeholder="Full vehicle tint" /></label><fieldset class="film-fieldset"><legend>Film package</legend><div class="film-options"><label class="film-option"><input type="radio" name="quoteFilm" value="Carbon" required><span>Carbon</span></label><label class="film-option"><input type="radio" name="quoteFilm" value="Ceramic IR" required><span>Ceramic IR</span></label><label class="film-option"><input type="radio" name="quoteFilm" value="Ceramic Plus" required><span>Ceramic Plus</span></label></div></fieldset><label>Amount<input id="quoteAmount" type="number" min="0" step="0.01" required /></label><label>Notes<textarea id="quoteNotes"></textarea></label><button class="btn primary" type="submit">Save quote</button></form></dialog>
+
   <dialog id="jobModal" class="modal"><form id="jobForm"><header><h3>New job</h3><button type="button" class="x" data-close="jobModal">×</button></header><label>Customer<select id="jobCustomer" required></select></label><label>Service<input id="jobService" required /></label><label>Date<input id="jobDate" type="date" /></label><label>Time<input id="jobTime" type="time" /></label><label>Total<input id="jobTotal" type="number" min="0" step="0.01" value="0" /></label><button class="btn primary" type="submit">Save job</button></form></dialog>
   <dialog id="paymentModal" class="modal"><form id="paymentForm"><header><h3>Add payment</h3><button type="button" class="x" data-close="paymentModal">×</button></header><label>Customer<select id="paymentCustomer" required></select></label><label>Amount<input id="paymentAmount" type="number" min="0.01" step="0.01" required /></label><label>Type<select id="paymentType"><option value="deposit">Deposit</option><option value="payment" selected>Payment</option><option value="refund">Refund</option></select></label><label>Method<select id="paymentMethod"><option value="cash">Cash</option><option value="card">Card</option><option value="zelle">Zelle</option><option value="cashapp">Cash App</option><option value="apple_pay">Apple Pay</option><option value="other">Other</option></select></label><button class="btn primary" type="submit">Save payment</button></form></dialog>
 
