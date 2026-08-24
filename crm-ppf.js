@@ -1,12 +1,5 @@
 (() => {
-  const PPF_PACKAGES = [
-    'Front Bumper',
-    'Partial Front',
-    'Full Front',
-    'Track Package',
-    'Full Vehicle',
-    'Custom PPF'
-  ];
+  const PPF_PACKAGES = ['Front Bumper','Partial Front','Full Front','Track Package','Full Vehicle','Custom PPF'];
 
   function initPPFQuote(){
     const form=document.querySelector('#quoteForm');
@@ -35,31 +28,24 @@
       if(ppfPackage)ppfPackage.required=isPPF;
       if(filmFieldset)filmFieldset.style.display=isPPF?'none':'';
       document.querySelector('#filmInfoPanel')?.classList.toggle('hidden',isPPF);
-      const coverage=document.querySelector('#quoteCoverage')?.closest('label');
-      if(coverage)coverage.style.display=isPPF?'none':'';
-      const eyebrow=document.querySelector('#quoteEyebrow')?.closest('label');
-      if(eyebrow)eyebrow.style.display=isPPF?'none':'';
+      const coverage=document.querySelector('#quoteCoverage')?.closest('label'); if(coverage)coverage.style.display=isPPF?'none':'';
+      const eyebrow=document.querySelector('#quoteEyebrow')?.closest('label'); if(eyebrow)eyebrow.style.display=isPPF?'none':'';
       document.querySelectorAll('input[name="quoteFilm"]').forEach(r=>r.required=!isPPF);
       serviceInput.value=isPPF?'Paint Protection Film (PPF)':'Full vehicle tint';
       if(isPPF&&amount)amount.value='';
     }
-    quoteType.addEventListener('change',sync);
-    sync();
+    quoteType.addEventListener('change',sync); sync();
 
     form.addEventListener('submit',async e=>{
       if(quoteType.value!=='PPF')return;
-      e.preventDefault();
-      e.stopImmediatePropagation();
-
+      e.preventDefault(); e.stopImmediatePropagation();
       const first=document.querySelector('#quoteFirst')?.value.trim();
       const last=document.querySelector('#quoteLast')?.value.trim()||'';
       const phone=document.querySelector('#quotePhone')?.value.trim();
       const email=document.querySelector('#quoteEmail')?.value.trim()||null;
-      const amountValue=Number(amount?.value||0);
-      const pkg=ppfPackage?.value;
+      const amountValue=Number(amount?.value||0); const pkg=ppfPackage?.value;
       if(!first||!phone){toast('Customer name and phone are required');return;}
       if(!pkg||!amountValue){toast('Choose a PPF package and enter the quote amount');return;}
-
       const norm=v=>String(v||'').replace(/\D/g,'');
       let customer=typeof state!=='undefined'?state.customers.find(c=>(norm(c.phone)&&norm(c.phone)===norm(phone))||(email&&c.email&&c.email.toLowerCase()===email.toLowerCase())):null;
       const customerPayload={first_name:first,last_name:last,phone,email,updated_at:new Date().toISOString()};
@@ -73,24 +59,21 @@
       const color=document.querySelector('#quoteColor')?.value.trim();
       const vehicleType=document.querySelector('#quoteVehicleType')?.value;
       const userNotes=document.querySelector('#quoteNotes')?.value.trim()||'';
-      const notes=[
-        [year,make,model].filter(Boolean).join(' '),
-        vehicleType?`Vehicle type: ${vehicleType}`:'',
-        color?`Color: ${color}`:'',
-        `PPF package: ${pkg}`,
-        userNotes
-      ].filter(Boolean).join('\n');
-
-      const {error}=await db.from('quotes').insert({customer_id:customerId,service:`PPF - ${pkg}`,film_package:null,amount:amountValue,notes,status:'draft'});
+      const vehicle=[year,make,model].filter(Boolean).join(' ');
+      const notes=[vehicle,vehicleType?`Vehicle type: ${vehicleType}`:'',color?`Color: ${color}`:'',`PPF package: ${pkg}`,userNotes].filter(Boolean).join('\n');
+      const subject=`EM Tinting PPF Quote${vehicle?' – '+vehicle:''}`;
+      const body=`Hi ${first},\n\nThank you for contacting EM Tinting. Here is your PPF quote${vehicle?' for your '+vehicle:''}:\n\n${pkg} — $${amountValue}\n\nThis quote is for the selected paint protection film coverage. If you would like to adjust the protected areas or package, reply to this email and we can update it.\n\nThank you,\nEM Tinting\nHouston & Richmond, TX\n346-804-9135`;
+      const {error}=await db.from('quotes').insert({customer_id:customerId,service:`PPF - ${pkg}`,film_package:null,vehicle_year:year||null,vehicle_make:make||null,vehicle_model:model||null,amount:amountValue,notes,status:'pending_review',quote_type:'PPF',vehicle_type:vehicleType||null,coverage:pkg,email_subject:subject,email_body:body});
       if(error){toast(error.message);return;}
-      document.querySelector('#quoteModal').close();
-      form.reset();
-      quoteType.value='Window Tint';
-      sync();
-      toast('PPF quote saved and customer linked');
-      await loadAll();
+      document.querySelector('#quoteModal').close(); form.reset(); quoteType.value='Window Tint'; sync();
+      toast('PPF quote saved for review'); await loadAll();
     },true);
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initPPFQuote);else initPPFQuote();
+
+  window.addEventListener('load',()=>{
+    if(document.querySelector('script[data-approval-loader]'))return;
+    const s=document.createElement('script'); s.src='crm-approval.js'; s.dataset.approvalLoader='1'; s.onload=()=>{try{renderQuotes();}catch{}}; document.body.appendChild(s);
+  });
 })();
