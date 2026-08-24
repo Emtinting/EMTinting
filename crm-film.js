@@ -17,6 +17,7 @@
   };
 
   const vehicleOptions = `<option value="">Choose vehicle type</option><option value="Sedan">Sedan</option><option value="Coupe">Coupe</option><option value="SUV">SUV</option><option value="Pickup Truck">Pickup Truck</option>`;
+  const normPhone = v => String(v||'').replace(/\D/g,'');
 
   function injectVehicleSelectors() {
     const apptModel = document.querySelector('#apptModel');
@@ -26,18 +27,76 @@
       apptModel.closest('label')?.insertAdjacentElement('afterend', label);
     }
 
-    const quoteService = document.querySelector('#quoteService');
-    if (quoteService && !document.querySelector('#quoteVehicleType')) {
-      const label = document.createElement('label');
-      label.innerHTML = `Vehicle type<select id="quoteVehicleType" required>${vehicleOptions}</select>`;
-      quoteService.closest('label')?.insertAdjacentElement('afterend', label);
+    const quoteForm = document.querySelector('#quoteForm');
+    const oldCustomer = document.querySelector('#quoteCustomer');
+    if (quoteForm && oldCustomer && !document.querySelector('#quoteCustomerSection')) {
+      const oldLabel = oldCustomer.closest('label');
+      oldCustomer.required = false;
+      oldLabel.style.display = 'none';
+
+      const customerSection = document.createElement('section');
+      customerSection.id = 'quoteCustomerSection';
+      customerSection.className = 'form-section';
+      customerSection.innerHTML = `
+        <h4>CUSTOMER</h4>
+        <label>Search existing customer
+          <input id="quoteCustomerSearch" list="quoteCustomerList" placeholder="Type a name or phone to reuse a saved customer" autocomplete="off">
+          <datalist id="quoteCustomerList"></datalist>
+        </label>
+        <div class="form-grid">
+          <label>First name<input id="quoteFirst" required placeholder="Customer first name"></label>
+          <label>Last name<input id="quoteLast" placeholder="Customer last name"></label>
+          <label>Phone<input id="quotePhone" required type="tel" placeholder="713-555-0000"></label>
+          <label>Email<input id="quoteEmail" type="email" placeholder="name@email.com"></label>
+        </div>
+        <div class="quick-actions"><a id="quoteCall" class="btn ghost" href="#">☎ Call</a><a id="quoteText" class="btn ghost" href="#">💬 Text</a></div>`;
+      oldLabel.insertAdjacentElement('afterend', customerSection);
+
+      const serviceLabel = document.querySelector('#quoteService')?.closest('label');
+      const vehicleSection = document.createElement('section');
+      vehicleSection.id = 'quoteVehicleSection';
+      vehicleSection.className = 'form-section';
+      vehicleSection.innerHTML = `
+        <h4>VEHICLE</h4>
+        <div class="form-grid">
+          <label>Year<input id="quoteYear" inputmode="numeric" placeholder="2026"></label>
+          <label>Make<input id="quoteMake" placeholder="Toyota"></label>
+          <label>Model<input id="quoteModel" placeholder="Camry"></label>
+          <label>Color<input id="quoteColor" placeholder="Optional"></label>
+          <label class="span-2">Vehicle type<select id="quoteVehicleType" required>${vehicleOptions}</select></label>
+        </div>`;
+      serviceLabel?.insertAdjacentElement('beforebegin', vehicleSection);
+
+      const datalist = document.querySelector('#quoteCustomerList');
+      const refreshCustomerList = () => {
+        if (!datalist || typeof state === 'undefined') return;
+        datalist.innerHTML = state.customers.map(c => `<option value="${customerName(c)} · ${c.phone||''}"></option>`).join('');
+      };
+      refreshCustomerList();
+
+      const fillExisting = () => {
+        if (typeof state === 'undefined') return;
+        const q = document.querySelector('#quoteCustomerSearch').value.toLowerCase().trim();
+        if (!q) return;
+        const c = state.customers.find(x => `${customerName(x)} · ${x.phone||''}`.toLowerCase()===q || normPhone(x.phone)===normPhone(q) || customerName(x).toLowerCase()===q);
+        if (!c) return;
+        oldCustomer.value = c.id;
+        document.querySelector('#quoteFirst').value = c.first_name||'';
+        document.querySelector('#quoteLast').value = c.last_name||'';
+        document.querySelector('#quotePhone').value = c.phone||'';
+        document.querySelector('#quoteEmail').value = c.email||'';
+        updateQuotePhoneLinks();
+      };
+      document.querySelector('#quoteCustomerSearch').addEventListener('change', fillExisting);
+      document.querySelector('#quoteCustomerSearch').addEventListener('blur', fillExisting);
+      document.querySelector('#quotePhone').addEventListener('input', updateQuotePhoneLinks);
     }
 
     const quoteVehicleType = document.querySelector('#quoteVehicleType');
     if (quoteVehicleType && !document.querySelector('#quoteCoverage')) {
       const label = document.createElement('label');
       label.innerHTML = `Tint coverage<select id="quoteCoverage" required><option value="">Choose coverage</option><option value="Full Vehicle">Full Vehicle</option><option value="Front 2 Doors">Front 2 Doors Only</option><option value="Windshield Only">Windshield Only</option></select>`;
-      quoteVehicleType.closest('label')?.insertAdjacentElement('afterend', label);
+      document.querySelector('#quoteService')?.closest('label')?.insertAdjacentElement('afterend', label);
     }
 
     const amount = document.querySelector('#quoteAmount');
@@ -46,20 +105,6 @@
       wrap.className = 'checkline';
       wrap.innerHTML = `<input id="quoteEyebrow" type="checkbox"> Add windshield eyebrow (+$40)`;
       amount.closest('label')?.insertAdjacentElement('beforebegin', wrap);
-    }
-
-    const quoteForm = document.querySelector('#quoteForm');
-    if (quoteForm && !quoteForm.dataset.vehicleTypeReady) {
-      quoteForm.dataset.vehicleTypeReady = '1';
-      quoteForm.addEventListener('submit', () => {
-        const type = document.querySelector('#quoteVehicleType')?.value;
-        const coverage = document.querySelector('#quoteCoverage')?.value;
-        const eyebrow = document.querySelector('#quoteEyebrow')?.checked;
-        const notes = document.querySelector('#quoteNotes');
-        if (!notes) return;
-        const cleaned = notes.value.replace(/^Vehicle type:.*\n?/i, '').replace(/^Tint coverage:.*\n?/i, '').replace(/^Eyebrow:.*\n?/i, '');
-        notes.value = `${type?`Vehicle type: ${type}\n`:''}${coverage?`Tint coverage: ${coverage}\n`:''}${eyebrow?'Eyebrow: +$40\n':''}${cleaned}`.trim();
-      }, true);
     }
 
     const apptForm = document.querySelector('#appointmentForm');
@@ -73,6 +118,15 @@
         notes.value = `Vehicle type: ${type}\n${cleaned}`.trim();
       }, true);
     }
+  }
+
+  function updateQuotePhoneLinks(){
+    const p = document.querySelector('#quotePhone')?.value || '';
+    const clean = p.replace(/[^0-9+]/g,'');
+    const call = document.querySelector('#quoteCall');
+    const text = document.querySelector('#quoteText');
+    if(call) call.href = `tel:${clean}`;
+    if(text) text.href = `sms:${clean}`;
   }
 
   function initFilmSelector() {
@@ -119,13 +173,15 @@
       const pkg=hidden.value || document.querySelector('input[name="quoteFilm"]:checked')?.value;
       const eyebrow=document.querySelector('#quoteEyebrow')?.checked;
       const amount=document.querySelector('#quoteAmount');
-      if(!amount) return;
+      if(!amount) return null;
       let base=null;
       if(coverage==='Full Vehicle') base=PRICES[coverage]?.[type]?.[pkg] ?? null;
       if(coverage==='Front 2 Doors') base=PRICES[coverage]?.[pkg] ?? null;
       if(coverage==='Windshield Only') base=PRICES[coverage]?.[pkg] ?? null;
-      if(base===null){amount.value='';return;}
-      amount.value=base+(eyebrow?40:0);
+      if(base===null){amount.value='';return null;}
+      const total=base+(eyebrow?40:0);
+      amount.value=total;
+      return {base,total,type,coverage,pkg,eyebrow};
     }
 
     document.querySelectorAll('input[name="quoteFilm"]').forEach(input => input.addEventListener('change', () => {render(input.value);calculateQuote();}));
@@ -137,7 +193,67 @@
       calculateQuote();
     }));
 
-    form.addEventListener('reset', () => {hidden.value='';panel.classList.add('hidden');setTimeout(()=>{const a=document.querySelector('#quoteAmount');if(a)a.value='';},0);});
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const first=document.querySelector('#quoteFirst')?.value.trim();
+      const last=document.querySelector('#quoteLast')?.value.trim()||'';
+      const phone=document.querySelector('#quotePhone')?.value.trim();
+      const email=document.querySelector('#quoteEmail')?.value.trim()||null;
+      if(!first || !phone){toast('Customer name and phone are required');return;}
+      const q=calculateQuote();
+      const filmValue=hidden.value || document.querySelector('input[name="quoteFilm"]:checked')?.value || null;
+      const service=document.querySelector('#quoteService')?.value.trim();
+      const amountValue=Number(document.querySelector('#quoteAmount')?.value||0);
+      if(!service || !filmValue || !amountValue){toast('Complete the service, film, vehicle type and coverage');return;}
+
+      let customer = typeof state!=='undefined' ? state.customers.find(c => (normPhone(c.phone)&&normPhone(c.phone)===normPhone(phone)) || (email&&c.email&&c.email.toLowerCase()===email.toLowerCase())) : null;
+      const customerPayload={first_name:first,last_name:last,phone,email,updated_at:new Date().toISOString()};
+      let customerId=customer?.id || null;
+      if(customerId){
+        const {error}=await db.from('customers').update(customerPayload).eq('id',customerId);
+        if(error){toast(error.message);return;}
+      }else{
+        const {data,error}=await db.from('customers').insert(customerPayload).select('id').single();
+        if(error){toast(error.message);return;}
+        customerId=data.id;
+      }
+
+      const year=document.querySelector('#quoteYear')?.value.trim();
+      const make=document.querySelector('#quoteMake')?.value.trim();
+      const model=document.querySelector('#quoteModel')?.value.trim();
+      const color=document.querySelector('#quoteColor')?.value.trim();
+      const type=document.querySelector('#quoteVehicleType')?.value;
+      const coverage=document.querySelector('#quoteCoverage')?.value;
+      const eyebrow=document.querySelector('#quoteEyebrow')?.checked;
+      const userNotes=document.querySelector('#quoteNotes')?.value.trim()||'';
+      const detailLines=[
+        [year,make,model].filter(Boolean).join(' '),
+        type?`Vehicle type: ${type}`:'',
+        coverage?`Tint coverage: ${coverage}`:'',
+        color?`Color: ${color}`:'',
+        eyebrow?'Eyebrow: +$40':'',
+        userNotes
+      ].filter(Boolean);
+      const payload={customer_id:customerId,service,film_package:filmValue,amount:amountValue,notes:detailLines.join('\n')||null,status:'draft'};
+      const {error}=await db.from('quotes').insert(payload);
+      if(error){toast(error.message);return;}
+      document.querySelector('#quoteCustomer').value=customerId;
+      document.querySelector('#quoteModal').close();
+      form.reset();
+      toast('Quote saved and customer linked');
+      await loadAll();
+    }, true);
+
+    form.addEventListener('reset', () => {
+      hidden.value='';panel.classList.add('hidden');
+      setTimeout(()=>{
+        const a=document.querySelector('#quoteAmount');if(a)a.value='';
+        const s=document.querySelector('#quoteCustomerSearch');if(s)s.value='';
+        const old=document.querySelector('#quoteCustomer');if(old)old.value='';
+        updateQuotePhoneLinks();
+      },0);
+    });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initFilmSelector);
