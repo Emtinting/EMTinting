@@ -19,11 +19,18 @@
         <label>Password<input id="loginPassword" type="password" required autocomplete="current-password" /></label>
         <button class="btn primary" type="submit">Sign in</button>
       </form>
-      <button id="showSignup" class="link-btn" type="button">First time? Create owner login</button>
+      <div class="auth-links">
+        <button id="showSignup" class="link-btn" type="button">First time? Create owner login</button>
+        <button id="forgotPassword" class="link-btn" type="button">Forgot password?</button>
+      </div>
       <form id="signupForm" class="stack hidden">
         <label>Email<input id="signupEmail" type="email" value="emtinting@yahoo.com" required autocomplete="email" /></label>
         <label>Password<input id="signupPassword" type="password" minlength="8" required autocomplete="new-password" /></label>
         <button class="btn primary" type="submit">Create account</button>
+      </form>
+      <form id="recoveryForm" class="stack hidden">
+        <label>New password<input id="recoveryPassword" type="password" minlength="8" required autocomplete="new-password" /></label>
+        <button class="btn primary" type="submit">Set new password</button>
       </form>
       <p id="authMessage" class="message"></p>
     </div>
@@ -45,10 +52,7 @@
 
     <main class="main">
       <header class="topbar">
-        <div>
-          <p class="eyebrow">EM TINTING CRM</p>
-          <h2 id="pageTitle">Dashboard</h2>
-        </div>
+        <div><p class="eyebrow">EM TINTING CRM</p><h2 id="pageTitle">Dashboard</h2></div>
         <button id="refreshBtn" class="btn ghost">Refresh</button>
       </header>
 
@@ -70,7 +74,7 @@
       </section>
 
       <section id="customersView" class="view">
-        <div class="panel"><div class="panel-head"><h3>Customers</h3><input id="customerSearch" class="search" placeholder="Search customer..." /></div><div id="customersTable" class="table-wrap"></div></div>
+        <div class="panel"><div class="panel-head"><h3>Customers</h3><div class="head-actions"><input id="customerSearch" class="search" placeholder="Search customer..." /><button class="btn primary small" data-open="customerModal">New customer</button></div></div><div id="customersTable" class="table-wrap"></div></div>
       </section>
 
       <section id="quotesView" class="view">
@@ -87,11 +91,10 @@
     </main>
   </div>
 
-  <dialog id="quoteModal" class="modal"><form id="quoteForm" method="dialog"><header><h3>New quote</h3><button value="cancel" class="x">×</button></header><label>Customer<select id="quoteCustomer" required></select></label><label>Service<input id="quoteService" required placeholder="Full vehicle tint" /></label><label>Film package<input id="quoteFilm" placeholder="Carbon IR / Ceramic IR" /></label><label>Amount<input id="quoteAmount" type="number" min="0" step="0.01" required /></label><label>Notes<textarea id="quoteNotes"></textarea></label><button class="btn primary" type="submit">Save quote</button></form></dialog>
-
-  <dialog id="jobModal" class="modal"><form id="jobForm" method="dialog"><header><h3>New job</h3><button value="cancel" class="x">×</button></header><label>Customer<select id="jobCustomer" required></select></label><label>Service<input id="jobService" required /></label><label>Date<input id="jobDate" type="date" /></label><label>Time<input id="jobTime" type="time" /></label><label>Total<input id="jobTotal" type="number" min="0" step="0.01" value="0" /></label><button class="btn primary" type="submit">Save job</button></form></dialog>
-
-  <dialog id="paymentModal" class="modal"><form id="paymentForm" method="dialog"><header><h3>Add payment</h3><button value="cancel" class="x">×</button></header><label>Customer<select id="paymentCustomer" required></select></label><label>Amount<input id="paymentAmount" type="number" min="0.01" step="0.01" required /></label><label>Type<select id="paymentType"><option value="deposit">Deposit</option><option value="payment" selected>Payment</option><option value="refund">Refund</option></select></label><label>Method<select id="paymentMethod"><option value="cash">Cash</option><option value="card">Card</option><option value="zelle">Zelle</option><option value="cashapp">Cash App</option><option value="apple_pay">Apple Pay</option><option value="other">Other</option></select></label><button class="btn primary" type="submit">Save payment</button></form></dialog>
+  <dialog id="customerModal" class="modal"><form id="customerForm"><header><h3>New customer</h3><button type="button" class="x" data-close="customerModal">×</button></header><label>First name<input id="customerFirst" required /></label><label>Last name<input id="customerLast" /></label><label>Phone<input id="customerPhone" required /></label><label>Email<input id="customerEmail" type="email" /></label><button class="btn primary" type="submit">Save customer</button></form></dialog>
+  <dialog id="quoteModal" class="modal"><form id="quoteForm"><header><h3>New quote</h3><button type="button" class="x" data-close="quoteModal">×</button></header><label>Customer<select id="quoteCustomer" required></select></label><label>Service<input id="quoteService" required placeholder="Full vehicle tint" /></label><label>Film package<input id="quoteFilm" placeholder="Carbon IR / Ceramic IR" /></label><label>Amount<input id="quoteAmount" type="number" min="0" step="0.01" required /></label><label>Notes<textarea id="quoteNotes"></textarea></label><button class="btn primary" type="submit">Save quote</button></form></dialog>
+  <dialog id="jobModal" class="modal"><form id="jobForm"><header><h3>New job</h3><button type="button" class="x" data-close="jobModal">×</button></header><label>Customer<select id="jobCustomer" required></select></label><label>Service<input id="jobService" required /></label><label>Date<input id="jobDate" type="date" /></label><label>Time<input id="jobTime" type="time" /></label><label>Total<input id="jobTotal" type="number" min="0" step="0.01" value="0" /></label><button class="btn primary" type="submit">Save job</button></form></dialog>
+  <dialog id="paymentModal" class="modal"><form id="paymentForm"><header><h3>Add payment</h3><button type="button" class="x" data-close="paymentModal">×</button></header><label>Customer<select id="paymentCustomer" required></select></label><label>Amount<input id="paymentAmount" type="number" min="0.01" step="0.01" required /></label><label>Type<select id="paymentType"><option value="deposit">Deposit</option><option value="payment" selected>Payment</option><option value="refund">Refund</option></select></label><label>Method<select id="paymentMethod"><option value="cash">Cash</option><option value="card">Card</option><option value="zelle">Zelle</option><option value="cashapp">Cash App</option><option value="apple_pay">Apple Pay</option><option value="other">Other</option></select></label><button class="btn primary" type="submit">Save payment</button></form></dialog>
 
   <div id="toast" class="toast"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
