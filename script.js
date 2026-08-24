@@ -14,15 +14,49 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   const hero = document.querySelector('.hero');
   if (!hero) return;
   const style = document.createElement('style');
-  style.textContent = `.hero{background:#050505!important;min-height:620px!important;overflow:hidden!important}.hero-overlay,.em-hero-slideshow,.em-hero-controls,.em-hero-label,.hero-card{display:none!important}.em-date-field{position:relative;width:100%}.em-date-field input[type="date"]{width:100%}.em-date-placeholder{position:absolute;left:28px;top:50%;transform:translateY(-50%);color:#f2f2f2;pointer-events:none;z-index:2}.em-date-field.has-value .em-date-placeholder,.em-date-field:focus-within .em-date-placeholder{display:none}.em-quote-builder{display:grid;gap:14px;margin-top:4px}.em-addon{display:flex;align-items:center;gap:10px;color:#f2f2f2;font-size:14px}.em-addon input{width:auto}.em-estimate{border:1px solid #353535;background:#0d0d0d;padding:16px 18px;border-radius:4px;display:flex;justify-content:space-between;gap:16px;align-items:center}.em-estimate span{color:#aaa;font-size:13px}.em-estimate strong{font-size:24px;color:#fff}.em-estimate small{display:block;color:#888;margin-top:4px;font-size:11px}@media(max-width:620px){body{padding-bottom:72px!important}.site-header{height:92px!important;padding:0 30px!important;background:#050505!important;border-bottom:2px solid #d71920!important;gap:16px!important;position:sticky!important;top:0!important}.brand{font-size:22px!important;gap:8px!important;white-space:nowrap}.brand-em{font-size:23px!important}.site-header .btn-small{margin-left:auto!important;min-height:56px!important;height:56px!important;padding:0 22px!important}.hero{height:auto!important;min-height:610px!important;padding:54px 28px 72px!important;align-items:flex-start!important}.hero h1{font-size:48px!important}.mobile-contact-bar{height:72px!important}}`;
+  style.textContent = `.hero{background:#050505!important;min-height:620px!important;overflow:hidden!important}.hero-overlay,.em-hero-slideshow,.em-hero-controls,.em-hero-label,.hero-card{display:none!important}.em-date-field{position:relative;width:100%}.em-date-field input[type="date"]{width:100%}.em-date-placeholder{position:absolute;left:28px;top:50%;transform:translateY(-50%);color:#f2f2f2;pointer-events:none;z-index:2}.em-date-field.has-value .em-date-placeholder,.em-date-field:focus-within .em-date-placeholder{display:none}.em-quote-builder{display:grid;gap:14px;margin-top:4px}.em-addon{display:flex;align-items:center;gap:10px;color:#f2f2f2;font-size:14px}.em-addon input{width:auto}@media(max-width:620px){body{padding-bottom:72px!important}.site-header{height:92px!important;padding:0 30px!important;background:#050505!important;border-bottom:2px solid #d71920!important;gap:16px!important;position:sticky!important;top:0!important}.brand{font-size:22px!important;gap:8px!important;white-space:nowrap}.brand-em{font-size:23px!important}.site-header .btn-small{margin-left:auto!important;min-height:56px!important;height:56px!important;padding:0 22px!important}.hero{height:auto!important;min-height:610px!important;padding:54px 28px 72px!important;align-items:flex-start!important}.hero h1{font-size:48px!important}.mobile-contact-bar{height:72px!important}}`;
   document.head.appendChild(style);
+
   const dateInput=document.querySelector('#bookingForm input[name="appointment_date"]');
-  if(dateInput&&!dateInput.closest('.em-date-field')){const w=document.createElement('div');w.className='em-date-field';const p=document.createElement('span');p.className='em-date-placeholder';p.textContent='Choose appointment Date';dateInput.parentNode.insertBefore(w,dateInput);w.appendChild(dateInput);w.appendChild(p);const sync=()=>w.classList.toggle('has-value',Boolean(dateInput.value));dateInput.addEventListener('change',sync);dateInput.addEventListener('input',sync);sync()}
-  const form=document.querySelector('#bookingForm');const vehicleType=form?.querySelector('select[name="vehicle_type"]');const film=form?.querySelector('select[name="tint_package"]');
-  if(vehicleType){vehicleType.innerHTML='<option value="">Choose vehicle type</option><option>Sedan</option><option>Coupe</option><option>SUV</option><option value="Pickup Truck">Pickup Truck</option>';vehicleType.required=true}
-  if(film){film.innerHTML='<option value="">Choose tint package</option><option value="Carbon">Carbon</option><option value="Ceramic IR">Ceramic IR ⭐ Most Popular</option><option value="Ceramic Plus">Ceramic Plus 🔥 Maximum Heat Rejection</option>'}
-  if(form&&film&&!document.querySelector('#emCoverage')){const builder=document.createElement('div');builder.className='em-quote-builder';builder.innerHTML='<select id="emCoverage" name="tint_coverage" required><option value="">Choose tint coverage</option><option>Full Vehicle</option><option>Front 2 Doors</option><option>Windshield Only</option></select><label class="em-addon"><input id="emEyebrow" name="eyebrow" type="checkbox" value="yes"><span>Add windshield eyebrow (+$40)</span></label><div class="em-estimate"><div><span>Estimated tint price</span><small>Final availability and appointment are confirmed by EM Tinting.</small></div><strong id="emEstimate">—</strong></div>';film.closest('.form-row')?.insertAdjacentElement('afterend',builder);
-    const PRICES={'Full Vehicle':{Sedan:{Carbon:180,'Ceramic IR':280,'Ceramic Plus':600},Coupe:{Carbon:180,'Ceramic IR':280,'Ceramic Plus':600},'Pickup Truck':{Carbon:180,'Ceramic IR':280,'Ceramic Plus':600},SUV:{Carbon:200,'Ceramic IR':300,'Ceramic Plus':620}},'Front 2 Doors':{Carbon:100,'Ceramic IR':150,'Ceramic Plus':220},'Windshield Only':{'Ceramic Plus':200}};const coverage=document.querySelector('#emCoverage'),eyebrow=document.querySelector('#emEyebrow'),estimate=document.querySelector('#emEstimate'),notes=form.querySelector('textarea[name="notes"]');
-    function calc(){const type=vehicleType.value,pkg=film.value,cov=coverage.value;let base=cov==='Full Vehicle'?PRICES[cov]?.[type]?.[pkg]:PRICES[cov]?.[pkg];if(cov==='Windshield Only'&&pkg&&pkg!=='Ceramic Plus'){estimate.textContent='Ceramic Plus only';return null}if(base==null){estimate.textContent='—';return null}const total=base+(eyebrow.checked?40:0);estimate.textContent=`$${total}`;return{base,total,type,pkg,cov,eyebrow:eyebrow.checked}}
-    [vehicleType,film,coverage,eyebrow].forEach(el=>el.addEventListener('change',calc));form.addEventListener('submit',()=>{const q=calc();if(!q||!notes)return;const label=q.pkg==='Ceramic IR'?'⭐ Most Popular':q.pkg==='Ceramic Plus'?'🔥 Maximum Heat Rejection':'';notes.value=`Quote selection: ${q.cov} | ${q.type} | ${q.pkg} ${label} | Base $${q.base}${q.eyebrow?' | Eyebrow +$40':''} | Estimated total $${q.total}\n${notes.value}`.trim()},true)}
+  if(dateInput&&!dateInput.closest('.em-date-field')){
+    const w=document.createElement('div');w.className='em-date-field';
+    const p=document.createElement('span');p.className='em-date-placeholder';p.textContent='Choose appointment Date';
+    dateInput.parentNode.insertBefore(w,dateInput);w.appendChild(dateInput);w.appendChild(p);
+    const sync=()=>w.classList.toggle('has-value',Boolean(dateInput.value));
+    dateInput.addEventListener('change',sync);dateInput.addEventListener('input',sync);sync();
+  }
+
+  const form=document.querySelector('#bookingForm');
+  const vehicleType=form?.querySelector('select[name="vehicle_type"]');
+  const film=form?.querySelector('select[name="tint_package"]');
+
+  if(vehicleType){
+    vehicleType.innerHTML='<option value="">Choose vehicle type</option><option>Sedan</option><option>Coupe</option><option>SUV</option><option value="Pickup Truck">Pickup Truck</option>';
+    vehicleType.required=true;
+  }
+
+  if(film){
+    film.innerHTML='<option value="">Choose tint package</option><option value="Carbon">Carbon</option><option value="Ceramic IR">Ceramic IR ⭐ Most Popular</option><option value="Ceramic Plus">Ceramic Plus 🔥 Maximum Heat Rejection</option>';
+  }
+
+  if(form&&film&&!document.querySelector('#emCoverage')){
+    const builder=document.createElement('div');
+    builder.className='em-quote-builder';
+    builder.innerHTML='<select id="emCoverage" name="tint_coverage" required><option value="">Choose tint coverage</option><option>Full Vehicle</option><option>Front 2 Doors</option><option>Windshield Only</option></select><label class="em-addon"><input id="emEyebrow" name="eyebrow" type="checkbox" value="yes"><span>Add windshield eyebrow</span></label>';
+    film.closest('.form-row')?.insertAdjacentElement('afterend',builder);
+
+    const coverage=document.querySelector('#emCoverage');
+    const eyebrow=document.querySelector('#emEyebrow');
+    const notes=form.querySelector('textarea[name="notes"]');
+
+    form.addEventListener('submit',()=>{
+      if(!notes)return;
+      const type=vehicleType?.value||'';
+      const pkg=film.value||'';
+      const cov=coverage?.value||'';
+      const label=pkg==='Ceramic IR'?'⭐ Most Popular':pkg==='Ceramic Plus'?'🔥 Maximum Heat Rejection':'';
+      const selection=`Quote selection: ${cov} | ${type} | ${pkg} ${label}${eyebrow?.checked?' | Eyebrow requested':''}`.trim();
+      notes.value=`${selection}\n${notes.value}`.trim();
+    },true);
+  }
 })();
