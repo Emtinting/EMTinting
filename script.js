@@ -35,15 +35,21 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     vehicleType.required=true;
   }
 
+  // Customers no longer choose a film before they understand the differences.
+  // Every tint request receives Carbon, Ceramic IR and Ceramic Plus options in the proposal.
   if(film){
-    film.innerHTML='<option value="">Choose tint package</option><option value="Carbon">Carbon</option><option value="Ceramic IR">Ceramic IR ⭐ Most Popular</option><option value="Ceramic Plus">Ceramic Plus 🔥 Maximum Heat Rejection</option>';
+    film.value='';
+    film.removeAttribute('required');
+    film.closest('.form-row')?.classList.add('em-no-film-choice');
+    film.style.display='none';
   }
 
-  if(form&&film&&!document.querySelector('#emCoverage')){
+  if(form&&!document.querySelector('#emCoverage')){
     const builder=document.createElement('div');
     builder.className='em-quote-builder';
     builder.innerHTML='<select id="emCoverage" name="tint_coverage" required><option value="">Choose tint coverage</option><option>Full Vehicle</option><option>Front 2 Doors</option><option>Windshield Only</option></select><label class="em-addon"><input id="emEyebrow" name="eyebrow" type="checkbox" value="yes"><span>Add windshield eyebrow</span></label>';
-    film.closest('.form-row')?.insertAdjacentElement('afterend',builder);
+    const dateRow=dateInput?.closest('.form-row');
+    if(dateRow) dateRow.insertAdjacentElement('beforebegin',builder); else form.querySelector('textarea[name="notes"]')?.insertAdjacentElement('beforebegin',builder);
 
     const coverage=document.querySelector('#emCoverage');
     const eyebrow=document.querySelector('#emEyebrow');
@@ -52,11 +58,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     form.addEventListener('submit',()=>{
       if(!notes)return;
       const type=vehicleType?.value||'';
-      const pkg=film.value||'';
       const cov=coverage?.value||'';
-      const label=pkg==='Ceramic IR'?'⭐ Most Popular':pkg==='Ceramic Plus'?'🔥 Maximum Heat Rejection':'';
-      const selection=`Quote selection: ${cov} | ${type} | ${pkg} ${label}${eyebrow?.checked?' | Eyebrow requested':''}`.trim();
-      notes.value=`${selection}\n${notes.value}`.trim();
+      const selection=`Quote request: ${cov} | ${type} | Show all tint film options${eyebrow?.checked?' | Eyebrow requested':''}`.trim();
+      if(!notes.value.startsWith('Quote request:')) notes.value=`${selection}\n${notes.value}`.trim();
     },true);
   }
 })();
