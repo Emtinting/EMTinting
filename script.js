@@ -207,4 +207,15 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     dateInput.addEventListener('input', syncDatePrompt);
     syncDatePrompt();
   }
+
+  const vehicleType = document.querySelector('#bookingForm select[name="vehicle_type"]');
+  if (vehicleType) {
+    vehicleType.innerHTML = `
+      <option value="">Choose vehicle type</option>
+      <option value="Sedan">Sedan</option>
+      <option value="Coupe">Coupe</option>
+      <option value="SUV">SUV</option>
+      <option value="Pickup Truck">Pickup Truck</option>`;
+    vehicleType.required = true;
+  }
 })();
