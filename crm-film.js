@@ -1,46 +1,22 @@
 (() => {
   const FILMS = {
-    Carbon: {
-      name: 'Carbon IR',
-      badge: 'Carbon',
-      heat: '62% IR rejection @ 5%',
-      solar: '61% TSER @ 5%',
-      uv: '99% UV rejection',
-      warranty: 'Lifetime warranty · Color stable',
-      description: 'Nano-carbon technology engineered for strong infrared heat rejection without interfering with electronic signals.',
-      image: 'https://hitekfilms.com/wp-content/uploads/2022/05/carbon-IR-1-1024x1024.jpg',
-      source: 'https://hitekfilms.com/product/carbon-ir/'
-    },
-    'Ceramic IR': {
-      name: 'Ceramic IR',
-      badge: 'Ceramic',
-      heat: '75% IR rejection @ 5%',
-      solar: '65% TSER @ 5%',
-      uv: '99% UV rejection',
-      warranty: 'Lifetime warranty',
-      description: 'Carbon-based nano-ceramic film with infrared-rejection technology for increased heat protection, optical clarity, style, and stability.',
-      image: 'https://hitekfilms.com/wp-content/uploads/2022/05/Ceramic-IR.png',
-      source: 'https://hitekfilms.com/product/ceramic-ir/'
-    },
-    'Ceramic Plus': {
-      name: 'Ceramic Plus',
-      badge: 'Premium Ceramic',
-      heat: 'Up to 92% IR rejection',
-      solar: 'Up to 69% TSER',
-      uv: '99% UV rejection',
-      warranty: 'Lifetime warranty · Color stable',
-      description: 'Carbon-infused nano-ceramic technology built for premium infrared heat control, clarity, durability, and no signal interference.',
-      image: 'https://hitekfilms.com/wp-content/uploads/2022/05/Ceramic-plus-Carbon-1024x813.png',
-      source: 'https://hitekfilms.com/product/ceramic-plus/'
-    }
+    Carbon: {name:'Carbon IR',badge:'Carbon',heat:'62% IR rejection @ 5%',solar:'61% TSER @ 5%',uv:'99% UV rejection',warranty:'Lifetime warranty · Color stable',description:'Nano-carbon technology engineered for strong infrared heat rejection without interfering with electronic signals.',image:'https://hitekfilms.com/wp-content/uploads/2022/05/carbon-IR-1-1024x1024.jpg',source:'https://hitekfilms.com/product/carbon-ir/'},
+    'Ceramic IR': {name:'Ceramic IR',badge:'Ceramic',heat:'75% IR rejection @ 5%',solar:'65% TSER @ 5%',uv:'99% UV rejection',warranty:'Lifetime warranty',description:'Carbon-based nano-ceramic film with infrared-rejection technology for increased heat protection, optical clarity, style, and stability.',image:'https://hitekfilms.com/wp-content/uploads/2022/05/Ceramic-IR.png',source:'https://hitekfilms.com/product/ceramic-ir/'},
+    'Ceramic Plus': {name:'Ceramic Plus',badge:'Premium Ceramic',heat:'Up to 92% IR rejection',solar:'Up to 69% TSER',uv:'99% UV rejection',warranty:'Lifetime warranty · Color stable',description:'Carbon-infused nano-ceramic technology built for premium infrared heat control, clarity, durability, and no signal interference.',image:'https://hitekfilms.com/wp-content/uploads/2022/05/Ceramic-plus-Carbon-1024x813.png',source:'https://hitekfilms.com/product/ceramic-plus/'}
   };
 
-  const vehicleOptions = `
-    <option value="">Choose vehicle type</option>
-    <option value="Sedan">Sedan</option>
-    <option value="Coupe">Coupe</option>
-    <option value="SUV">SUV</option>
-    <option value="Pickup Truck">Pickup Truck</option>`;
+  const PRICES = {
+    'Full Vehicle': {
+      Sedan:{Carbon:180,'Ceramic IR':280,'Ceramic Plus':600},
+      Coupe:{Carbon:180,'Ceramic IR':280,'Ceramic Plus':600},
+      'Pickup Truck':{Carbon:180,'Ceramic IR':280,'Ceramic Plus':600},
+      SUV:{Carbon:200,'Ceramic IR':300,'Ceramic Plus':620}
+    },
+    'Front 2 Doors': {Carbon:100,'Ceramic IR':150,'Ceramic Plus':220},
+    'Windshield Only': {'Ceramic Plus':200}
+  };
+
+  const vehicleOptions = `<option value="">Choose vehicle type</option><option value="Sedan">Sedan</option><option value="Coupe">Coupe</option><option value="SUV">SUV</option><option value="Pickup Truck">Pickup Truck</option>`;
 
   function injectVehicleSelectors() {
     const apptModel = document.querySelector('#apptModel');
@@ -57,15 +33,32 @@
       quoteService.closest('label')?.insertAdjacentElement('afterend', label);
     }
 
+    const quoteVehicleType = document.querySelector('#quoteVehicleType');
+    if (quoteVehicleType && !document.querySelector('#quoteCoverage')) {
+      const label = document.createElement('label');
+      label.innerHTML = `Tint coverage<select id="quoteCoverage" required><option value="">Choose coverage</option><option value="Full Vehicle">Full Vehicle</option><option value="Front 2 Doors">Front 2 Doors Only</option><option value="Windshield Only">Windshield Only</option></select>`;
+      quoteVehicleType.closest('label')?.insertAdjacentElement('afterend', label);
+    }
+
+    const amount = document.querySelector('#quoteAmount');
+    if (amount && !document.querySelector('#quoteEyebrow')) {
+      const wrap = document.createElement('label');
+      wrap.className = 'checkline';
+      wrap.innerHTML = `<input id="quoteEyebrow" type="checkbox"> Add windshield eyebrow (+$40)`;
+      amount.closest('label')?.insertAdjacentElement('beforebegin', wrap);
+    }
+
     const quoteForm = document.querySelector('#quoteForm');
     if (quoteForm && !quoteForm.dataset.vehicleTypeReady) {
       quoteForm.dataset.vehicleTypeReady = '1';
       quoteForm.addEventListener('submit', () => {
         const type = document.querySelector('#quoteVehicleType')?.value;
+        const coverage = document.querySelector('#quoteCoverage')?.value;
+        const eyebrow = document.querySelector('#quoteEyebrow')?.checked;
         const notes = document.querySelector('#quoteNotes');
-        if (!type || !notes) return;
-        const cleaned = notes.value.replace(/^Vehicle type:.*\n?/i, '');
-        notes.value = `Vehicle type: ${type}\n${cleaned}`.trim();
+        if (!notes) return;
+        const cleaned = notes.value.replace(/^Vehicle type:.*\n?/i, '').replace(/^Tint coverage:.*\n?/i, '').replace(/^Eyebrow:.*\n?/i, '');
+        notes.value = `${type?`Vehicle type: ${type}\n`:''}${coverage?`Tint coverage: ${coverage}\n`:''}${eyebrow?'Eyebrow: +$40\n':''}${cleaned}`.trim();
       }, true);
     }
 
@@ -101,19 +94,7 @@
     const panel = document.createElement('section');
     panel.id = 'filmInfoPanel';
     panel.className = 'film-info hidden';
-    panel.innerHTML = `
-      <img id="filmInfoImage" alt="HITEK film performance specifications" loading="lazy">
-      <div class="film-info-copy">
-        <div class="film-info-heading"><span id="filmInfoBadge"></span><strong id="filmInfoName"></strong></div>
-        <p id="filmInfoDescription"></p>
-        <div class="film-spec-grid">
-          <div><small>Heat / IR</small><b id="filmInfoHeat"></b></div>
-          <div><small>Solar Rejection</small><b id="filmInfoSolar"></b></div>
-          <div><small>UV Protection</small><b id="filmInfoUV"></b></div>
-          <div><small>Coverage</small><b id="filmInfoWarranty"></b></div>
-        </div>
-        <a id="filmInfoSource" target="_blank" rel="noopener noreferrer">View HITEK product details</a>
-      </div>`;
+    panel.innerHTML = `<img id="filmInfoImage" alt="HITEK film performance specifications" loading="lazy"><div class="film-info-copy"><div class="film-info-heading"><span id="filmInfoBadge"></span><strong id="filmInfoName"></strong></div><p id="filmInfoDescription"></p><div class="film-spec-grid"><div><small>Heat / IR</small><b id="filmInfoHeat"></b></div><div><small>Solar Rejection</small><b id="filmInfoSolar"></b></div><div><small>UV Protection</small><b id="filmInfoUV"></b></div><div><small>Coverage</small><b id="filmInfoWarranty"></b></div></div><a id="filmInfoSource" target="_blank" rel="noopener noreferrer">View HITEK product details</a></div>`;
     fieldset.insertAdjacentElement('afterend', panel);
 
     const render = (value) => {
@@ -132,14 +113,31 @@
       document.querySelector('#filmInfoSource').href = film.source;
     };
 
-    document.querySelectorAll('input[name="quoteFilm"]').forEach(input => {
-      input.addEventListener('change', () => render(input.value));
-    });
+    function calculateQuote(){
+      const type=document.querySelector('#quoteVehicleType')?.value;
+      const coverage=document.querySelector('#quoteCoverage')?.value;
+      const pkg=hidden.value || document.querySelector('input[name="quoteFilm"]:checked')?.value;
+      const eyebrow=document.querySelector('#quoteEyebrow')?.checked;
+      const amount=document.querySelector('#quoteAmount');
+      if(!amount) return;
+      let base=null;
+      if(coverage==='Full Vehicle') base=PRICES[coverage]?.[type]?.[pkg] ?? null;
+      if(coverage==='Front 2 Doors') base=PRICES[coverage]?.[pkg] ?? null;
+      if(coverage==='Windshield Only') base=PRICES[coverage]?.[pkg] ?? null;
+      if(base===null){amount.value='';return;}
+      amount.value=base+(eyebrow?40:0);
+    }
 
-    form.addEventListener('reset', () => {
-      hidden.value = '';
-      panel.classList.add('hidden');
-    });
+    document.querySelectorAll('input[name="quoteFilm"]').forEach(input => input.addEventListener('change', () => {render(input.value);calculateQuote();}));
+    ['quoteVehicleType','quoteCoverage','quoteEyebrow'].forEach(id=>document.querySelector('#'+id)?.addEventListener('change',()=>{
+      if(id==='quoteCoverage' && document.querySelector('#quoteCoverage')?.value==='Windshield Only'){
+        const plus=document.querySelector('input[name="quoteFilm"][value="Ceramic Plus"]');
+        if(plus){plus.checked=true;render('Ceramic Plus');}
+      }
+      calculateQuote();
+    }));
+
+    form.addEventListener('reset', () => {hidden.value='';panel.classList.add('hidden');setTimeout(()=>{const a=document.querySelector('#quoteAmount');if(a)a.value='';},0);});
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initFilmSelector);
