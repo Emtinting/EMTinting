@@ -29,6 +29,22 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
     .hero-card{display:none!important;}
 
+    .em-date-field{position:relative;width:100%;}
+    .em-date-field input[type="date"]{width:100%;}
+    .em-date-placeholder{
+      position:absolute;
+      left:28px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#f2f2f2;
+      font-size:inherit;
+      line-height:1;
+      pointer-events:none;
+      z-index:2;
+    }
+    .em-date-field.has-value .em-date-placeholder,
+    .em-date-field:focus-within .em-date-placeholder{display:none;}
+
     @media (max-width:620px){
       body{padding-bottom:72px!important;}
       .site-header{
@@ -173,5 +189,22 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     menuButton.setAttribute('aria-label', 'Menu');
     menuButton.innerHTML = '<i></i><i></i><i></i>';
     header.appendChild(menuButton);
+  }
+
+  const dateInput = document.querySelector('#bookingForm input[name="appointment_date"]');
+  if (dateInput && !dateInput.closest('.em-date-field')) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'em-date-field';
+    const placeholder = document.createElement('span');
+    placeholder.className = 'em-date-placeholder';
+    placeholder.textContent = 'Choose appointment Date';
+    dateInput.parentNode.insertBefore(wrapper, dateInput);
+    wrapper.appendChild(dateInput);
+    wrapper.appendChild(placeholder);
+
+    const syncDatePrompt = () => wrapper.classList.toggle('has-value', Boolean(dateInput.value));
+    dateInput.addEventListener('change', syncDatePrompt);
+    dateInput.addEventListener('input', syncDatePrompt);
+    syncDatePrompt();
   }
 })();
