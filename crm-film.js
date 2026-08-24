@@ -35,7 +35,55 @@
     }
   };
 
+  const vehicleOptions = `
+    <option value="">Choose vehicle type</option>
+    <option value="Sedan">Sedan</option>
+    <option value="Coupe">Coupe</option>
+    <option value="SUV">SUV</option>
+    <option value="Pickup Truck">Pickup Truck</option>`;
+
+  function injectVehicleSelectors() {
+    const apptModel = document.querySelector('#apptModel');
+    if (apptModel && !document.querySelector('#apptVehicleType')) {
+      const label = document.createElement('label');
+      label.innerHTML = `Vehicle type<select id="apptVehicleType" required>${vehicleOptions}</select>`;
+      apptModel.closest('label')?.insertAdjacentElement('afterend', label);
+    }
+
+    const quoteService = document.querySelector('#quoteService');
+    if (quoteService && !document.querySelector('#quoteVehicleType')) {
+      const label = document.createElement('label');
+      label.innerHTML = `Vehicle type<select id="quoteVehicleType" required>${vehicleOptions}</select>`;
+      quoteService.closest('label')?.insertAdjacentElement('afterend', label);
+    }
+
+    const quoteForm = document.querySelector('#quoteForm');
+    if (quoteForm && !quoteForm.dataset.vehicleTypeReady) {
+      quoteForm.dataset.vehicleTypeReady = '1';
+      quoteForm.addEventListener('submit', () => {
+        const type = document.querySelector('#quoteVehicleType')?.value;
+        const notes = document.querySelector('#quoteNotes');
+        if (!type || !notes) return;
+        const cleaned = notes.value.replace(/^Vehicle type:.*\n?/i, '');
+        notes.value = `Vehicle type: ${type}\n${cleaned}`.trim();
+      }, true);
+    }
+
+    const apptForm = document.querySelector('#appointmentForm');
+    if (apptForm && !apptForm.dataset.vehicleTypeReady) {
+      apptForm.dataset.vehicleTypeReady = '1';
+      apptForm.addEventListener('submit', () => {
+        const type = document.querySelector('#apptVehicleType')?.value;
+        const notes = document.querySelector('#apptNotes');
+        if (!type || !notes) return;
+        const cleaned = notes.value.replace(/^Vehicle type:.*\n?/i, '');
+        notes.value = `Vehicle type: ${type}\n${cleaned}`.trim();
+      }, true);
+    }
+  }
+
   function initFilmSelector() {
+    injectVehicleSelectors();
     const fieldset = document.querySelector('.film-fieldset');
     const form = document.querySelector('#quoteForm');
     if (!fieldset || !form || fieldset.dataset.hitekReady) return;
