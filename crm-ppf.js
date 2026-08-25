@@ -3,6 +3,9 @@ window.addEventListener('load',()=>{
   const approval=document.createElement('script');
   approval.src='crm-approval.js';
   document.body.appendChild(approval);
+  const growth=document.createElement('script');
+  growth.src='crm-growth.js';
+  document.body.appendChild(growth);
 
   const firstName=c=>String(c?.first_name||customerName(c)||'there').trim().split(/\s+/)[0]||'there';
   const displayTime=v=>{
