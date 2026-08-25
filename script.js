@@ -36,242 +36,49 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     .em-instagram-card span{position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.7);padding:6px 8px;font-size:10px;font-weight:800;letter-spacing:.08em}
     .em-instagram-actions{margin-top:24px;display:flex;gap:14px;align-items:center}
     .em-mobile-quote{display:none}
-    @media(max-width:800px){
-      .em-instagram-grid{grid-template-columns:repeat(2,1fr)}
-      .em-instagram-card:nth-child(5){display:none}
-      .em-instagram-head{display:block}
-      .em-instagram-head p{margin-top:14px}
-    }
-    @media(max-width:620px){
-      body{padding-bottom:82px!important}
-      .site-header{height:92px!important;padding:0 30px!important;background:#050505!important;border-bottom:2px solid #d71920!important;gap:16px!important;position:sticky!important;top:0!important}
-      .brand{font-size:22px!important;gap:8px!important;white-space:nowrap}
-      .brand-em{font-size:23px!important}
-      .site-header .btn-small{margin-left:auto!important;min-height:56px!important;height:56px!important;padding:0 22px!important}
-      .hero{height:auto!important;min-height:610px!important;padding:54px 28px 72px!important;align-items:flex-start!important}
-      .hero h1{font-size:48px!important}
-      .mobile-contact-bar{display:none!important}
-      .em-mobile-quote{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:9999;height:72px;background:#e21a22;color:white;align-items:center;justify-content:center;font-weight:900;font-size:17px;letter-spacing:.04em;box-shadow:0 -8px 30px rgba(0,0,0,.35)}
-      .em-instagram-work{padding:62px 20px}
-      .em-instagram-grid{gap:8px}
-      .em-instagram-actions{display:grid}
-      .em-instagram-actions .btn{width:100%}
-    }
+    @media(max-width:800px){.em-instagram-grid{grid-template-columns:repeat(2,1fr)}.em-instagram-card:nth-child(5){display:none}.em-instagram-head{display:block}.em-instagram-head p{margin-top:14px}}
+    @media(max-width:620px){body{padding-bottom:82px!important}.site-header{height:92px!important;padding:0 30px!important;background:#050505!important;border-bottom:2px solid #d71920!important;gap:16px!important;position:sticky!important;top:0!important}.brand{font-size:22px!important;gap:8px!important;white-space:nowrap}.brand-em{font-size:23px!important}.site-header .btn-small{margin-left:auto!important;min-height:56px!important;height:56px!important;padding:0 22px!important}.hero{height:auto!important;min-height:610px!important;padding:54px 28px 72px!important;align-items:flex-start!important}.hero h1{font-size:48px!important}.mobile-contact-bar{display:none!important}.em-mobile-quote{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:9999;height:72px;background:#e21a22;color:white;align-items:center;justify-content:center;font-weight:900;font-size:17px;letter-spacing:.04em;box-shadow:0 -8px 30px rgba(0,0,0,.35)}.em-instagram-work{padding:62px 20px}.em-instagram-grid{gap:8px}.em-instagram-actions{display:grid}.em-instagram-actions .btn{width:100%}}
   `;
   document.head.appendChild(style);
 
-  if (!document.querySelector('.em-mobile-quote')) {
-    const a = document.createElement('a');
-    a.className = 'em-mobile-quote';
-    a.href = '#book';
-    a.textContent = 'GET A QUOTE';
-    document.body.appendChild(a);
-  }
-
+  if (!document.querySelector('.em-mobile-quote')) { const a=document.createElement('a'); a.className='em-mobile-quote'; a.href='#book'; a.textContent='GET A QUOTE'; document.body.appendChild(a); }
   if (!document.querySelector('.em-instagram-work')) {
-    const section = document.createElement('section');
-    section.className = 'em-instagram-work';
-    section.id = 'recent-work';
-    section.innerHTML = `<div class="em-instagram-wrap"><div class="em-instagram-head"><div><p class="kicker">RECENT WORK</p><h2>See what we’ve been tinting.</h2></div><p>A quick look at recent EM Tinting installs. Tap any photo to open our Instagram and see more finished vehicles, shades and film options.</p></div><div class="em-instagram-grid">${[1,2,3,4,5].map((n,i)=>`<a class="em-instagram-card" href="https://www.instagram.com/em_tinting/" target="_blank" rel="noopener noreferrer"><img src="media/hero-0${n}.jpg" alt="EM Tinting recent window tint installation ${n}" loading="lazy"><span>${i===0?'CERAMIC TINT':i===1?'WINDOW TINT':i===2?'RECENT INSTALL':i===3?'EM TINTING':'HOUSTON TX'}</span></a>`).join('')}</div><div class="em-instagram-actions"><a class="btn" href="https://www.instagram.com/em_tinting/" target="_blank" rel="noopener noreferrer">View More on Instagram</a><span style="color:#888;font-size:13px">@em_tinting</span></div></div>`;
-    const booking = document.querySelector('#book');
-    if (booking) booking.parentNode.insertBefore(section, booking);
-    else document.querySelector('footer')?.before(section);
+    const section=document.createElement('section'); section.className='em-instagram-work'; section.id='recent-work';
+    section.innerHTML=`<div class="em-instagram-wrap"><div class="em-instagram-head"><div><p class="kicker">RECENT WORK</p><h2>See what we’ve been tinting.</h2></div><p>A quick look at recent EM Tinting installs. Tap any photo to open our Instagram and see more finished vehicles, shades and film options.</p></div><div class="em-instagram-grid">${[1,2,3,4,5].map((n,i)=>`<a class="em-instagram-card" href="https://www.instagram.com/em_tinting/" target="_blank" rel="noopener noreferrer"><img src="media/hero-0${n}.jpg" alt="EM Tinting recent window tint installation ${n}" loading="lazy"><span>${i===0?'CERAMIC TINT':i===1?'WINDOW TINT':i===2?'RECENT INSTALL':i===3?'EM TINTING':'HOUSTON TX'}</span></a>`).join('')}</div><div class="em-instagram-actions"><a class="btn" href="https://www.instagram.com/em_tinting/" target="_blank" rel="noopener noreferrer">View More on Instagram</a><span style="color:#888;font-size:13px">@em_tinting</span></div></div>`;
+    const booking=document.querySelector('#book'); if(booking) booking.parentNode.insertBefore(section,booking); else document.querySelector('footer')?.before(section);
   }
-
-  const dateInput = document.querySelector('#bookingForm input[name="appointment_date"]');
-  if (dateInput && !dateInput.closest('.em-date-field')) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'em-date-field';
-    const label = document.createElement('span');
-    label.className = 'em-date-label';
-    label.textContent = 'Appointment date';
-    dateInput.parentNode.insertBefore(wrapper, dateInput);
-    wrapper.appendChild(dateInput);
-    wrapper.appendChild(label);
-  }
-
-  const form = document.querySelector('#bookingForm');
-  const vehicleType = form?.querySelector('select[name="vehicle_type"]');
-  const film = form?.querySelector('select[name="tint_package"]');
-
-  if (vehicleType) {
-    vehicleType.innerHTML = '<option value="">Choose vehicle type</option><option>Sedan</option><option>Coupe</option><option>SUV</option><option value="Pickup Truck">Pickup Truck</option>';
-    vehicleType.required = true;
-  }
-
-  if (film) {
-    film.value = '';
-    film.removeAttribute('required');
-    film.closest('.form-row')?.classList.add('em-no-film-choice');
-    film.style.display = 'none';
-  }
-
-  if (form && !document.querySelector('#emCoverage')) {
-    const builder = document.createElement('div');
-    builder.className = 'em-quote-builder';
-    builder.innerHTML = '<select id="emCoverage" name="tint_coverage" required><option value="">Choose tint coverage</option><option>Full Vehicle</option><option>Front 2 Doors</option><option>Windshield Only</option></select><label class="em-addon"><input id="emEyebrow" name="eyebrow" type="checkbox" value="yes"><span>Add windshield eyebrow</span></label>';
-    const dateRow = dateInput?.closest('.form-row');
-    if (dateRow) dateRow.insertAdjacentElement('beforebegin', builder);
-    else form.querySelector('textarea[name="notes"]')?.insertAdjacentElement('beforebegin', builder);
-
-    const coverage = document.querySelector('#emCoverage');
-    const eyebrow = document.querySelector('#emEyebrow');
-    const notes = form.querySelector('textarea[name="notes"]');
-    form.addEventListener('submit', () => {
-      if (!notes) return;
-      const type = vehicleType?.value || '';
-      const cov = coverage?.value || '';
-      const selection = `Quote request: ${cov} | ${type} | Show all tint film options${eyebrow?.checked?' | Eyebrow requested':''}`.trim();
-      if (!notes.value.startsWith('Quote request:')) notes.value = `${selection}\n${notes.value}`.trim();
-    }, true);
+  const dateInput=document.querySelector('#bookingForm input[name="appointment_date"]');
+  if(dateInput&&!dateInput.closest('.em-date-field')){const wrapper=document.createElement('div');wrapper.className='em-date-field';const label=document.createElement('span');label.className='em-date-label';label.textContent='Appointment date';dateInput.parentNode.insertBefore(wrapper,dateInput);wrapper.appendChild(dateInput);wrapper.appendChild(label);}
+  const form=document.querySelector('#bookingForm'); const vehicleType=form?.querySelector('select[name="vehicle_type"]'); const film=form?.querySelector('select[name="tint_package"]');
+  if(vehicleType){vehicleType.innerHTML='<option value="">Choose vehicle type</option><option>Sedan</option><option>Coupe</option><option>SUV</option><option value="Pickup Truck">Pickup Truck</option>';vehicleType.required=true;}
+  if(film){film.value='';film.removeAttribute('required');film.closest('.form-row')?.classList.add('em-no-film-choice');film.style.display='none';}
+  if(form&&!document.querySelector('#emCoverage')){
+    const builder=document.createElement('div');builder.className='em-quote-builder';builder.innerHTML='<select id="emCoverage" name="tint_coverage" required><option value="">Choose tint coverage</option><option>Full Vehicle</option><option>Front 2 Doors</option><option>Windshield Only</option></select><label class="em-addon"><input id="emEyebrow" name="eyebrow" type="checkbox" value="yes"><span>Add windshield eyebrow</span></label>';
+    const dateRow=dateInput?.closest('.form-row'); if(dateRow) dateRow.insertAdjacentElement('beforebegin',builder); else form.querySelector('textarea[name="notes"]')?.insertAdjacentElement('beforebegin',builder);
+    const coverage=document.querySelector('#emCoverage');const eyebrow=document.querySelector('#emEyebrow');const notes=form.querySelector('textarea[name="notes"]');
+    form.addEventListener('submit',()=>{if(!notes)return;const type=vehicleType?.value||'';const cov=coverage?.value||'';const selection=`Quote request: ${cov} | ${type} | Show all tint film options${eyebrow?.checked?' | Eyebrow requested':''}`.trim();if(!notes.value.startsWith('Quote request:'))notes.value=`${selection}\n${notes.value}`.trim();},true);
   }
 })();
 
 // EM Tinting — interactive tint shade visualizer
 (() => {
-  if (document.querySelector('#emTintVisualizer')) return;
-  const why = document.querySelector('#why');
-  const form = document.querySelector('#bookingForm');
-  if (!why || !form) return;
-
-  const style = document.createElement('style');
-  style.textContent = `
-    .em-shade-section{padding:92px max(6vw,28px);background:#0b0b0b;border-top:1px solid #242424;border-bottom:1px solid #242424}
-    .em-shade-wrap{max-width:1200px;margin:0 auto}
-    .em-shade-head{display:grid;grid-template-columns:1fr .75fr;gap:60px;align-items:end;margin-bottom:35px}
-    .em-shade-head h2{font-size:clamp(42px,5vw,68px);line-height:1;letter-spacing:-.045em;margin:0}
-    .em-shade-head p{margin:0;color:#999;max-width:520px}
-    .em-shade-ui{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:22px;align-items:start}
-    .em-shade-stage{background:#fff;border-radius:4px;overflow:hidden;border:1px solid #333;padding:10px}
-    .em-shade-stage svg{display:block;width:100%;height:auto}
-    .em-shade-controls{display:grid;gap:8px}
-    .em-shade-btn{min-height:56px;border:1px solid #333;background:#121212;color:#fff;border-radius:4px;padding:10px 13px;text-align:left;cursor:pointer;font:inherit;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .em-shade-btn strong{font-size:18px}.em-shade-btn span{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em}
-    .em-shade-btn.active{border-color:#e21a22;background:#1b1011;box-shadow:inset 3px 0 0 #e21a22}
-    .em-shade-note{margin-top:14px;color:#777;font-size:12px;line-height:1.5}
-    .em-shade-selected{margin-top:15px;padding:14px 15px;background:#151515;border:1px solid #2b2b2b;font-size:13px;color:#cfcfcf}
-    .em-shade-selected strong{color:#fff}
-    @media(max-width:820px){.em-shade-head,.em-shade-ui{grid-template-columns:1fr}.em-shade-controls{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:620px){.em-shade-section{padding:68px 20px}.em-shade-controls{grid-template-columns:repeat(2,1fr)}.em-shade-btn{display:grid;gap:2px;min-height:62px}.em-shade-head{gap:22px}.em-shade-head h2{font-size:42px}}
-  `;
-  document.head.appendChild(style);
-
-  const section = document.createElement('section');
-  section.id = 'emTintVisualizer';
-  section.className = 'em-shade-section';
-  section.innerHTML = `
-    <div class="em-shade-wrap">
-      <div class="em-shade-head">
-        <div><p class="kicker">TINT SHADE VISUALIZER</p><h2>See how dark you want to go.</h2></div>
-        <p>Tap a shade to compare privacy and appearance. The driver becomes harder to see as the tint gets darker.</p>
-      </div>
-      <div class="em-shade-ui">
-        <div>
-          <div class="em-shade-stage">
-            <svg viewBox="0 0 760 360" role="img" aria-label="Red car showing adjustable window tint darkness">
-              <rect width="760" height="360" fill="#fff"/>
-              <text id="emShadeLabel" x="380" y="58" text-anchor="middle" fill="#111" font-size="25" font-weight="800">70% VLT</text>
-              <path d="M82 249 Q90 224 123 219 L177 210 L234 139 Q251 119 288 116 L461 116 Q494 119 519 144 L576 204 L633 219 Q663 226 672 249 L672 271 L82 271Z" fill="#e21a22" stroke="#9d1117" stroke-width="3"/>
-              <path id="emRearGlass" d="M244 151 Q257 134 290 132 L358 132 L358 207 L198 207Z" fill="#fff" stroke="#171717" stroke-width="5"/>
-              <path id="emFrontGlass" d="M376 132 L456 132 Q481 135 500 156 L544 207 L376 207Z" fill="#fff" stroke="#171717" stroke-width="5"/>
-              <g id="emDriver">
-                <circle cx="455" cy="155" r="15" fill="#222"/>
-                <path d="M455 171 L455 194 M455 180 L438 190 M455 180 L474 191 M455 194 L442 207 M455 194 L470 207" stroke="#222" stroke-width="7" stroke-linecap="round"/>
-                <circle cx="493" cy="196" r="23" fill="none" stroke="#222" stroke-width="6"/>
-                <line x1="470" y1="191" x2="484" y2="190" stroke="#222" stroke-width="6" stroke-linecap="round"/>
-              </g>
-              <path id="emFrontOverlay" d="M376 132 L456 132 Q481 135 500 156 L544 207 L376 207Z" fill="#fff" fill-opacity="0"/>
-              <line x1="367" y1="126" x2="367" y2="216" stroke="#171717" stroke-width="8"/>
-              <circle cx="205" cy="270" r="49" fill="#111"/><circle cx="205" cy="270" r="22" fill="#c5c5c5"/>
-              <circle cx="558" cy="270" r="49" fill="#111"/><circle cx="558" cy="270" r="22" fill="#c5c5c5"/>
-              <text x="382" y="247" text-anchor="middle" fill="#fff" font-size="21" font-weight="800" letter-spacing="2">EM TINTING</text>
-            </svg>
-          </div>
-          <div class="em-shade-selected">Selected shade: <strong id="emShadeSelected">70% — Nearly Clear</strong></div>
-          <div class="em-shade-note">Visual guide only. Actual appearance can vary based on factory glass, lighting, interior color and the selected film.</div>
-        </div>
-        <div class="em-shade-controls" aria-label="Choose tint shade">
-          <button type="button" class="em-shade-btn active" data-shade="70"><strong>70%</strong><span>Nearly Clear</span></button>
-          <button type="button" class="em-shade-btn" data-shade="50"><strong>50%</strong><span>Light Gray</span></button>
-          <button type="button" class="em-shade-btn" data-shade="35"><strong>35%</strong><span>Medium</span></button>
-          <button type="button" class="em-shade-btn" data-shade="20"><strong>20%</strong><span>Dark</span></button>
-          <button type="button" class="em-shade-btn" data-shade="15"><strong>15%</strong><span>Very Dark</span></button>
-          <button type="button" class="em-shade-btn" data-shade="5"><strong>5%</strong><span>Limo Dark</span></button>
-        </div>
-      </div>
-    </div>`;
-  why.parentNode.insertBefore(section, why);
-
-  let shadeInput = form.querySelector('input[name="preferred_shade"]');
-  if (!shadeInput) {
-    shadeInput = document.createElement('input');
-    shadeInput.type = 'hidden';
-    shadeInput.name = 'preferred_shade';
-    shadeInput.value = '70%';
-    form.appendChild(shadeInput);
-  }
-
-  const rear = section.querySelector('#emRearGlass');
-  const front = section.querySelector('#emFrontGlass');
-  const overlay = section.querySelector('#emFrontOverlay');
-  const driver = section.querySelector('#emDriver');
-  const label = section.querySelector('#emShadeLabel');
-  const selected = section.querySelector('#emShadeSelected');
-  const shades = {
-    70:['#ffffff',0,1,'Nearly Clear'],
-    50:['#d8d8d8',.25,.88,'Light Gray'],
-    35:['#a5a5a5',.45,.65,'Medium'],
-    20:['#666666',.66,.40,'Dark'],
-    15:['#3d3d3d',.80,.22,'Very Dark'],
-    5:['#090909',.96,.05,'Limo Dark']
-  };
-
-  function setShade(value) {
-    const data = shades[value];
-    if (!data) return;
-    rear.setAttribute('fill', data[0]);
-    front.setAttribute('fill', data[0]);
-    overlay.setAttribute('fill', data[0]);
-    overlay.setAttribute('fill-opacity', String(data[1]));
-    driver.setAttribute('opacity', String(data[2]));
-    label.textContent = `${value}% VLT`;
-    selected.textContent = `${value}% — ${data[3]}`;
-    shadeInput.value = `${value}%`;
-    section.querySelectorAll('.em-shade-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.shade === String(value)));
-  }
-
-  section.querySelectorAll('.em-shade-btn').forEach(btn => btn.addEventListener('click', () => setShade(Number(btn.dataset.shade))));
-  setShade(70);
-
-  form.addEventListener('submit', () => {
-    const notes = form.querySelector('textarea[name="notes"]');
-    if (!notes || !shadeInput.value) return;
-    const shadeLine = `Preferred shade: ${shadeInput.value}`;
-    if (!notes.value.includes('Preferred shade:')) notes.value = `${notes.value}\n${shadeLine}`.trim();
-  }, true);
+  if(document.querySelector('#emTintVisualizer'))return;const why=document.querySelector('#why');const form=document.querySelector('#bookingForm');if(!why||!form)return;
+  const style=document.createElement('style');style.textContent=`.em-shade-section{padding:92px max(6vw,28px);background:#0b0b0b;border-top:1px solid #242424;border-bottom:1px solid #242424}.em-shade-wrap{max-width:1200px;margin:0 auto}.em-shade-head{display:grid;grid-template-columns:1fr .75fr;gap:60px;align-items:end;margin-bottom:35px}.em-shade-head h2{font-size:clamp(42px,5vw,68px);line-height:1;letter-spacing:-.045em;margin:0}.em-shade-head p{margin:0;color:#999;max-width:520px}.em-shade-ui{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:22px;align-items:start}.em-shade-stage{background:#fff;border-radius:4px;overflow:hidden;border:1px solid #333;padding:10px}.em-shade-stage svg{display:block;width:100%;height:auto}.em-shade-controls{display:grid;gap:8px}.em-shade-btn{min-height:56px;border:1px solid #333;background:#121212;color:#fff;border-radius:4px;padding:10px 13px;text-align:left;cursor:pointer;font:inherit;display:flex;align-items:center;justify-content:space-between;gap:12px}.em-shade-btn strong{font-size:18px}.em-shade-btn span{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:.08em}.em-shade-btn.active{border-color:#e21a22;background:#1b1011;box-shadow:inset 3px 0 0 #e21a22}.em-shade-note{margin-top:14px;color:#777;font-size:12px;line-height:1.5}.em-shade-selected{margin-top:15px;padding:14px 15px;background:#151515;border:1px solid #2b2b2b;font-size:13px;color:#cfcfcf}.em-shade-selected strong{color:#fff}@media(max-width:820px){.em-shade-head,.em-shade-ui{grid-template-columns:1fr}.em-shade-controls{grid-template-columns:repeat(3,1fr)}}@media(max-width:620px){.em-shade-section{padding:68px 20px}.em-shade-controls{grid-template-columns:repeat(2,1fr)}.em-shade-btn{display:grid;gap:2px;min-height:62px}.em-shade-head{gap:22px}.em-shade-head h2{font-size:42px}}`;document.head.appendChild(style);
+  const section=document.createElement('section');section.id='emTintVisualizer';section.className='em-shade-section';section.innerHTML=`<div class="em-shade-wrap"><div class="em-shade-head"><div><p class="kicker">TINT SHADE VISUALIZER</p><h2>See how dark you want to go.</h2></div><p>Tap a shade to compare privacy and appearance. The driver becomes harder to see as the tint gets darker.</p></div><div class="em-shade-ui"><div><div class="em-shade-stage"><svg viewBox="0 0 760 360" role="img" aria-label="Red car showing adjustable window tint darkness"><rect width="760" height="360" fill="#fff"/><text id="emShadeLabel" x="380" y="58" text-anchor="middle" fill="#111" font-size="25" font-weight="800">70% VLT</text><path d="M82 249 Q90 224 123 219 L177 210 L234 139 Q251 119 288 116 L461 116 Q494 119 519 144 L576 204 L633 219 Q663 226 672 249 L672 271 L82 271Z" fill="#e21a22" stroke="#9d1117" stroke-width="3"/><path id="emRearGlass" d="M244 151 Q257 134 290 132 L358 132 L358 207 L198 207Z" fill="#fff" stroke="#171717" stroke-width="5"/><path id="emFrontGlass" d="M376 132 L456 132 Q481 135 500 156 L544 207 L376 207Z" fill="#fff" stroke="#171717" stroke-width="5"/><g id="emDriver"><circle cx="455" cy="155" r="15" fill="#222"/><path d="M455 171 L455 194 M455 180 L438 190 M455 180 L474 191 M455 194 L442 207 M455 194 L470 207" stroke="#222" stroke-width="7" stroke-linecap="round"/><circle cx="493" cy="196" r="23" fill="none" stroke="#222" stroke-width="6"/><line x1="470" y1="191" x2="484" y2="190" stroke="#222" stroke-width="6" stroke-linecap="round"/></g><path id="emFrontOverlay" d="M376 132 L456 132 Q481 135 500 156 L544 207 L376 207Z" fill="#fff" fill-opacity="0"/><line x1="367" y1="126" x2="367" y2="216" stroke="#171717" stroke-width="8"/><circle cx="205" cy="270" r="49" fill="#111"/><circle cx="205" cy="270" r="22" fill="#c5c5c5"/><circle cx="558" cy="270" r="49" fill="#111"/><circle cx="558" cy="270" r="22" fill="#c5c5c5"/><text x="382" y="247" text-anchor="middle" fill="#fff" font-size="21" font-weight="800" letter-spacing="2">EM TINTING</text></svg></div><div class="em-shade-selected">Selected shade: <strong id="emShadeSelected">70% — Nearly Clear</strong></div><div class="em-shade-note">Visual guide only. Actual appearance can vary based on factory glass, lighting, interior color and the selected film.</div></div><div class="em-shade-controls" aria-label="Choose tint shade"><button type="button" class="em-shade-btn active" data-shade="70"><strong>70%</strong><span>Nearly Clear</span></button><button type="button" class="em-shade-btn" data-shade="50"><strong>50%</strong><span>Light Gray</span></button><button type="button" class="em-shade-btn" data-shade="35"><strong>35%</strong><span>Medium</span></button><button type="button" class="em-shade-btn" data-shade="20"><strong>20%</strong><span>Dark</span></button><button type="button" class="em-shade-btn" data-shade="15"><strong>15%</strong><span>Very Dark</span></button><button type="button" class="em-shade-btn" data-shade="5"><strong>5%</strong><span>Limo Dark</span></button></div></div></div>`;why.parentNode.insertBefore(section,why);
+  let shadeInput=form.querySelector('input[name="preferred_shade"]');if(!shadeInput){shadeInput=document.createElement('input');shadeInput.type='hidden';shadeInput.name='preferred_shade';shadeInput.value='70%';form.appendChild(shadeInput);}
+  const rear=section.querySelector('#emRearGlass'),front=section.querySelector('#emFrontGlass'),overlay=section.querySelector('#emFrontOverlay'),driver=section.querySelector('#emDriver'),label=section.querySelector('#emShadeLabel'),selected=section.querySelector('#emShadeSelected');const shades={70:['#ffffff',0,1,'Nearly Clear'],50:['#d8d8d8',.25,.88,'Light Gray'],35:['#a5a5a5',.45,.65,'Medium'],20:['#666666',.66,.40,'Dark'],15:['#3d3d3d',.80,.22,'Very Dark'],5:['#090909',.96,.05,'Limo Dark']};
+  function setShade(value){const data=shades[value];if(!data)return;rear.setAttribute('fill',data[0]);front.setAttribute('fill',data[0]);overlay.setAttribute('fill',data[0]);overlay.setAttribute('fill-opacity',String(data[1]));driver.setAttribute('opacity',String(data[2]));label.textContent=`${value}% VLT`;selected.textContent=`${value}% — ${data[3]}`;shadeInput.value=`${value}%`;section.querySelectorAll('.em-shade-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.shade===String(value)));}
+  section.querySelectorAll('.em-shade-btn').forEach(btn=>btn.addEventListener('click',()=>setShade(Number(btn.dataset.shade))));setShade(70);form.addEventListener('submit',()=>{const notes=form.querySelector('textarea[name="notes"]');if(!notes||!shadeInput.value)return;const shadeLine=`Preferred shade: ${shadeInput.value}`;if(!notes.value.includes('Preferred shade:'))notes.value=`${notes.value}\n${shadeLine}`.trim();},true);
 })();
 
-// EM Tinting — live instant quote estimates from CRM pricing
+// EM Tinting — package finder: public Carbon starting price, ceramic pricing stays internal
 (() => {
-  const form = document.querySelector('#bookingForm');
-  if (!form || document.querySelector('#emInstantQuote')) return;
-  const service = form.querySelector('select[name="service"]');
-  const vehicle = form.querySelector('select[name="vehicle_type"]');
-  const coverage = document.querySelector('#emCoverage');
-  const eyebrow = document.querySelector('#emEyebrow');
-  if (!service || !vehicle || !coverage) return;
-
-  const style=document.createElement('style');
-  style.textContent=`.em-instant{display:none;margin:4px 0 4px;padding:18px;border:1px solid #333;background:#0c0c0c}.em-instant.show{display:block}.em-instant-head{display:flex;justify-content:space-between;gap:14px;align-items:end;margin-bottom:13px}.em-instant-head strong{font-size:18px;color:#fff}.em-instant-head span{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.08em}.em-instant-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.em-instant-card{border:1px solid #2d2d2d;background:#141414;padding:14px}.em-instant-card b{display:block;color:#fff;font-size:14px}.em-instant-card strong{display:block;color:#fff;font-size:25px;margin-top:7px}.em-instant-card small{display:block;color:#777;margin-top:5px;line-height:1.35}.em-instant-note{font-size:11px;color:#777;margin:12px 0 0}.em-instant-loading{color:#888;font-size:13px}@media(max-width:620px){.em-instant-grid{grid-template-columns:1fr}.em-instant-card{display:flex;align-items:center;justify-content:space-between;gap:12px}.em-instant-card strong{margin:0}}`;
-  document.head.appendChild(style);
-  const box=document.createElement('div');box.id='emInstantQuote';box.className='em-instant';box.innerHTML='<div class="em-instant-head"><div><span>Instant estimate</span><strong>Estimated HITEK tint options</strong></div></div><div id="emInstantBody" class="em-instant-loading">Choose Window Tint, vehicle type and coverage to see pricing.</div><p class="em-instant-note">Estimate is based on the selections above and will be reviewed by EM Tinting before the final quote is sent.</p>';
-  const dateField=form.querySelector('.em-date-field')||form.querySelector('input[name="appointment_date"]');
-  if(dateField) dateField.insertAdjacentElement('beforebegin',box); else form.querySelector('button[type="submit"]')?.insertAdjacentElement('beforebegin',box);
-  const body=box.querySelector('#emInstantBody');
-  let pricing=[];let addon=40;let loaded=false;
-  const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(n||0));
-  async function loadPricing(){if(loaded)return;body.textContent='Loading current pricing…';try{const r=await fetch('https://neuginokjfvnkmlzhwoa.supabase.co/functions/v1/public-pricing',{cache:'no-store'});const data=await r.json();if(!r.ok)throw new Error(data.error||'Pricing unavailable');pricing=data.pricing||[];addon=Number(data.eyebrow_addon||40);loaded=true;render();}catch(e){body.textContent='Instant pricing is temporarily unavailable. You can still request a quote.';}}
-  function render(){const isTint=service.value==='Window Tint';if(!isTint){box.classList.remove('show');return;}box.classList.add('show');if(!vehicle.value||!coverage.value){body.className='em-instant-loading';body.textContent='Choose your vehicle type and tint coverage to see your estimate.';return;}if(!loaded){loadPricing();return;}const rows=pricing.filter(x=>x.vehicle_type===vehicle.value&&x.coverage===coverage.value);if(!rows.length){body.className='em-instant-loading';body.textContent='This combination needs a custom quote. Submit the request and we’ll price it for you.';return;}body.className='em-instant-grid';body.innerHTML=rows.map(x=>{const total=Number(x.price)+(eyebrow?.checked?addon:0);const tag=x.film_package==='Ceramic IR'?'Most Popular':x.film_package==='Ceramic Plus'?'Maximum Heat Rejection':'Everyday Value';return `<div class="em-instant-card"><div><b>HITEK ${x.film_package}</b><small>${tag}</small></div><strong>${money(total)}</strong></div>`}).join('');}
-  [service,vehicle,coverage,eyebrow].forEach(el=>el?.addEventListener('change',render));
-  loadPricing();render();
+  const form=document.querySelector('#bookingForm');if(!form||document.querySelector('#emInstantQuote'))return;const service=form.querySelector('select[name="service"]'),vehicle=form.querySelector('select[name="vehicle_type"]'),coverage=document.querySelector('#emCoverage'),eyebrow=document.querySelector('#emEyebrow'),film=form.querySelector('select[name="tint_package"]');if(!service||!vehicle||!coverage)return;
+  const style=document.createElement('style');style.textContent=`.em-instant{display:none;margin:4px 0;padding:18px;border:1px solid #333;background:#0c0c0c}.em-instant.show{display:block}.em-instant-head{margin-bottom:13px}.em-instant-head strong{display:block;font-size:19px;color:#fff}.em-instant-head span{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.08em}.em-instant-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.em-instant-card{border:1px solid #2d2d2d;background:#141414;padding:15px;cursor:pointer;color:#fff;text-align:left;font:inherit}.em-instant-card.active{border-color:#e21a22;box-shadow:inset 3px 0 0 #e21a22}.em-instant-card b{display:block;font-size:14px}.em-instant-card strong{display:block;font-size:24px;margin-top:8px}.em-instant-card small{display:block;color:#888;margin-top:6px;line-height:1.35}.em-instant-card .contact-price{font-size:17px}.em-instant-note{font-size:11px;color:#777;margin:12px 0 0}.em-instant-loading{color:#888;font-size:13px}@media(max-width:620px){.em-instant-grid{grid-template-columns:1fr}}`;document.head.appendChild(style);
+  const box=document.createElement('div');box.id='emInstantQuote';box.className='em-instant';box.innerHTML='<div class="em-instant-head"><span>Find your tint package</span><strong>Choose the option that fits you.</strong></div><div id="emInstantBody" class="em-instant-loading">Choose Window Tint, vehicle type and coverage to see your options.</div><p class="em-instant-note">Carbon shows a starting estimate. Ceramic IR and Ceramic Plus are personalized to your vehicle and will be quoted by EM Tinting.</p>';
+  const dateField=form.querySelector('.em-date-field')||form.querySelector('input[name="appointment_date"]');if(dateField)dateField.insertAdjacentElement('beforebegin',box);else form.querySelector('button[type="submit"]')?.insertAdjacentElement('beforebegin',box);const body=box.querySelector('#emInstantBody');let pricing=[],addon=40,loaded=false,selectedPackage='';const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(n||0));
+  async function loadPricing(){if(loaded)return;try{const r=await fetch('https://neuginokjfvnkmlzhwoa.supabase.co/functions/v1/public-pricing',{cache:'no-store'});const data=await r.json();if(!r.ok)throw new Error();pricing=data.pricing||[];addon=Number(data.eyebrow_addon||40);loaded=true;render();}catch(e){body.textContent='Package pricing is temporarily unavailable. You can still request a quote.';}}
+  function selectPackage(name){selectedPackage=name;if(film){film.style.display='none';film.value=name;}body.querySelectorAll('.em-instant-card').forEach(card=>card.classList.toggle('active',card.dataset.package===name));}
+  function render(){const isTint=service.value==='Window Tint';if(!isTint){box.classList.remove('show');return;}box.classList.add('show');if(!vehicle.value||!coverage.value){body.className='em-instant-loading';body.textContent='Choose your vehicle type and tint coverage to see your options.';return;}if(!loaded){body.textContent='Loading package options…';loadPricing();return;}const rows=pricing.filter(x=>x.vehicle_type===vehicle.value&&x.coverage===coverage.value);const carbon=rows.find(x=>x.film_package==='Carbon');const packages=['Carbon','Ceramic IR','Ceramic Plus'];body.className='em-instant-grid';body.innerHTML=packages.map(name=>{const row=rows.find(x=>x.film_package===name);if(name==='Carbon'&&carbon){const total=Number(carbon.price)+(eyebrow?.checked?addon:0);return `<button type="button" class="em-instant-card" data-package="Carbon"><b>HITEK Carbon</b><small>Great everyday tint • Privacy • UV protection</small><strong>Starting at ${money(total)}</strong></button>`;}const tag=name==='Ceramic IR'?'Most Popular • Better heat rejection':'Premium • Maximum heat rejection';return `<button type="button" class="em-instant-card" data-package="${name}"><b>HITEK ${name}</b><small>${tag}</small><strong class="contact-price">Get My Price</strong></button>`;}).join('');body.querySelectorAll('.em-instant-card').forEach(card=>card.addEventListener('click',()=>selectPackage(card.dataset.package)));if(selectedPackage)selectPackage(selectedPackage);}
+  [service,vehicle,coverage,eyebrow].forEach(el=>el?.addEventListener('change',render));loadPricing();render();
 })();
