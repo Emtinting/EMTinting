@@ -1,11 +1,19 @@
 document.write('<script src="crm-ppf-core.js"><\/script>');
 window.addEventListener('load',()=>{
+  const modernStyle=document.createElement('link');
+  modernStyle.rel='stylesheet';
+  modernStyle.href='crm-modern.css';
+  document.head.appendChild(modernStyle);
+
   const approval=document.createElement('script');
   approval.src='crm-approval.js';
   document.body.appendChild(approval);
   const growth=document.createElement('script');
   growth.src='crm-growth.js';
   document.body.appendChild(growth);
+  const modern=document.createElement('script');
+  modern.src='crm-modern.js';
+  document.body.appendChild(modern);
 
   const firstName=c=>String(c?.first_name||customerName(c)||'there').trim().split(/\s+/)[0]||'there';
   const displayTime=v=>{
