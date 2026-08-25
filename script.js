@@ -250,3 +250,28 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     if (!notes.value.includes('Preferred shade:')) notes.value = `${notes.value}\n${shadeLine}`.trim();
   }, true);
 })();
+
+// EM Tinting — live instant quote estimates from CRM pricing
+(() => {
+  const form = document.querySelector('#bookingForm');
+  if (!form || document.querySelector('#emInstantQuote')) return;
+  const service = form.querySelector('select[name="service"]');
+  const vehicle = form.querySelector('select[name="vehicle_type"]');
+  const coverage = document.querySelector('#emCoverage');
+  const eyebrow = document.querySelector('#emEyebrow');
+  if (!service || !vehicle || !coverage) return;
+
+  const style=document.createElement('style');
+  style.textContent=`.em-instant{display:none;margin:4px 0 4px;padding:18px;border:1px solid #333;background:#0c0c0c}.em-instant.show{display:block}.em-instant-head{display:flex;justify-content:space-between;gap:14px;align-items:end;margin-bottom:13px}.em-instant-head strong{font-size:18px;color:#fff}.em-instant-head span{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.08em}.em-instant-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.em-instant-card{border:1px solid #2d2d2d;background:#141414;padding:14px}.em-instant-card b{display:block;color:#fff;font-size:14px}.em-instant-card strong{display:block;color:#fff;font-size:25px;margin-top:7px}.em-instant-card small{display:block;color:#777;margin-top:5px;line-height:1.35}.em-instant-note{font-size:11px;color:#777;margin:12px 0 0}.em-instant-loading{color:#888;font-size:13px}@media(max-width:620px){.em-instant-grid{grid-template-columns:1fr}.em-instant-card{display:flex;align-items:center;justify-content:space-between;gap:12px}.em-instant-card strong{margin:0}}`;
+  document.head.appendChild(style);
+  const box=document.createElement('div');box.id='emInstantQuote';box.className='em-instant';box.innerHTML='<div class="em-instant-head"><div><span>Instant estimate</span><strong>Estimated HITEK tint options</strong></div></div><div id="emInstantBody" class="em-instant-loading">Choose Window Tint, vehicle type and coverage to see pricing.</div><p class="em-instant-note">Estimate is based on the selections above and will be reviewed by EM Tinting before the final quote is sent.</p>';
+  const dateField=form.querySelector('.em-date-field')||form.querySelector('input[name="appointment_date"]');
+  if(dateField) dateField.insertAdjacentElement('beforebegin',box); else form.querySelector('button[type="submit"]')?.insertAdjacentElement('beforebegin',box);
+  const body=box.querySelector('#emInstantBody');
+  let pricing=[];let addon=40;let loaded=false;
+  const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(n||0));
+  async function loadPricing(){if(loaded)return;body.textContent='Loading current pricing…';try{const r=await fetch('https://neuginokjfvnkmlzhwoa.supabase.co/functions/v1/public-pricing',{cache:'no-store'});const data=await r.json();if(!r.ok)throw new Error(data.error||'Pricing unavailable');pricing=data.pricing||[];addon=Number(data.eyebrow_addon||40);loaded=true;render();}catch(e){body.textContent='Instant pricing is temporarily unavailable. You can still request a quote.';}}
+  function render(){const isTint=service.value==='Window Tint';if(!isTint){box.classList.remove('show');return;}box.classList.add('show');if(!vehicle.value||!coverage.value){body.className='em-instant-loading';body.textContent='Choose your vehicle type and tint coverage to see your estimate.';return;}if(!loaded){loadPricing();return;}const rows=pricing.filter(x=>x.vehicle_type===vehicle.value&&x.coverage===coverage.value);if(!rows.length){body.className='em-instant-loading';body.textContent='This combination needs a custom quote. Submit the request and we’ll price it for you.';return;}body.className='em-instant-grid';body.innerHTML=rows.map(x=>{const total=Number(x.price)+(eyebrow?.checked?addon:0);const tag=x.film_package==='Ceramic IR'?'Most Popular':x.film_package==='Ceramic Plus'?'Maximum Heat Rejection':'Everyday Value';return `<div class="em-instant-card"><div><b>HITEK ${x.film_package}</b><small>${tag}</small></div><strong>${money(total)}</strong></div>`}).join('');}
+  [service,vehicle,coverage,eyebrow].forEach(el=>el?.addEventListener('change',render));
+  loadPricing();render();
+})();
