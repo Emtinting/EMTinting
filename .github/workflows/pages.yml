@@ -23,6 +23,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Force fresh website assets
+        run: |
+          sed -i 's#script.js?v=[^"'"']*#script.js?v=${{ github.sha }}#g' index.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
