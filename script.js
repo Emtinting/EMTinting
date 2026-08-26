@@ -82,3 +82,17 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   function render(){const isTint=service.value==='Window Tint';if(!isTint){box.classList.remove('show');return;}box.classList.add('show');if(!vehicle.value||!coverage.value){body.className='em-instant-loading';body.textContent='Choose your vehicle type and tint coverage to see your options.';return;}if(!loaded){body.textContent='Loading package options…';loadPricing();return;}const rows=pricing.filter(x=>x.vehicle_type===vehicle.value&&x.coverage===coverage.value);const carbon=rows.find(x=>x.film_package==='Carbon');const packages=['Carbon','Ceramic IR','Ceramic Plus'];body.className='em-instant-grid';body.innerHTML=packages.map(name=>{const row=rows.find(x=>x.film_package===name);if(name==='Carbon'&&carbon){const total=Number(carbon.price)+(eyebrow?.checked?addon:0);return `<button type="button" class="em-instant-card" data-package="Carbon"><b>HITEK Carbon</b><small>Great everyday tint • Privacy • UV protection</small><strong>Starting at ${money(total)}</strong></button>`;}const tag=name==='Ceramic IR'?'Most Popular • Better heat rejection':'Premium • Maximum heat rejection';return `<button type="button" class="em-instant-card" data-package="${name}"><b>HITEK ${name}</b><small>${tag}</small><strong class="contact-price">Get My Price</strong></button>`;}).join('');body.querySelectorAll('.em-instant-card').forEach(card=>card.addEventListener('click',()=>selectPackage(card.dataset.package)));if(selectedPackage)selectPackage(selectedPackage);}
   [service,vehicle,coverage,eyebrow].forEach(el=>el?.addEventListener('change',render));loadPricing();render();
 })();
+
+// EM Tinting — Google review CTA
+(() => {
+  if(document.querySelector('#emGoogleReview'))return;
+  const booking=document.querySelector('#book');
+  const footer=document.querySelector('footer');
+  if(!booking&&!footer)return;
+  const style=document.createElement('style');
+  style.textContent=`.em-review-section{padding:58px max(6vw,28px);background:#fff;color:#111;border-top:1px solid #ddd}.em-review-wrap{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:36px}.em-review-copy .stars{font-size:24px;letter-spacing:4px;margin-bottom:8px}.em-review-copy h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:0 0 12px}.em-review-copy p{margin:0;color:#555;max-width:620px}.em-review-btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 22px;background:#e21a22;color:#fff;text-decoration:none;font-weight:900;white-space:nowrap}.em-review-btn:hover{background:#bd1319}@media(max-width:720px){.em-review-section{padding:48px 20px}.em-review-wrap{display:block}.em-review-btn{width:100%;margin-top:22px}}`;
+  document.head.appendChild(style);
+  const section=document.createElement('section');section.id='emGoogleReview';section.className='em-review-section';
+  section.innerHTML=`<div class="em-review-wrap"><div class="em-review-copy"><div class="stars" aria-label="5 stars">★★★★★</div><h2>Happy with your tint?</h2><p>Your feedback helps local drivers find EM Tinting. If we’ve worked on your vehicle, we’d appreciate a quick Google review.</p></div><a class="em-review-btn" href="https://g.page/r/CctrPJPx2tdIEBM/review" target="_blank" rel="noopener noreferrer">Leave Us a Google Review</a></div>`;
+  if(footer)footer.parentNode.insertBefore(section,footer);else booking.parentNode.insertBefore(section,booking.nextSibling);
+})();
