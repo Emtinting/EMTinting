@@ -2,7 +2,7 @@ document.write('<script src="crm-ppf-core.js"><\/script>');
 window.addEventListener('load',()=>{
   const modernStyle=document.createElement('link');
   modernStyle.rel='stylesheet';
-  modernStyle.href='crm-modern.css';
+  modernStyle.href='crm-modern.css?v=20260827-1300';
   document.head.appendChild(modernStyle);
 
   const approval=document.createElement('script');
@@ -12,8 +12,11 @@ window.addEventListener('load',()=>{
   growth.src='crm-growth.js';
   document.body.appendChild(growth);
   const modern=document.createElement('script');
-  modern.src='crm-modern.js';
+  modern.src='crm-modern.js?v=20260827-1300';
   document.body.appendChild(modern);
+  const calendarGuard=document.createElement('script');
+  calendarGuard.src='crm-calendar-guard.js?v=20260827-1300';
+  document.body.appendChild(calendarGuard);
 
   const firstName=c=>String(c?.first_name||customerName(c)||'there').trim().split(/\s+/)[0]||'there';
   const displayTime=v=>{
