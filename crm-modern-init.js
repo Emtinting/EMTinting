@@ -11,7 +11,7 @@
     const group=t=>{const x=document.createElement('div');x.className='crm-nav-group';x.textContent=t;nav.appendChild(x);};
     const addExisting=(view,label)=>{const b=original.find(x=>x.dataset.view===view);if(!b)return;b.textContent=label||b.textContent;nav.appendChild(b);};
     const custom=(label,fn,badge)=>{const b=document.createElement('button');b.type='button';b.className='nav-item';b.innerHTML=`${label}${badge?` <span class="crm-nav-badge">${badge}</span>`:''}`;b.onclick=fn;nav.appendChild(b);};
-    group('MAIN'); addExisting('dashboard'); addExisting('bookings','Appointments'); addExisting('quotes','Quotes'); addExisting('customers','Customers');
+    group('MAIN'); addExisting('dashboard'); addExisting('bookings','Appointments'); addExisting('calendar','Calendar'); addExisting('quotes','Quotes'); addExisting('customers','Customers');
     group('COMMUNICATION'); custom('Follow-up Center',()=>{qs('[data-view="dashboard"]')?.click();setTimeout(()=>qs('#growthPanel')?.scrollIntoView({behavior:'smooth'}),100)},'•'); custom('Reminders',()=>qs('[data-view="bookings"]')?.click()); custom('Review Requests',()=>{qs('[data-view="dashboard"]')?.click();setTimeout(()=>qs('#growthPanel')?.scrollIntoView({behavior:'smooth'}),100)});
     group('FINANCIAL'); addExisting('payments','Payments'); custom('Deposits',()=>qs('[data-view="payments"]')?.click());
     group('REPORTS'); addExisting('jobs','Jobs'); custom('Reports',()=>toast('Reports dashboard coming next')); custom('Analytics',()=>toast('Analytics dashboard coming next'));
