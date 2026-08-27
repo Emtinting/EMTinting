@@ -29,6 +29,20 @@ window.addEventListener('load',()=>{
   };
   const cleanPhone=p=>String(p||'').replace(/[^0-9+]/g,'');
   const smsLink=(phone,message)=>`sms:${cleanPhone(phone)}?body=${encodeURIComponent(message)}`;
+  const isMac=()=>/Macintosh|Mac OS X/i.test(navigator.userAgent)&&!/iPhone|iPad|iPod/i.test(navigator.userAgent);
+  async function openSms(phone,message){
+    if(isMac()){
+      try{
+        await navigator.clipboard.writeText(message);
+        toast('Message copied — paste it into Messages with Command + V');
+      }catch(err){
+        const ta=document.createElement('textarea');ta.value=message;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();document.execCommand('copy');ta.remove();toast('Message copied — paste it into Messages with Command + V');
+      }
+      window.location.href=`sms:${cleanPhone(phone)}`;
+      return;
+    }
+    window.location.href=smsLink(phone,message);
+  }
   const reminderMessage=(type,booking,customer)=>{
     const name=firstName(customer);
     const date=dateFmt(booking.appointment_date);
@@ -40,13 +54,13 @@ window.addEventListener('load',()=>{
     if(type==='cancellation') return `Hi ${name}, this is EM Tinting. Your appointment scheduled for ${date} at ${time} has been cancelled. Please reply if you would like to reschedule. Thank you!`;
     return `Hi ${name}, this is EM Tinting regarding your appointment on ${date} at ${time}.`;
   };
-  window.openAppointmentText=function(id,type){
+  window.openAppointmentText=async function(id,type){
     const booking=(state.bookings||[]).find(b=>b.id===id);
     if(!booking) return toast('Appointment not found');
     const customer=customerById(booking.customer_id);
     if(!customer?.phone) return toast('Customer phone number is missing');
     const message=reminderMessage(type,booking,customer);
-    window.location.href=smsLink(customer.phone,message);
+    await openSms(customer.phone,message);
   };
 
   if(typeof renderBookings==='function'){
