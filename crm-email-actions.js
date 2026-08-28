@@ -36,4 +36,11 @@ window.addEventListener('load',()=>{
   };
   const start=()=>{ addButtons(); const table=document.getElementById('bookingsTable'); if(table) new MutationObserver(()=>addButtons()).observe(table,{childList:true,subtree:true}); };
   setTimeout(start,700);
+
+  if(!document.querySelector('script[data-crm-reschedule]')){
+    const script=document.createElement('script');
+    script.src='crm-reschedule.js?v=20260828-1';
+    script.dataset.crmReschedule='1';
+    document.body.appendChild(script);
+  }
 });
