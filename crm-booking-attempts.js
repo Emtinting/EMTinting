@@ -1,6 +1,6 @@
 (()=>{
   const qs=(s,r=document)=>r.querySelector(s);
-  const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));
+  const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   const cleanPhone=v=>String(v||'').replace(/[^0-9+]/g,'');
   const fmtWhen=v=>v?new Date(v).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'—';
   const isToday=v=>{if(!v)return false;const d=new Date(v),n=new Date();return d.getFullYear()===n.getFullYear()&&d.getMonth()===n.getMonth()&&d.getDate()===n.getDate();};
@@ -48,12 +48,14 @@
     ensureUI();
     const btn=qs('#refreshBookingAttempts');if(btn)btn.textContent='Loading…';
     try{
+      const {data:{session}}=await db.auth.getSession();
+      if(!session){if(btn)btn.textContent='Refresh leads';return;}
       const {data,error}=await db.from('booking_attempts').select('*').order('last_seen_at',{ascending:false}).limit(50);
       if(error)throw error;attempts=data||[];render();
     }catch(e){const table=qs('#bookingAttemptsTable');if(table)table.innerHTML=`<div class="empty">Unable to load booking attempts: ${esc(e.message||'Unknown error')}</div>`;}
     if(btn)btn.textContent='Refresh leads';
   }
 
-  function init(){if(typeof db==='undefined')return;ensureUI();loadAttempts();qs('#refreshBtn')?.addEventListener('click',()=>setTimeout(loadAttempts,250));}
+  function init(){if(typeof db==='undefined')return;ensureUI();loadAttempts();qs('#refreshBtn')?.addEventListener('click',()=>setTimeout(loadAttempts,250));db.auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN')setTimeout(loadAttempts,300);});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,400));else setTimeout(init,400);
 })();
