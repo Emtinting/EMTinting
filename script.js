@@ -56,7 +56,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     const builder=document.createElement('div');builder.className='em-quote-builder';builder.innerHTML='<select id="emCoverage" name="tint_coverage" required><option value="">Choose tint coverage</option><option>Full Vehicle</option><option>Front 2 Doors</option><option>Windshield Only</option><option>Tint Removal</option></select><label class="em-addon"><input id="emEyebrow" name="eyebrow" type="checkbox" value="yes"><span>Add windshield eyebrow</span></label>';
     const dateRow=dateInput?.closest('.form-row'); if(dateRow) dateRow.insertAdjacentElement('beforebegin',builder); else form.querySelector('textarea[name="notes"]')?.insertAdjacentElement('beforebegin',builder);
     const coverage=document.querySelector('#emCoverage');const eyebrow=document.querySelector('#emEyebrow');const notes=form.querySelector('textarea[name="notes"]');
-    form.addEventListener('submit',()=>{if(!notes)return;const type=vehicleType?.value||'';const cov=coverage?.value||'';const selection=`Quote request: ${cov} | ${type} | Show all tint film options${eyebrow?.checked?' | Eyebrow requested':''}`.trim();if(!notes.value.startsWith('Quote request:'))notes.value=`${selection}\n${notes.value}`.trim();},true);
+    form.addEventListener('submit',()=>{if(!notes)return;const type=vehicleType?.value||'';const cov=coverage?.value||'';const selection=`Quote request: ${cov} | ${type} | Show all tint film options${eyebrow?.checked?' | Eyebrow requested':''}`.trim();if(!notes.value.startsWith('Quote request:'))notes.value=`${selection}\
+${notes.value}`.trim();},true);
   }
 })();
 
@@ -68,7 +69,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   let shadeInput=form.querySelector('input[name="preferred_shade"]');if(!shadeInput){shadeInput=document.createElement('input');shadeInput.type='hidden';shadeInput.name='preferred_shade';shadeInput.value='70%';form.appendChild(shadeInput);}
   const rear=section.querySelector('#emRearGlass'),front=section.querySelector('#emFrontGlass'),overlay=section.querySelector('#emFrontOverlay'),driver=section.querySelector('#emDriver'),label=section.querySelector('#emShadeLabel'),selected=section.querySelector('#emShadeSelected');const shades={70:['#ffffff',0,1,'Nearly Clear'],50:['#d8d8d8',.25,.88,'Light Gray'],35:['#a5a5a5',.45,.65,'Medium'],20:['#666666',.66,.40,'Dark'],15:['#3d3d3d',.80,.22,'Very Dark'],5:['#090909',.96,.05,'Limo Dark']};
   function setShade(value){const data=shades[value];if(!data)return;rear.setAttribute('fill',data[0]);front.setAttribute('fill',data[0]);overlay.setAttribute('fill',data[0]);overlay.setAttribute('fill-opacity',String(data[1]));driver.setAttribute('opacity',String(data[2]));label.textContent=`${value}% VLT`;selected.textContent=`${value}% — ${data[3]}`;shadeInput.value=`${value}%`;section.querySelectorAll('.em-shade-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.shade===String(value)));}
-  section.querySelectorAll('.em-shade-btn').forEach(btn=>btn.addEventListener('click',()=>setShade(Number(btn.dataset.shade))));setShade(70);form.addEventListener('submit',()=>{const notes=form.querySelector('textarea[name="notes"]');if(!notes||!shadeInput.value)return;const shadeLine=`Preferred shade: ${shadeInput.value}`;if(!notes.value.includes('Preferred shade:'))notes.value=`${notes.value}\n${shadeLine}`.trim();},true);
+  section.querySelectorAll('.em-shade-btn').forEach(btn=>btn.addEventListener('click',()=>setShade(Number(btn.dataset.shade))));setShade(70);form.addEventListener('submit',()=>{const notes=form.querySelector('textarea[name="notes"]');if(!notes||!shadeInput.value)return;const shadeLine=`Preferred shade: ${shadeInput.value}`;if(!notes.value.includes('Preferred shade:'))notes.value=`${notes.value}\
+${shadeLine}`.trim();},true);
 })();
 
 // EM Tinting — package finder: public Carbon starting price, ceramic pricing stays internal
@@ -95,4 +97,44 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   const section=document.createElement('section');section.id='emGoogleReview';section.className='em-review-section';
   section.innerHTML=`<div class="em-review-wrap"><div class="em-review-copy"><div class="stars" aria-label="5 stars">★★★★★</div><h2>Happy with your tint?</h2><p>Your feedback helps local drivers find EM Tinting. If we’ve worked on your vehicle, we’d appreciate a quick Google review.</p></div><a class="em-review-btn" href="https://g.page/r/CctrPJPx2tdIEBM/review" target="_blank" rel="noopener noreferrer">Leave Us a Google Review</a></div>`;
   if(footer)footer.parentNode.insertBefore(section,footer);else booking.parentNode.insertBefore(section,booking.nextSibling);
+})();
+
+// EM Tinting — booking attempt tracker for CRM
+(() => {
+  const form=document.querySelector('#bookingForm');
+  if(!form||form.dataset.attemptTracking==='1')return;
+  form.dataset.attemptTracking='1';
+  const endpoint='https://neuginokjfvnkmlzhwoa.supabase.co/rest/v1/booking_attempts?on_conflict=session_id';
+  const apiKey='sb_publishable_T-XFCPWnkn_meQPK0AKA6A_hRvfRXGk';
+  const storageKey='em_booking_attempt_session';
+  let sessionId=sessionStorage.getItem(storageKey);
+  if(!sessionId){sessionId=(crypto.randomUUID?crypto.randomUUID():`${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`);sessionStorage.setItem(storageKey,sessionId);}
+  let lastSnapshot={};
+  let timer=null;
+  let started=false;
+  const val=name=>String(form.elements[name]?.value||'').trim();
+  const clip=(value,max=500)=>String(value||'').slice(0,max)||null;
+  function snapshot(){
+    const data={
+      first_name:clip(val('first_name'),80),last_name:clip(val('last_name'),80),phone:clip(val('phone'),40),email:clip(val('email'),160),
+      vehicle_year:clip(val('vehicle_year'),10),vehicle_make:clip(val('vehicle_make'),80),vehicle_model:clip(val('vehicle_model'),80),vehicle_type:clip(val('vehicle_type'),60),
+      service:clip(val('service'),100),tint_coverage:clip(val('tint_coverage'),100),tint_package:clip(val('tint_package'),100),preferred_shade:clip(val('preferred_shade'),20),
+      appointment_date:val('appointment_date')||null,appointment_time:val('appointment_time')||null,
+      windshield:Boolean(form.elements.windshield?.checked),eyebrow:Boolean(form.elements.eyebrow?.checked),notes:clip(val('notes'),1000)
+    };
+    lastSnapshot={...lastSnapshot,...data};
+    return data;
+  }
+  async function send(event,extra={},saved=false){
+    const fields=saved?lastSnapshot:snapshot();
+    const body={session_id:sessionId,last_seen_at:new Date().toISOString(),updated_at:new Date().toISOString(),last_event:event,page_url:clip(location.href,500),referrer:clip(document.referrer,500),user_agent:clip(navigator.userAgent,500),...fields,...extra};
+    try{await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','apikey':apiKey,'Authorization':`Bearer ${apiKey}`,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(body),keepalive:true});}catch(_){ }
+  }
+  function queue(event='editing'){clearTimeout(timer);timer=setTimeout(()=>send(event),700);}
+  form.addEventListener('focusin',()=>{if(started)return;started=true;send('started');},{once:true});
+  form.addEventListener('input',()=>queue('editing'));
+  form.addEventListener('change',()=>queue('editing'));
+  form.addEventListener('submit',()=>{clearTimeout(timer);lastSnapshot=snapshot();send('submit_clicked',{},true);},true);
+  const status=document.querySelector('#bookingStatus');
+  if(status){new MutationObserver(()=>{const text=(status.textContent||'').trim();if(!text)return;if(text.startsWith('Thanks!'))send('completed',{completed:true,error_message:null},true);else if(!text.startsWith('Sending')&&(text.includes('Unable')||text.includes('also call')||text.includes('error')))send('error',{completed:false,error_message:clip(text,500)},true);}).observe(status,{childList:true,subtree:true,characterData:true});}
 })();
