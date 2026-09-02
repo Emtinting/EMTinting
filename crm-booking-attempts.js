@@ -29,7 +29,8 @@
     const today=attempts.filter(x=>isToday(x.first_seen_at)).length;
     const completed=attempts.filter(x=>x.completed).length;
     const abandoned=attempts.filter(x=>!x.completed&&x.last_event!=='error').length;
-    stats.innerHTML=`<article><span>Today</span><strong>${today}</strong><small>started forms</small></article><article><span>Not Finished</span><strong>${abandoned}</strong><small>possible leads</small></article><article><span>Completed</span><strong>${completed}</strong><small>submitted</small></article>`;
+    const alerted=attempts.filter(x=>x.abandoned_alert_sent_at).length;
+    stats.innerHTML=`<article><span>Today</span><strong>${today}</strong><small>started forms</small></article><article><span>Not Finished</span><strong>${abandoned}</strong><small>possible leads</small></article><article><span>Completed</span><strong>${completed}</strong><small>submitted</small></article><article><span>Alerted</span><strong>${alerted}</strong><small>owner emailed</small></article>`;
     if(!attempts.length){table.innerHTML='<div class="empty">No website booking attempts yet. New form starts will appear here automatically.</div>';return;}
     const rows=attempts.map(a=>{
       const name=[a.first_name,a.last_name].filter(Boolean).join(' ')||'Anonymous visitor';
@@ -39,7 +40,8 @@
       const contact=[];
       if(a.phone){const p=cleanPhone(a.phone);contact.push(`<a href="tel:${p}">Call</a><a href="sms:${p}">Text</a>`);}
       if(a.email)contact.push(`<a href="mailto:${esc(a.email)}">Email</a>`);
-      return `<tr><td><strong>${esc(name)}</strong><br><small>${esc(a.phone||a.email||'No contact entered yet')}</small></td><td>${esc(vehicle)}</td><td>${esc(interest)}</td><td>${esc(a.appointment_date||'—')} ${esc((a.appointment_time||'').slice(0,5))}</td><td><span class="pill ${a.completed?'confirmed':a.last_event==='error'?'cancelled':'pending'}">${esc(status)}</span><br><small>${esc(fmtWhen(a.last_seen_at))}</small></td><td><div class="table-actions">${contact.join('')||'<span class="muted">No contact yet</span>'}</div></td></tr>`;
+      const alertedLine=a.abandoned_alert_sent_at?`<br><small>Owner alerted ${esc(fmtWhen(a.abandoned_alert_sent_at))}</small>`:'';
+      return `<tr><td><strong>${esc(name)}</strong><br><small>${esc(a.phone||a.email||'No contact entered yet')}</small></td><td>${esc(vehicle)}</td><td>${esc(interest)}</td><td>${esc(a.appointment_date||'—')} ${esc((a.appointment_time||'').slice(0,5))}</td><td><span class="pill ${a.completed?'confirmed':a.last_event==='error'?'cancelled':'pending'}">${esc(status)}</span><br><small>${esc(fmtWhen(a.last_seen_at))}</small>${alertedLine}</td><td><div class="table-actions">${contact.join('')||'<span class="muted">No contact yet</span>'}</div></td></tr>`;
     }).join('');
     table.innerHTML=`<table><thead><tr><th>Lead</th><th>Vehicle</th><th>Interested In</th><th>Preferred Time</th><th>Status</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
