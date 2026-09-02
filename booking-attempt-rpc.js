@@ -19,3 +19,31 @@
   form.addEventListener('submit',()=>{clearTimeout(timer);lastSnapshot=snapshot();send('submit_clicked',{},true);},true);
   const status=document.querySelector('#bookingStatus');if(status)new MutationObserver(()=>{const text=(status.textContent||'').trim();if(!text)return;if(text.startsWith('Thanks!'))send('completed',{completed:true,error_message:null},true);else if(!text.startsWith('Sending')&&(text.includes('Unable')||text.includes('also call')||text.toLowerCase().includes('error')))send('error',{completed:false,error_message:clip(text,500)},true);}).observe(status,{childList:true,subtree:true,characterData:true});
 })();
+
+// EM Tinting — same-day booking override
+(()=>{
+  const form=document.querySelector('#bookingForm');
+  const dateEl=form?.elements?.appointment_date;
+  const timeEl=document.querySelector('#appointmentTime');
+  const statusEl=document.querySelector('#bookingStatus');
+  if(!form||!dateEl||!timeEl)return;
+  const zone='America/Chicago';
+  const nowParts=()=>{const p=new Intl.DateTimeFormat('en-US',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()).reduce((a,x)=>(a[x.type]=x.value,a),{});return{date:`${p.year}-${p.month}-${p.day}`,hour:Number(p.hour),minute:Number(p.minute)}};
+  const today=nowParts();
+  dateEl.min=today.date;
+  function refill(){
+    timeEl.innerHTML='<option value="">Choose appointment time</option>';
+    if(!dateEl.value)return;
+    const d=new Date(dateEl.value+'T12:00:00');
+    const day=d.getDay();
+    if(day===0){if(statusEl)statusEl.textContent='We are closed on Sundays. Please choose another date.';dateEl.value='';return;}
+    if(statusEl)statusEl.textContent='';
+    const end=day===6?14:18;
+    let start=10;
+    const now=nowParts();
+    if(dateEl.value===now.date){start=Math.max(10,now.hour+(now.minute>0?1:0));if(start>end){if(statusEl)statusEl.textContent='There are no appointment times left today. Please choose another date.';return;}}
+    for(let h=start;h<=end;h++){const value=String(h).padStart(2,'0')+':00';const label=new Date('2000-01-01T'+value+':00').toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});timeEl.insertAdjacentHTML('beforeend',`<option value="${value}">${label}</option>`);}
+  }
+  dateEl.addEventListener('change',()=>setTimeout(refill,0));
+  setTimeout(()=>{dateEl.min=nowParts().date;if(dateEl.value)refill();},0);
+})();
