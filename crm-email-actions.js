@@ -29,6 +29,12 @@ window.addEventListener('load',()=>{
       });
     });
   };
-  const start=()=>{addButtons();const table=document.getElementById('bookingsTable');if(table)new MutationObserver(addButtons).observe(table,{childList:true,subtree:true});};
+  const loadModule=(key,src)=>{if(document.querySelector(`script[data-${key}]`))return;const s=document.createElement('script');s.src=src;s.dataset[key.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]='1';document.body.appendChild(s);};
+  const start=()=>{addButtons();const table=document.getElementById('bookingsTable');if(table)new MutationObserver(addButtons).observe(table,{childList:true,subtree:true});
+    loadModule('crm-warranty-email-fix','crm-warranty-email-fix.js?v=20260903-clean1');
+    loadModule('crm-invoice-email-v2','crm-invoice-email-v2.js?v=20260903-1');
+    loadModule('crm-customer-dedupe','crm-customer-dedupe.js?v=20260903-1');
+    loadModule('crm-activity-log','crm-activity-log.js?v=20260903-1');
+  };
   setTimeout(start,700);
 });
