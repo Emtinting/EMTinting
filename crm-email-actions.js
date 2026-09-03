@@ -97,4 +97,5 @@ window.addEventListener('load',()=>{
   setTimeout(start,700);
   if(!document.querySelector('script[data-crm-reschedule]')){const script=document.createElement('script');script.src='crm-reschedule.js?v=20260828-1';script.dataset.crmReschedule='1';document.body.appendChild(script);}
   if(!document.querySelector('script[data-crm-warranty-v2]')){const script=document.createElement('script');script.src='crm-warranty-v2.js?v=20260903-2';script.dataset.crmWarrantyV2='1';document.body.appendChild(script);}
+  if(!document.querySelector('script[data-crm-warranty-email-fix]')){const script=document.createElement('script');script.src='crm-warranty-email-fix.js?v=20260903-preview1';script.dataset.crmWarrantyEmailFix='1';document.body.appendChild(script);}
 });
