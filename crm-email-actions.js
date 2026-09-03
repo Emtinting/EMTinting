@@ -86,4 +86,10 @@ window.addEventListener('load',()=>{
     script.dataset.crmReschedule='1';
     document.body.appendChild(script);
   }
+  if(!document.querySelector('script[data-crm-warranty-v2]')){
+    const script=document.createElement('script');
+    script.src='crm-warranty-v2.js?v=20260903-1';
+    script.dataset.crmWarrantyV2='1';
+    document.body.appendChild(script);
+  }
 });
