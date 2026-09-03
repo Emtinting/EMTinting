@@ -34,7 +34,50 @@ window.addEventListener('load',()=>{
       });
     });
   };
-  const start=()=>{ addButtons(); const table=document.getElementById('bookingsTable'); if(table) new MutationObserver(()=>addButtons()).observe(table,{childList:true,subtree:true}); };
+
+  const normalizePhone=v=>String(v||'').replace(/\D/g,'');
+  const readField=(card,label)=>{
+    const terms=[...card.querySelectorAll('dt')];
+    const term=terms.find(x=>x.textContent.trim().toUpperCase()===label.toUpperCase());
+    return term?.nextElementSibling?.textContent?.trim()||'—';
+  };
+  const addWarrantyEmailButton=()=>{
+    document.querySelectorAll('.crm-ewarranty-actions').forEach(actions=>{
+      if(actions.querySelector('[data-warranty-email]')) return;
+      const card=document.getElementById('crmWarrantyCard');
+      if(!card || card.querySelector('#crmWarrantyForm') || card.querySelector('.empty')) return;
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.dataset.warrantyEmail='1';
+      btn.textContent='Email Customer';
+      btn.addEventListener('click',()=>{
+        const detail=document.getElementById('crmAppointmentDetail');
+        const phoneBlock=[...(detail?.querySelectorAll('.crm-appt-meta>div')||[])].find(x=>x.querySelector('small')?.textContent.trim()==='Phone');
+        const phone=phoneBlock?phoneBlock.textContent.replace('Phone','').trim():'';
+        const customer=(state.customers||[]).find(c=>normalizePhone(c.phone)===normalizePhone(phone));
+        if(!customer?.email) return toast('Customer email address is missing');
+        const vehicle=readField(card,'VEHICLE:');
+        const film=readField(card,'FILM TYPE:');
+        const shade=readField(card,'SHADE:');
+        const installDate=readField(card,'INSTALL DATE:');
+        const vin=readField(card,'VIN #:');
+        const roll=readField(card,'ROLL #:');
+        const subject='Your HITEK Window Film Warranty - EM Tinting';
+        const body=`Hi ${firstName(customer)},\n\nThank you for choosing EM Tinting. Your HITEK window film warranty has been registered and is on file.\n\nWarranty details:\nVehicle: ${vehicle}\nFilm: ${film}\nShade: ${shade}\nInstallation date: ${installDate}\nVIN: ${vin}\nFilm roll #: ${roll}\n\nPlease keep this email for your records. If you ever need help with your tint or warranty, reply to this email or contact EM Tinting.\n\nThank you,\nEM Tinting`;
+        window.location.href=`mailto:${encodeURIComponent(customer.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+      const textBtn=actions.querySelector('#crmTextWarranty');
+      if(textBtn?.nextSibling) actions.insertBefore(btn,textBtn.nextSibling); else actions.appendChild(btn);
+    });
+  };
+
+  const start=()=>{
+    addButtons();
+    addWarrantyEmailButton();
+    const table=document.getElementById('bookingsTable');
+    if(table) new MutationObserver(()=>addButtons()).observe(table,{childList:true,subtree:true});
+    new MutationObserver(()=>addWarrantyEmailButton()).observe(document.body,{childList:true,subtree:true});
+  };
   setTimeout(start,700);
 
   if(!document.querySelector('script[data-crm-reschedule]')){
