@@ -36,11 +36,23 @@ window.addEventListener('load',()=>{
   };
 
   const normalizePhone=v=>String(v||'').replace(/\D/g,'');
-  const readField=(card,label)=>{
-    const terms=[...card.querySelectorAll('dt')];
-    const term=terms.find(x=>x.textContent.trim().toUpperCase()===label.toUpperCase());
-    return term?.nextElementSibling?.textContent?.trim()||'—';
+  const showWarrantySentStatus=sentAt=>{
+    const top=document.querySelector('.crm-warranty-v2-top');
+    if(!top||!sentAt) return;
+    let status=top.querySelector('.crm-warranty-email-status');
+    if(!status){
+      status=document.createElement('div');
+      status.className='crm-warranty-email-status';
+      status.style.cssText='margin-left:auto;align-self:center;color:#aeb6bf;font-size:12px;white-space:nowrap';
+      const button=top.querySelector('#crmWarrantyEmailV2');
+      if(button) top.insertBefore(status,button); else top.appendChild(status);
+    }
+    const d=new Date(sentAt);
+    status.textContent=`Warranty emailed ${d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})} ${d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})} ✓`;
+    const mainBtn=top.querySelector('#crmWarrantyEmailV2');
+    if(mainBtn) mainBtn.innerHTML='✉ &nbsp; Email Warranty Again';
   };
+
   const addWarrantyEmailButton=()=>{
     document.querySelectorAll('.crm-ewarranty-actions').forEach(actions=>{
       if(actions.querySelector('[data-warranty-email]')) return;
@@ -49,25 +61,45 @@ window.addEventListener('load',()=>{
       const btn=document.createElement('button');
       btn.type='button';
       btn.dataset.warrantyEmail='1';
-      btn.textContent='Email Customer';
-      btn.addEventListener('click',()=>{
+      btn.textContent='Email Warranty';
+      btn.addEventListener('click',async()=>{
         const detail=document.getElementById('crmAppointmentDetail');
         const phoneBlock=[...(detail?.querySelectorAll('.crm-appt-meta>div')||[])].find(x=>x.querySelector('small')?.textContent.trim()==='Phone');
         const phone=phoneBlock?phoneBlock.textContent.replace('Phone','').trim():'';
         const customer=(state.customers||[]).find(c=>normalizePhone(c.phone)===normalizePhone(phone));
         if(!customer?.email) return toast('Customer email address is missing');
-        const vehicle=readField(card,'VEHICLE:');
-        const film=readField(card,'FILM TYPE:');
-        const shade=readField(card,'SHADE:');
-        const installDate=readField(card,'INSTALL DATE:');
-        const vin=readField(card,'VIN #:');
-        const roll=readField(card,'ROLL #:');
-        const subject='Your HITEK Window Film Warranty - EM Tinting';
-        const body=`Hi ${firstName(customer)},\n\nThank you for choosing EM Tinting. Your HITEK window film warranty has been registered and is on file.\n\nWarranty details:\nVehicle: ${vehicle}\nFilm: ${film}\nShade: ${shade}\nInstallation date: ${installDate}\nVIN: ${vin}\nFilm roll #: ${roll}\n\nPlease keep this email for your records. If you ever need help with your tint or warranty, reply to this email or contact EM Tinting.\n\nThank you,\nEM Tinting`;
-        window.location.href=`mailto:${encodeURIComponent(customer.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const {data:warranty,error:warrantyError}=await db.from('warranties').select('id,warranty_emailed_at').eq('customer_id',customer.id).order('installation_date',{ascending:false}).limit(1).maybeSingle();
+        if(warrantyError) return toast(warrantyError.message);
+        if(!warranty?.id) return toast('Create and save the HITEK warranty first');
+        btn.disabled=true;
+        const v2=document.getElementById('crmWarrantyEmailV2');
+        if(v2){v2.disabled=true;v2.textContent='Sending warranty...';}
+        btn.textContent='Sending...';
+        const {data,error}=await db.functions.invoke('send-warranty',{body:{warranty_id:warranty.id}});
+        btn.disabled=false;
+        if(v2) v2.disabled=false;
+        if(error||data?.error){
+          const msg=data?.error||error?.message||'Warranty email failed';
+          btn.textContent='Email Warranty';
+          if(v2) v2.innerHTML='✉ &nbsp; Email Warranty';
+          return toast(msg);
+        }
+        btn.textContent='Email Warranty Again';
+        showWarrantySentStatus(data?.sent_at||new Date().toISOString());
+        toast(`Warranty emailed to ${customer.email}`);
       });
       const textBtn=actions.querySelector('#crmTextWarranty');
       if(textBtn?.nextSibling) actions.insertBefore(btn,textBtn.nextSibling); else actions.appendChild(btn);
+
+      (async()=>{
+        const detail=document.getElementById('crmAppointmentDetail');
+        const phoneBlock=[...(detail?.querySelectorAll('.crm-appt-meta>div')||[])].find(x=>x.querySelector('small')?.textContent.trim()==='Phone');
+        const phone=phoneBlock?phoneBlock.textContent.replace('Phone','').trim():'';
+        const customer=(state.customers||[]).find(c=>normalizePhone(c.phone)===normalizePhone(phone));
+        if(!customer) return;
+        const {data:w}=await db.from('warranties').select('warranty_emailed_at').eq('customer_id',customer.id).order('installation_date',{ascending:false}).limit(1).maybeSingle();
+        if(w?.warranty_emailed_at){btn.textContent='Email Warranty Again';setTimeout(()=>showWarrantySentStatus(w.warranty_emailed_at),100);}
+      })();
     });
   };
 
@@ -88,7 +120,7 @@ window.addEventListener('load',()=>{
   }
   if(!document.querySelector('script[data-crm-warranty-v2]')){
     const script=document.createElement('script');
-    script.src='crm-warranty-v2.js?v=20260903-1';
+    script.src='crm-warranty-v2.js?v=20260903-2';
     script.dataset.crmWarrantyV2='1';
     document.body.appendChild(script);
   }
