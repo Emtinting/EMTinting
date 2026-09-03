@@ -1,5 +1,6 @@
 (()=>{
   const norm=v=>String(v||'').replace(/\D/g,'');
+  const bookings=()=>typeof state!=='undefined'?(state.bookings||[]):[];
   const getMeta=(label)=>{
     const detail=document.getElementById('crmAppointmentDetail');
     const block=[...(detail?.querySelectorAll('.crm-appt-meta>div')||[])].find(x=>x.querySelector('small')?.textContent.trim()===label);
@@ -22,13 +23,13 @@
   };
   const resolveBooking=()=>{
     const saved=window.__crmWarrantyBookingId||sessionStorage.getItem('crmWarrantyBookingId');
-    let booking=(window.state?.bookings||[]).find(b=>b.id===saved);
+    let booking=bookings().find(b=>b.id===saved);
     if(booking) return booking;
     const date=getMeta('Date'), time=getMeta('Time'), vehicle=getMeta('Vehicle'), service=getMeta('Service'), phone=norm(getMeta('Phone'));
-    const candidates=(window.state?.bookings||[]).filter(b=>{
-      const bd=typeof window.dateFmt==='function'?window.dateFmt(b.appointment_date):String(b.appointment_date||'');
+    const candidates=bookings().filter(b=>{
+      const bd=typeof dateFmt==='function'?dateFmt(b.appointment_date):String(b.appointment_date||'');
       const bv=[b.vehicle_year,b.vehicle_make,b.vehicle_model].filter(Boolean).join(' ');
-      const customer=typeof window.customerById==='function'?window.customerById(b.customer_id):null;
+      const customer=typeof customerById==='function'?customerById(b.customer_id):null;
       return (!date||bd===date)&&(!time||fmtTime(b.appointment_time)===time)&&(!vehicle||bv===vehicle)&&(!service||String(b.service||'')===service)&&(!phone||norm(customer?.phone)===phone);
     });
     booking=candidates[0]||null;
@@ -70,7 +71,7 @@
     try{warranty=await findWarranty(booking);}catch(err){return typeof toast==='function'?toast(err?.message||'Could not load warranty'):null;}
     if(!warranty?.id) return typeof toast==='function'?toast('No saved HITEK warranty is linked to this appointment'):null;
     sending=true;
-    const buttons=[clicked,document.getElementById('crmWarrantyEmailV2'),document.querySelector('[data-warranty-email]')].filter(Boolean);
+    const buttons=[clicked,document.getElementById('crmWarrantyEmailV2'),document.querySelector('[data-warranty-email]')].filter((b,i,a)=>b&&a.indexOf(b)===i);
     buttons.forEach(b=>{b.disabled=true;b.textContent='Sending warranty...';});
     try{
       const {data,error}=await db.functions.invoke('send-warranty',{body:{warranty_id:warranty.id}});
@@ -82,7 +83,7 @@
       buttons.forEach(b=>{b.disabled=false;b.textContent='Email Warranty';});
       const main=document.getElementById('crmWarrantyEmailV2');if(main) main.innerHTML='✉ &nbsp; Email Warranty';
       if(typeof toast==='function') toast(err?.message||'Warranty email failed');
-    }finally{s ending=false;}
+    }finally{sending=false;}
   };
   document.addEventListener('click',e=>{
     const view=e.target.closest?.('.crm-view-btn');
@@ -91,7 +92,8 @@
   document.addEventListener('click',e=>{
     const btn=e.target.closest?.('#crmWarrantyEmailV2,[data-warranty-email]');
     if(!btn) return;
-    e.preventDefault();e.stopImmediatePropagation();
+    e.preventDefault();
+    e.stopImmediatePropagation();
     sendWarranty(btn);
   },true);
 })();
