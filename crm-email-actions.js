@@ -35,6 +35,7 @@ window.addEventListener('load',()=>{
     loadModule('crm-invoice-email-v2','crm-invoice-email-v2.js?v=20260903-1');
     loadModule('crm-customer-dedupe','crm-customer-dedupe.js?v=20260903-1');
     loadModule('crm-activity-log','crm-activity-log.js?v=20260903-1');
+    loadModule('crm-service-presets','crm-service-presets.js?v=20260904-1');
   };
   setTimeout(start,700);
 });
