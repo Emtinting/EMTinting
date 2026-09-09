@@ -38,6 +38,7 @@ window.addEventListener('load',()=>{
     loadModule('crm-service-presets','crm-service-presets.js?v=20260904-1');
     loadModule('crm-business-upgrades','crm-business-upgrades.js?v=20260904-1');
     loadModule('crm-approval-latest','crm-approval.js?v=20260908-multi2');
+    loadModule('crm-quote-email-editor','crm-quote-email-editor.js?v=20260909-1');
   };
   setTimeout(start,700);
 });
