@@ -37,6 +37,7 @@ window.addEventListener('load',()=>{
     loadModule('crm-activity-log','crm-activity-log.js?v=20260903-1');
     loadModule('crm-service-presets','crm-service-presets.js?v=20260904-1');
     loadModule('crm-business-upgrades','crm-business-upgrades.js?v=20260904-1');
+    loadModule('crm-approval-latest','crm-approval.js?v=20260908-multi2');
   };
   setTimeout(start,700);
 });
