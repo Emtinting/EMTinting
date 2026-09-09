@@ -6,7 +6,7 @@ window.addEventListener('load',()=>{
   document.head.appendChild(modernStyle);
 
   const approval=document.createElement('script');
-  approval.src='crm-approval.js';
+  approval.src='crm-approval.js?v=20260908-multi3';
   document.body.appendChild(approval);
   const growth=document.createElement('script');
   growth.src='crm-growth.js';
