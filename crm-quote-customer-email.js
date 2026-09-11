@@ -46,7 +46,7 @@ function addButtons(){
     const m=(any.getAttribute('onclick')||'').match(/\('([^']+)'/);if(!m)return;const id=m[1];
     if(!actions.querySelector(`[data-edit-customer-email="${id}"]`)){const b=document.createElement('button');b.type='button';b.textContent='Edit customer email';b.dataset.editCustomerEmail=id;b.onclick=()=>editQuoteCustomerEmail(id);actions.insertBefore(b,actions.firstChild)}
     const q=state.quotes.find(x=>x.id===id);
-    if(q&&(q.accepted_at||q.status==='accepted')&&!actions.querySelector(`[data-schedule-accepted="${id}"]`)){
+    if(!document.querySelector('script[data-ops-suite]')&&q&&(q.accepted_at||q.status==='accepted')&&!actions.querySelector(`[data-schedule-accepted="${id}"]`)){
       const b=document.createElement('button');b.type='button';b.textContent='Schedule Appointment';b.className='primary-inline';b.dataset.scheduleAccepted=id;b.onclick=()=>scheduleAcceptedQuote(id);actions.insertBefore(b,actions.firstChild)
     }
   });
@@ -55,4 +55,4 @@ function start(){addButtons();const t=document.getElementById('quotesTable');if(
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,900));else setTimeout(start,900);
 })();
 
-(()=>{if(document.querySelector('script[data-ops-suite]'))return;const s=document.createElement('script');s.src='crm-operations-suite.js?v=20260911-1';s.dataset.opsSuite='1';document.body.appendChild(s)})();
+(()=>{if(document.querySelector('script[data-ops-suite]'))return;window.qsa=window.qsa||((s,r=document)=>[...r.querySelectorAll(s)]);const s=document.createElement('script');s.src='crm-operations-suite.js?v=20260911-2';s.dataset.opsSuite='1';document.body.appendChild(s)})();
