@@ -54,3 +54,5 @@ function addButtons(){
 function start(){addButtons();const t=document.getElementById('quotesTable');if(t)new MutationObserver(addButtons).observe(t,{childList:true,subtree:true})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,900));else setTimeout(start,900);
 })();
+
+(()=>{if(document.querySelector('script[data-ops-suite]'))return;const s=document.createElement('script');s.src='crm-operations-suite.js?v=20260911-1';s.dataset.opsSuite='1';document.body.appendChild(s)})();
