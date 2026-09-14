@@ -55,4 +55,4 @@ function start(){addButtons();const t=document.getElementById('quotesTable');if(
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,900));else setTimeout(start,900);
 })();
 
-(()=>{if(document.querySelector('script[data-ops-suite]'))return;window.qsa=window.qsa||((s,r=document)=>[...r.querySelectorAll(s)]);const s=document.createElement('script');s.src='crm-operations-suite.js?v=20260911-2';s.dataset.opsSuite='1';document.body.appendChild(s)})();
+(()=>{if(!document.querySelector('script[data-ops-suite]')){window.qsa=window.qsa||((s,r=document)=>[...r.querySelectorAll(s)]);const s=document.createElement('script');s.src='crm-operations-suite.js?v=20260914-1';s.dataset.opsSuite='1';document.body.appendChild(s)}if(!document.querySelector('script[data-today-open-fix]')){const f=document.createElement('script');f.src='crm-today-open-fix.js?v=20260914-1';f.dataset.todayOpenFix='1';document.body.appendChild(f)}})();
