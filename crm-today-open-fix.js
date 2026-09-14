@@ -1,41 +1,53 @@
 (()=>{
-  const extractId=button=>{
-    if(button.dataset.bookingId)return button.dataset.bookingId;
-    const code=button.getAttribute('onclick')||'';
-    const patterns=[/includes\('([^']+)'\)/,/openAppointmentWorkspace\('([^']+)'\)/,/\('([^']+)'\)/];
-    for(const p of patterns){const m=code.match(p);if(m?.[1])return m[1];}
-    return null;
-  };
+  function localToday(){
+    const d=new Date();
+    d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
+    return d.toISOString().slice(0,10);
+  }
+  function todayBookings(){
+    const bookings=(window.state?.bookings||[]).filter(b=>b.appointment_date===localToday()&&b.status!=='cancelled');
+    return bookings.sort((a,b)=>(a.appointment_time||'').localeCompare(b.appointment_time||''));
+  }
   async function openBooking(id){
     if(!id)return;
-    if(typeof window.openAppointmentWorkspace!=='function'){
-      const nav=document.querySelector('[data-view="bookings"]');
-      nav?.click();
-      await new Promise(r=>setTimeout(r,300));
-    }
     if(typeof window.openAppointmentWorkspace==='function'){
       await window.openAppointmentWorkspace(id);
       return;
     }
-    if(typeof toast==='function')toast('Appointment details are still loading. Refresh once and try again.');
+    document.querySelector('[data-view="bookings"]')?.click();
+    await new Promise(r=>setTimeout(r,350));
+    if(typeof window.openAppointmentWorkspace==='function'){
+      await window.openAppointmentWorkspace(id);
+      return;
+    }
+    if(typeof window.toast==='function')window.toast('Could not open appointment details.');
   }
   function bindButtons(){
-    document.querySelectorAll('#opsTodayContent .ops-actions button').forEach(button=>{
-      if(button.textContent.trim()!=='Open'||button.dataset.openBound==='1')return;
-      const id=extractId(button);if(!id)return;
-      button.dataset.bookingId=id;
-      button.dataset.openBound='1';
+    const rows=[...document.querySelectorAll('#opsTodayContent .ops-today-card')];
+    const bookings=todayBookings();
+    rows.forEach((row,index)=>{
+      const button=[...row.querySelectorAll('.ops-actions button')].find(b=>b.textContent.trim()==='Open');
+      const booking=bookings[index];
+      if(!button||!booking)return;
+      button.dataset.bookingId=booking.id;
       button.removeAttribute('onclick');
-      button.onclick=e=>{e.preventDefault();e.stopPropagation();openBooking(id);};
+      button.onclick=e=>{
+        e.preventDefault();
+        e.stopPropagation();
+        openBooking(booking.id);
+      };
     });
   }
-  const observer=new MutationObserver(bindButtons);
-  observer.observe(document.documentElement,{childList:true,subtree:true});
   document.addEventListener('click',e=>{
     const button=e.target.closest('#opsTodayContent .ops-actions button');
     if(!button||button.textContent.trim()!=='Open')return;
-    const id=extractId(button);if(!id)return;
-    e.preventDefault();e.stopImmediatePropagation();openBooking(id);
+    const id=button.dataset.bookingId;
+    if(!id)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    openBooking(id);
   },true);
-  bindButtons();setInterval(bindButtons,800);
+  new MutationObserver(bindButtons).observe(document.documentElement,{childList:true,subtree:true});
+  bindButtons();
+  setInterval(bindButtons,700);
 })();
