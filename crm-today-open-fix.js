@@ -5,7 +5,7 @@
     return d.toISOString().slice(0,10);
   }
   function todayBookings(){
-    const bookings=(window.state?.bookings||[]).filter(b=>b.appointment_date===localToday()&&b.status!=='cancelled');
+    const bookings=(typeof state!=='undefined'&&Array.isArray(state.bookings)?state.bookings:[]).filter(b=>b.appointment_date===localToday()&&b.status!=='cancelled');
     return bookings.sort((a,b)=>(a.appointment_time||'').localeCompare(b.appointment_time||''));
   }
   async function openBooking(id){
@@ -20,7 +20,7 @@
       await window.openAppointmentWorkspace(id);
       return;
     }
-    if(typeof window.toast==='function')window.toast('Could not open appointment details.');
+    if(typeof toast==='function')toast('Could not open appointment details.');
   }
   function bindButtons(){
     const rows=[...document.querySelectorAll('#opsTodayContent .ops-today-card')];
