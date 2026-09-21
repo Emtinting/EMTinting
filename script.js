@@ -138,3 +138,16 @@ ${shadeLine}`.trim();},true);
   const status=document.querySelector('#bookingStatus');
   if(status){new MutationObserver(()=>{const text=(status.textContent||'').trim();if(!text)return;if(text.startsWith('Thanks!'))send('completed',{completed:true,error_message:null},true);else if(!text.startsWith('Sending')&&(text.includes('Unable')||text.includes('also call')||text.includes('error')))send('error',{completed:false,error_message:clip(text,500)},true);}).observe(status,{childList:true,subtree:true,characterData:true});}
 })();
+
+// EM Tinting — accepted quote -> booking handoff + confirmation
+(() => {
+  const form=document.querySelector('#bookingForm'); if(!form)return;
+  const token=new URLSearchParams(location.search).get('quote'); if(!token)return;
+  let hidden=form.querySelector('input[name="quote_token"]'); if(!hidden){hidden=document.createElement('input');hidden.type='hidden';hidden.name='quote_token';form.appendChild(hidden);} hidden.value=token;
+  const note=document.createElement('div'); note.className='em-accepted-booking'; note.innerHTML='<strong>✓ Your tint package is selected.</strong><span>Choose your appointment date and time below. Your accepted quote will be attached automatically.</span>';
+  form.prepend(note);
+  const style=document.createElement('style'); style.textContent='.em-accepted-booking{grid-column:1/-1;background:#101214;border:1px solid #e21a22;border-left:4px solid #e21a22;padding:16px 18px;margin-bottom:10px;display:grid;gap:5px}.em-accepted-booking strong{color:#fff;font-size:17px}.em-accepted-booking span{color:#aaa;font-size:13px}.em-booked-confirm{background:#101214;border:1px solid #333;border-top:4px solid #e21a22;padding:24px;margin-top:14px}.em-booked-confirm h3{font-size:27px;margin:0 0 10px}.em-booked-confirm .em-confirm-row{display:flex;justify-content:space-between;gap:20px;padding:9px 0;border-bottom:1px solid #292929}.em-booked-confirm .em-confirm-row span{color:#999}.em-booked-confirm .em-confirm-row b{color:#fff;text-align:right}'; document.head.appendChild(style);
+  form.addEventListener('submit',()=>{hidden.value=token;},true);
+  const status=document.querySelector('#bookingStatus');
+  if(status){new MutationObserver(()=>{if(!status.textContent.startsWith('Thanks!'))return; const date=form.dataset.lastBookingDate, time=form.dataset.lastBookingTime;}).observe(status,{childList:true,subtree:true});}
+})();
