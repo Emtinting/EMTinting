@@ -34,5 +34,12 @@
   window.scheduleAcceptedQuote=scheduleAcceptedQuote;window.openScheduledQuote=openScheduledQuote;
   function enhanceQuoteRows(){qsa('#quotesTable tbody tr').forEach(row=>{const actions=qs('.table-actions',row);if(!actions)return;const any=qsa('button',actions).find(b=>(b.getAttribute('onclick')||'').match(/\('([^']+)'/));const m=(any?.getAttribute('onclick')||'').match(/\('([^']+)'/);if(!m)return;const id=m[1],q=state.quotes.find(x=>x.id===id);if(!q||!(q.accepted_at||q.status==='accepted'))return;const booked=state.bookings.find(b=>b.quote_id===id)||state.bookings.find(b=>b.id===q.booking_id);qsa('[data-schedule-accepted]',actions).forEach(x=>x.remove());if(!actions.querySelector('[data-ops-quote-schedule]')){const b=document.createElement('button');b.dataset.opsQuoteSchedule='1';b.className='primary-inline';b.textContent=booked?'View Appointment':'Schedule Appointment';b.onclick=()=>booked?openScheduledQuote(id):scheduleAcceptedQuote(id);actions.prepend(b)}})}
   function refreshAll(){injectStyles();ensureTodayView();renderToday();enhanceBookingRows();enhanceCustomerRows();enhanceQuoteRows();colorCalendar();renderConversion();ensureTimelineModal();ensureScheduleModal();const f=qs('#opsScheduleQuoteForm');if(f&&!f.dataset.bound){f.dataset.bound='1';f.onsubmit=submitAcceptedSchedule}}
-  const obs=new MutationObserver(()=>setTimeout(refreshAll,0));obs.observe(document.documentElement,{childList:true,subtree:true});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(refreshAll,900));else setTimeout(refreshAll,900);setInterval(()=>{if(qs('#app')&&!qs('#app').classList.contains('hidden'))refreshAll()},2500);
+  let refreshQueued=false;
+  const queueRefresh=()=>{if(refreshQueued)return;refreshQueued=true;requestAnimationFrame(()=>{refreshQueued=false;refreshAll()})};
+  const watchRoot=qs('#app')||document.body;
+  const obs=new MutationObserver(mutations=>{
+    if(mutations.some(m=>[...m.addedNodes].some(n=>n.nodeType===1 && !n.closest?.('.em-mobile-nav')))) queueRefresh();
+  });
+  obs.observe(watchRoot,{childList:true,subtree:true});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(refreshAll,350));else setTimeout(refreshAll,350);
 })();
