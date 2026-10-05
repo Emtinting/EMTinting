@@ -34,5 +34,21 @@
   window.scheduleAcceptedQuote=scheduleAcceptedQuote;window.openScheduledQuote=openScheduledQuote;
   function enhanceQuoteRows(){qsa('#quotesTable tbody tr').forEach(row=>{const actions=qs('.table-actions',row);if(!actions)return;const any=qsa('button',actions).find(b=>(b.getAttribute('onclick')||'').match(/\('([^']+)'/));const m=(any?.getAttribute('onclick')||'').match(/\('([^']+)'/);if(!m)return;const id=m[1],q=state.quotes.find(x=>x.id===id);if(!q||!(q.accepted_at||q.status==='accepted'))return;const booked=state.bookings.find(b=>b.quote_id===id)||state.bookings.find(b=>b.id===q.booking_id);qsa('[data-schedule-accepted]',actions).forEach(x=>x.remove());if(!actions.querySelector('[data-ops-quote-schedule]')){const b=document.createElement('button');b.dataset.opsQuoteSchedule='1';b.className='primary-inline';b.textContent=booked?'View Appointment':'Schedule Appointment';b.onclick=()=>booked?openScheduledQuote(id):scheduleAcceptedQuote(id);actions.prepend(b)}})}
   function refreshAll(){injectStyles();ensureTodayView();renderToday();enhanceBookingRows();enhanceCustomerRows();enhanceQuoteRows();colorCalendar();renderConversion();ensureTimelineModal();ensureScheduleModal();const f=qs('#opsScheduleQuoteForm');if(f&&!f.dataset.bound){f.dataset.bound='1';f.onsubmit=submitAcceptedSchedule}}
-  const obs=new MutationObserver(()=>setTimeout(refreshAll,0));obs.observe(document.documentElement,{childList:true,subtree:true});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(refreshAll,900));else setTimeout(refreshAll,900);setInterval(()=>{if(qs('#app')&&!qs('#app').classList.contains('hidden'))refreshAll()},2500);
+  // Observe source tables only. Dashboard writes must never trigger themselves.
+  let pending=false;
+  const targets=['#bookingsTable','#customersTable','#quotesTable','#calendarBody'];
+  const obs=new MutationObserver(()=>{
+    if(pending)return;
+    pending=true;
+    requestAnimationFrame(()=>{
+      pending=false;
+      obs.disconnect();
+      try{enhanceBookingRows();enhanceCustomerRows();enhanceQuoteRows();colorCalendar()}
+      finally{observeSources()}
+    });
+  });
+  function observeSources(){targets.forEach(s=>{const el=qs(s);if(el)obs.observe(el,{childList:true,subtree:true})})}
+  function refresh(){obs.disconnect();try{refreshAll()}finally{observeSources()}}
+  document.addEventListener('crm:data-updated',refresh);
+  refresh();
 })();

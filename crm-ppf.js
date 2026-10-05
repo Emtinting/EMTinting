@@ -1,22 +1,11 @@
 document.write('<script src="crm-ppf-core.js"><\/script>');
 window.addEventListener('load',()=>{
-  const modernStyle=document.createElement('link');
-  modernStyle.rel='stylesheet';
-  modernStyle.href='crm-modern.css?v=20260827-1300';
-  document.head.appendChild(modernStyle);
-
-  const approval=document.createElement('script');
-  approval.src='crm-approval.js?v=20260908-multi3';
-  document.body.appendChild(approval);
-  const growth=document.createElement('script');
-  growth.src='crm-growth.js';
-  document.body.appendChild(growth);
-  const modern=document.createElement('script');
-  modern.src='crm-modern.js?v=20260827-1300';
-  document.body.appendChild(modern);
-  const calendarGuard=document.createElement('script');
-  calendarGuard.src='crm-calendar-guard.js?v=20260827-1300';
-  document.body.appendChild(calendarGuard);
+  // Core features are already loaded by crm.html. Keep one instance of each.
+  if(!document.querySelector('script[src^="crm-warranty-preview.js"]')){
+    const preview=document.createElement('script');
+    preview.src='crm-warranty-preview.js?v=20260825-1';
+    document.body.appendChild(preview);
+  }
 
   const firstName=c=>String(c?.first_name||customerName(c)||'there').trim().split(/\s+/)[0]||'there';
   const displayTime=v=>{
