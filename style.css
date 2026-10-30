@@ -5,3 +5,26 @@
 .mobile-contact-bar{display:none}
 @media(max-width:900px){.process-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){body{padding-bottom:64px}.compare-cta{align-items:flex-start;flex-direction:column;gap:18px}.compare-table th,.compare-table td{padding:16px}.process-grid{grid-template-columns:1fr}.mobile-contact-bar{position:fixed;z-index:80;left:0;right:0;bottom:0;height:64px;display:grid;grid-template-columns:1fr 1fr 1.35fr;background:#080808;border-top:1px solid #343434;box-shadow:0 -8px 24px rgba(0,0,0,.35)}.mobile-contact-bar a{display:flex;align-items:center;justify-content:center;border-right:1px solid #292929;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.mobile-contact-bar a:last-child{border-right:0;background:var(--red);color:#fff}}
+
+/* EM Tinting — premium automotive refresh, 2026-10-30 */
+:root{--red:#db171f;--paper:#0c0c0e;--max:1340px}
+body{background:#08090b;color:#f6f6f6;font-family:Arial,Helvetica,sans-serif}
+.site-header{background:rgba(6,7,9,.96);height:88px;border-bottom:1px solid #27272a}
+.brand{font-size:26px;font-weight:900;letter-spacing:-.04em}.brand-em{color:#fff}.brand span:last-child{color:#fff;font-weight:900}
+.site-header nav{gap:26px}.site-header nav a{font-size:12px;font-weight:800;letter-spacing:.12em;color:#e0e0e0}
+.btn,.site-header .btn-small{background:var(--red);color:#fff;border-radius:0;text-transform:uppercase;font-size:12px;font-weight:900;letter-spacing:.12em;box-shadow:none}
+.btn:hover,.site-header .btn-small:hover{background:#ff2b35;color:#fff}
+.hero{background:#07090c url('media/hero-car.svg') 80% center/cover no-repeat;min-height:720px;padding-top:105px;padding-bottom:125px}
+.hero-overlay{background:linear-gradient(90deg,#050608 0%,rgba(5,6,8,.98) 30%,rgba(5,6,8,.6) 62%,rgba(5,6,8,.1) 100%),linear-gradient(0deg,#07080a 0%,transparent 35%)}
+.hero-content{width:min(790px,85%)}.hero h1{font-size:clamp(70px,9vw,138px);line-height:.86;letter-spacing:-.075em;font-weight:950;text-transform:uppercase;margin-bottom:32px}.hero h1 span{color:#fff}
+.hero .kicker{color:#f0444c;letter-spacing:.24em;font-size:12px}.hero-copy{max-width:540px;font-size:18px;color:#c9c9cd;line-height:1.6}.hero-actions{margin-top:36px}.hero .btn{min-height:58px;padding:0 32px}.hero-card{border-left:3px solid var(--red);background:rgba(10,11,14,.84)}
+.trust-strip{max-width:none;border-top:1px solid #242529;border-bottom:1px solid #242529}.trust-strip span{color:#eee;font-weight:800;font-size:11px}
+.section-white,.why-section,.warranty-section{background:#101114;color:#f5f5f5}.section-intro,.why-copy p:not(.kicker),.warranty-intro p:not(.kicker){color:#b1b1b5}
+.section h2,.cta-band h2{font-weight:900;text-transform:uppercase;letter-spacing:-.055em}.dark-kicker{color:#f0444c}
+.service-grid{grid-template-columns:repeat(4,1fr);gap:12px}.service-card{min-height:330px;background:#18191c;color:#fff;border:1px solid #303137;padding:28px}.service-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.4);border-color:#d71920}.service-number{color:#f0444c}.service-card h3{font-size:26px;text-transform:uppercase;font-weight:900}.service-card p{color:#b8b8bd;font-size:14px}.service-card a{color:#ff444e}
+.gallery-pro{gap:12px}.gallery-pro figure{border:1px solid #303136}.gallery-pro figcaption{background:rgba(4,5,7,.85);font-weight:900}
+.film-feature,.compare-section,.work-section{background:#0b0c0f}.film-card{border-color:#36363a}
+.booking-section{background:#101114}.booking-form{background:#17181c;border:1px solid #37383d}.booking-form input,.booking-form select,.booking-form textarea{background:#0c0d10;border:1px solid #42434a}.booking-form .btn{width:100%}
+.faq{background:#101114;color:#fff}.faq details{border-color:#343438}.faq p{color:#bbb}
+@media(max-width:1050px){.service-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.hero{min-height:650px;background-position:65% center}.hero h1{font-size:clamp(54px,13vw,78px)!important}.hero-content{width:100%}.hero-overlay{background:linear-gradient(90deg,rgba(5,6,8,.97),rgba(5,6,8,.65)),linear-gradient(0deg,#07080a,transparent 55%)}.service-grid{grid-template-columns:1fr}.service-card{min-height:235px}.hero-card{display:none}.site-header nav{display:none}}
