@@ -16,8 +16,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
   const style = document.createElement('style');
   style.textContent = `
-    .hero{background:#050505!important;min-height:620px!important;overflow:hidden!important}
-    .hero-overlay,.em-hero-slideshow,.em-hero-controls,.em-hero-label,.hero-card{display:none!important}
+    .hero{min-height:720px!important;overflow:hidden!important}
+    .em-hero-slideshow,.em-hero-controls,.em-hero-label{display:none!important}
     .em-date-field{width:100%;display:flex;flex-direction:column;gap:7px}
     .em-date-field input[type="date"]{width:100%;min-height:64px}
     .em-date-label{order:-1;color:#aaa;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1.2}
@@ -51,7 +51,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   if(dateInput&&!dateInput.closest('.em-date-field')){const wrapper=document.createElement('div');wrapper.className='em-date-field';const label=document.createElement('span');label.className='em-date-label';label.textContent='Appointment date';dateInput.parentNode.insertBefore(wrapper,dateInput);wrapper.appendChild(dateInput);wrapper.appendChild(label);}
   const form=document.querySelector('#bookingForm'); const vehicleType=form?.querySelector('select[name="vehicle_type"]'); const film=form?.querySelector('select[name="tint_package"]');
   if(vehicleType){vehicleType.innerHTML='<option value="">Choose vehicle type</option><option>Sedan</option><option>Coupe</option><option>SUV</option><option value="Pickup Truck">Pickup Truck</option>';vehicleType.required=true;}
-  if(film){film.value='';film.removeAttribute('required');film.closest('.form-row')?.classList.add('em-no-film-choice');film.style.display='none';}
+  if(film){film.style.display='block';film.closest('.form-row')?.classList.remove('em-no-film-choice');}
   if(form&&!document.querySelector('#emCoverage')){
     const builder=document.createElement('div');builder.className='em-quote-builder';builder.innerHTML='<select id="emCoverage" name="tint_coverage" required><option value="">Choose tint coverage</option><option>Full Vehicle</option><option>Front 2 Doors</option><option>Windshield Only</option><option>Tint Removal</option></select><label class="em-addon"><input id="emEyebrow" name="eyebrow" type="checkbox" value="yes"><span>Add windshield eyebrow</span></label>';
     const dateRow=dateInput?.closest('.form-row'); if(dateRow) dateRow.insertAdjacentElement('beforebegin',builder); else form.querySelector('textarea[name="notes"]')?.insertAdjacentElement('beforebegin',builder);
