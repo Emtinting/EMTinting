@@ -40,6 +40,39 @@
       }catch(e){output.textContent=e.message||"Unable to create payment link"}finally{btn.disabled=false;btn.textContent="Create Secure Stripe Payment Link"}
     });
   }
-  document.addEventListener("DOMContentLoaded",install);install();
-  const observer=new MutationObserver(install);observer.observe(document.documentElement,{childList:true,subtree:true});
+
+  function installPaymentsAction(){
+    const page=document.getElementById("paymentsView");
+    if(!page||document.getElementById("stripePaymentsButton"))return;
+    const head=page.querySelector(".panel-head")||page.querySelector(".panel")||page;
+    const btn=document.createElement("button");
+    btn.id="stripePaymentsButton";btn.type="button";btn.className="btn primary small";
+    btn.textContent="Create Secure Stripe Payment Link";
+    btn.addEventListener("click",()=>{
+      if(!Array.isArray(state?.bookings)||!state.bookings.length){toast("Create an appointment first to generate an invoice.");return}
+      let modal=document.getElementById("stripeBookingPicker");
+      if(!modal){
+        modal=document.createElement("dialog");modal.id="stripeBookingPicker";modal.className="modal";
+        const wrapper=document.createElement("div");wrapper.style.padding="22px";
+        const heading=document.createElement("h3");heading.textContent="Choose an appointment invoice";
+        const select=document.createElement("select");select.id="stripeBookingSelect";select.style.cssText="width:100%;margin:14px 0;padding:12px";
+        const actions=document.createElement("div");actions.style.cssText="display:flex;gap:10px;flex-wrap:wrap";
+        const cancel=document.createElement("button");cancel.type="button";cancel.className="btn ghost";cancel.textContent="Cancel";cancel.onclick=()=>modal.close();
+        const next=document.createElement("button");next.type="button";next.className="btn primary";next.textContent="Continue to Invoice";
+        next.onclick=()=>{const id=select.value;if(!id)return;modal.close();if(typeof window.openInvoice==="function")window.openInvoice(id);else toast("Invoice editor is unavailable")};
+        actions.append(cancel,next);wrapper.append(heading,select,actions);modal.append(wrapper);document.body.append(modal);
+      }
+      const select=modal.querySelector("#stripeBookingSelect");select.replaceChildren();
+      for(const b of state.bookings){
+        const c=state.customers?.find(c=>c.id===b.customer_id);
+        const option=document.createElement("option");option.value=b.id;
+        option.textContent=[c?[c.first_name,c.last_name].filter(Boolean).join(" "):"Customer",b.appointment_date,b.service].filter(Boolean).join(" — ");
+        select.append(option);
+      }
+      modal.showModal();
+    });
+    head.append(btn);
+  }
+  document.addEventListener("DOMContentLoaded",()=>{install();installPaymentsAction()});install();installPaymentsAction();
+  const observer=new MutationObserver(()=>{install();installPaymentsAction()});observer.observe(document.documentElement,{childList:true,subtree:true});
 })();
