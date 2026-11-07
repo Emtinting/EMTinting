@@ -6,3 +6,7 @@ body .hero:before{content:none!important}
 #emTintVisualizer .bmw-shade-image{display:block!important}
 #emTintVisualizer .bmw-window-mask{display:block!important}
 #emTintVisualizer .em-real-car-preview{display:none!important}
+
+/* Hide the legacy illustrated car in all loading states. */
+#emTintVisualizer .em-shade-stage > svg:not(.bmw-window-mask){display:none!important}
+#emTintVisualizer .bmw-window-mask path{transition:fill .25s ease,mix-blend-mode .25s ease}
