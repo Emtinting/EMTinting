@@ -11,6 +11,27 @@
 <link rel="stylesheet" href="tint-premium.css?v=20261107-fixshade4">
 <link rel="stylesheet" href="bmw-shade-visualizer.css?v=20261107-bmw-live3">
 <link rel="stylesheet" href="site-visual-fix.css?v=20261107-single-visualizer-8">
+<style id="em-no-cartoon-fix">
+#emTintVisualizer .em-shade-stage > svg:not(.bmw-window-mask),
+#emTintVisualizer .em-shade-stage > .em-real-car-preview,
+#emTintVisualizer .em-shade-stage > svg[viewBox="0 0 760 360"]{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;overflow:hidden!important}
+#emTintVisualizer .em-shade-stage > .bmw-shade-stage{display:block!important}
+</style>
+<script id="em-remove-cartoon">
+(function(){
+function clean(){
+const stage=document.querySelector('#emTintVisualizer .em-shade-stage');
+if(!stage)return;
+for(const child of Array.from(stage.children)){
+if(child.matches('svg:not(.bmw-window-mask), .em-real-car-preview'))child.remove();
+}
+}
+document.addEventListener('DOMContentLoaded',clean);
+if(document.readyState!=='loading')clean();
+const observer=new MutationObserver(clean);
+observer.observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </head>
 <body>
 <header class="site-header">
