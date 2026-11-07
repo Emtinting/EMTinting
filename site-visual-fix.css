@@ -10,3 +10,27 @@ body .hero:before{content:none!important}
 /* Hide the legacy illustrated car in all loading states. */
 #emTintVisualizer .em-shade-stage > svg:not(.bmw-window-mask){display:none!important}
 #emTintVisualizer .bmw-window-mask path{transition:fill .25s ease,mix-blend-mode .25s ease}
+
+/* Standalone BMW tint visualizer layout: no legacy JS-injected CSS required */
+#emTintVisualizer{padding:76px max(4vw,24px);background:#050506;border-top:1px solid #242424;color:#fff}
+#emTintVisualizer .em-shade-wrap{max-width:1440px;margin:auto}
+#emTintVisualizer .em-shade-head{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;margin-bottom:38px}
+#emTintVisualizer .em-shade-head h2{font-size:clamp(42px,5vw,74px);font-weight:900;line-height:1.05;letter-spacing:-.04em;font-style:italic;margin:14px 0 0}
+#emTintVisualizer .em-shade-head h2 em{color:#e21a22}
+#emTintVisualizer .em-shade-head p{color:#c7c7ca;line-height:1.6}
+#emTintVisualizer .em-shade-ui{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:26px}
+#emTintVisualizer .em-shade-stage{padding:0;background:#111;border:1px solid #333;border-radius:12px;overflow:hidden}
+#emTintVisualizer .bmw-shade-stage{position:relative;aspect-ratio:1095/482;overflow:hidden}
+#emTintVisualizer .bmw-shade-image{display:block;width:100%;height:100%;object-fit:fill}
+#emTintVisualizer .bmw-window-mask{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;display:block}
+#emTintVisualizer .bmw-window-mask path{transition:fill .22s ease;mix-blend-mode:normal}
+#emTintVisualizer .bmw-shade-label{position:absolute;top:18px;left:18px;z-index:1;background:#09090be8;border:1px solid #e21a22;color:white;padding:10px 16px;border-radius:8px;font-size:21px;font-weight:800}
+#emTintVisualizer .em-shade-controls{display:grid;gap:10px}
+#emTintVisualizer .em-shade-btn{min-height:67px;padding:12px 19px;background:#0d0e10;color:#fff;border:1px solid #333;border-radius:9px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+#emTintVisualizer .em-shade-btn strong{font-size:22px}
+#emTintVisualizer .em-shade-btn span{font-size:11px;color:#aaa}
+#emTintVisualizer .em-shade-btn.active{border-color:#e21a22;background:#33090d;box-shadow:inset 4px 0 #e21a22}
+#emTintVisualizer .em-shade-selected{margin-top:16px;padding:17px 20px;background:#111;border:1px solid #333;border-left:5px solid #e21a22;border-radius:8px}
+#emTintVisualizer .em-shade-note{font-size:12px;color:#aaa}
+@media(max-width:860px){#emTintVisualizer .em-shade-head,#emTintVisualizer .em-shade-ui{grid-template-columns:1fr}#emTintVisualizer .em-shade-controls{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:520px){#emTintVisualizer .em-shade-controls{grid-template-columns:repeat(2,1fr)}#emTintVisualizer .em-shade-btn{min-height:60px;padding:10px}#emTintVisualizer .em-shade-btn strong{font-size:18px}}
