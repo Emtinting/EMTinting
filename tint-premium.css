@@ -1,0 +1,23 @@
+/* EM Tinting premium tint visualizer */
+#emTintVisualizer{background:#050506!important;padding:75px max(4vw,24px) 92px!important}
+#emTintVisualizer .em-shade-wrap{max-width:1440px!important}
+#emTintVisualizer .em-shade-head{grid-template-columns:1.2fr .8fr;gap:48px;margin-bottom:38px;align-items:center}
+#emTintVisualizer .em-shade-head .kicker{color:#f4f4f4;letter-spacing:.15em;font-size:13px;border-left:5px solid #df0c1b;padding-left:13px}
+#emTintVisualizer .em-shade-head h2{font-size:clamp(42px,5vw,74px)!important;font-weight:900!important;line-height:1.05!important;text-transform:uppercase;font-style:italic;letter-spacing:-.04em!important;max-width:850px}
+#emTintVisualizer .em-shade-head p:last-child{font-size:16px;line-height:1.75;color:#c7c7ca}
+#emTintVisualizer .em-shade-ui{grid-template-columns:minmax(0,1fr) 275px!important;gap:26px!important}
+#emTintVisualizer .em-shade-stage{border:1px solid #2b2b30!important;background:#0d0e10!important;border-radius:12px!important;overflow:hidden}
+#emTintVisualizer .em-real-car-preview{aspect-ratio:1.82!important;background:#121418}
+#emTintVisualizer .em-real-car-preview img{object-fit:cover;filter:contrast(1.09) saturate(.85)}
+#emTintVisualizer .em-real-car-overlay{display:none!important}
+#emTintVisualizer .em-real-car-label{top:18px;left:18px;border:1px solid #343434;border-radius:9px;background:#08090bdd;padding:11px 17px;font-size:22px}
+#emTintVisualizer .em-real-car-preview:after{content:''}
+#emTintVisualizer .em-shade-controls{gap:10px!important}
+#emTintVisualizer .em-shade-btn{border-radius:10px!important;min-height:67px!important;padding:12px 19px!important;background:#0d0e10!important;border:1px solid #33353a!important}
+#emTintVisualizer .em-shade-btn strong{font-size:22px!important}
+#emTintVisualizer .em-shade-btn span{font-size:11px!important;letter-spacing:.02em!important}
+#emTintVisualizer .em-shade-btn.active{background:linear-gradient(90deg,#29070b,#150a0c)!important;border-color:#d30b20!important;box-shadow:inset 4px 0 #e10d24!important}
+#emTintVisualizer .em-shade-selected{border:1px solid #323237!important;border-left:5px solid #d80b1e!important;background:#101114!important;border-radius:8px!important;padding:17px 20px!important;font-size:15px!important}
+#emTintVisualizer .em-shade-note{font-size:12px!important;color:#b0b0b5!important;font-style:italic}
+@media(max-width:860px){#emTintVisualizer .em-shade-head,#emTintVisualizer .em-shade-ui{grid-template-columns:1fr!important}#emTintVisualizer .em-shade-controls{grid-template-columns:repeat(3,1fr)!important}}
+@media(max-width:520px){#emTintVisualizer .em-shade-controls{grid-template-columns:repeat(2,1fr)!important}#emTintVisualizer .em-shade-head h2{font-size:42px!important}}
