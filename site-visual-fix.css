@@ -34,3 +34,5 @@ body .hero:before{content:none!important}
 #emTintVisualizer .em-shade-note{font-size:12px;color:#aaa}
 @media(max-width:860px){#emTintVisualizer .em-shade-head,#emTintVisualizer .em-shade-ui{grid-template-columns:1fr}#emTintVisualizer .em-shade-controls{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:520px){#emTintVisualizer .em-shade-controls{grid-template-columns:repeat(2,1fr)}#emTintVisualizer .em-shade-btn{min-height:60px;padding:10px}#emTintVisualizer .em-shade-btn strong{font-size:18px}}
+
+#emTintVisualizer .bmw-window-mask path{stroke:rgba(13,17,22,.25);stroke-width:.7px;stroke-linejoin:round;filter:blur(.65px)}
