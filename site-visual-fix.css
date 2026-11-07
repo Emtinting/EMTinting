@@ -1,0 +1,8 @@
+/* Remove low-resolution hero photo completely. */
+body .hero{background-image:radial-gradient(ellipse at 75% 55%,#23262b 0%,#111318 45%,#070809 85%)!important;background-color:#090a0c!important}
+body .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.13))!important}
+body .hero:before{content:none!important}
+#emTintVisualizer .bmw-shade-stage{display:block!important}
+#emTintVisualizer .bmw-shade-image{display:block!important}
+#emTintVisualizer .bmw-window-mask{display:block!important}
+#emTintVisualizer .em-real-car-preview{display:none!important}
