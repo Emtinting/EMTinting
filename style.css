@@ -28,3 +28,30 @@ body{background:#08090b;color:#f6f6f6;font-family:Arial,Helvetica,sans-serif}
 .faq{background:#101114;color:#fff}.faq details{border-color:#343438}.faq p{color:#bbb}
 @media(max-width:1050px){.service-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.hero{min-height:650px;background-position:65% center}.hero h1{font-size:clamp(54px,13vw,78px)!important}.hero-content{width:100%}.hero-overlay{background:linear-gradient(90deg,rgba(5,6,8,.97),rgba(5,6,8,.65)),linear-gradient(0deg,#07080a,transparent 55%)}.service-grid{grid-template-columns:1fr}.service-card{min-height:235px}.hero-card{display:none}.site-header nav{display:none}}
+
+
+/* EM Tinting: editorial refresh — restrained surfaces, authentic photography */
+:root{--paper:#f6f6f4;--red:#d7222a;--max:1240px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;letter-spacing:-.005em}
+.site-header{height:74px;background:rgba(9,10,12,.97);border-bottom:1px solid #252629;backdrop-filter:blur(8px)}
+.site-header nav{gap:22px;letter-spacing:.045em;text-transform:none;font-size:13px}
+.site-header .btn-small{background:#fff;color:#111}
+.hero{min-height:680px;background:#08090a url("media/hero-01.jpg") 67% center/cover no-repeat}
+.hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.95) 0%,rgba(0,0,0,.86) 30%,rgba(0,0,0,.44) 63%,rgba(0,0,0,.2) 100%)}
+.hero-content{width:min(670px,92%)}
+.hero h1{font-size:clamp(48px,6.6vw,90px);letter-spacing:-.065em;line-height:.99;font-weight:800}
+.hero h1 span{color:#fff}
+.hero-copy{max-width:530px;font-size:17px;line-height:1.7;color:#e2e2e2}
+.kicker{letter-spacing:.11em;font-weight:700}
+.btn{border-radius:4px;font-weight:700;letter-spacing:0;transition:background .18s ease,box-shadow .18s ease}
+.btn:hover{transform:none;box-shadow:0 0 0 2px rgba(255,255,255,.2)}
+.section{padding-top:88px;padding-bottom:88px}
+.section h2,.cta-band h2{font-size:clamp(38px,4.5vw,62px);line-height:1.08;letter-spacing:-.045em}
+.service-grid{gap:1px;background:#dedede;border:1px solid #dedede}
+.service-card{min-height:275px;border:0;padding:32px;background:#fff;transition:background .2s}
+.service-card:hover{transform:none;box-shadow:none;background:#fafafa}
+.service-card h3{font-size:27px}
+.service-card p{line-height:1.7}
+.trust-strip span{letter-spacing:.035em;text-transform:none;font-size:13px}
+.hero-card{border-radius:4px;backdrop-filter:none;background:rgba(12,12,12,.91)}
+@media(max-width:760px){.hero{min-height:660px;background-position:61% center}.hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.91),rgba(0,0,0,.55))}.hero h1{font-size:clamp(45px,10vw,67px)}.hero-card{right:22px;bottom:20px}.section{padding-top:66px;padding-bottom:66px}.service-grid{gap:1px}}
