@@ -9,7 +9,7 @@
 #emTintVisualizer .em-shade-stage{border:1px solid #2b2b30!important;background:#0d0e10!important;border-radius:12px!important;overflow:hidden}
 #emTintVisualizer .em-real-car-preview{aspect-ratio:1.82!important;background:#121418}
 #emTintVisualizer .em-real-car-preview img{object-fit:cover;filter:contrast(1.09) saturate(.85)}
-#emTintVisualizer .em-real-car-overlay{display:none!important}
+#emTintVisualizer .em-real-car-overlay{display:block!important;mix-blend-mode:multiply;pointer-events:none}
 #emTintVisualizer .em-real-car-label{top:18px;left:18px;border:1px solid #343434;border-radius:9px;background:#08090bdd;padding:11px 17px;font-size:22px}
 #emTintVisualizer .em-real-car-preview:after{content:''}
 #emTintVisualizer .em-shade-controls{gap:10px!important}
