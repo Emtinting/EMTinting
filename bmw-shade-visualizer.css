@@ -4,3 +4,7 @@
 #emTintVisualizer .bmw-shade-stage{aspect-ratio:1095/482;max-width:100%;}
 #emTintVisualizer .bmw-shade-image{object-fit:contain!important;image-rendering:auto;}
 #emTintVisualizer .bmw-window-mask{preserveAspectRatio:xMidYMid meet;}
+
+#emTintVisualizer .bmw-shade-stage{aspect-ratio:3300/960!important;background:#000!important}
+#emTintVisualizer .bmw-shade-image{object-fit:contain!important}
+#emTintVisualizer .bmw-window-mask{inset:0!important;width:100%!important;height:100%!important}
