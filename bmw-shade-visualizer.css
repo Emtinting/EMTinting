@@ -8,3 +8,8 @@
 #emTintVisualizer .bmw-shade-stage{aspect-ratio:3300/960!important;background:#000!important}
 #emTintVisualizer .bmw-shade-image{object-fit:contain!important}
 #emTintVisualizer .bmw-window-mask{inset:0!important;width:100%!important;height:100%!important}
+
+/* Match the 2048 x 608 BMW photo exactly so the SVG tint stays on the glass. */
+#emTintVisualizer .bmw-shade-stage{aspect-ratio:2048/608!important}
+#emTintVisualizer .bmw-shade-image{width:100%!important;height:100%!important;object-fit:fill!important}
+#emTintVisualizer .bmw-window-mask{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
