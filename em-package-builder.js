@@ -6,8 +6,8 @@ const service=form.elements.service;if(service&&!service.value)service.value='Wi
 const preferred=form.elements.preferred_shade;if(preferred)preferred.value='Custom / different shades';
 const wind=form.elements.windshield;if(wind)wind.checked=x.wind!=='Not requested';
 const notes=form.elements.notes;
-const block='CUSTOM TINT PACKAGE REQUEST\\nFilm: '+x.film+'\\nFront doors: '+x.front+'\\nRear doors: '+x.rear+'\\nRear windshield: '+x.back+'\\nFront windshield: '+x.wind;
-if(notes){const original=notes.value||'';const cleaned=original.replace(/(?:\\n\\n)?CUSTOM TINT PACKAGE REQUEST\\n[\\s\\S]*$/,'').trim();notes.value=[cleaned,block].filter(Boolean).join('\\n\\n')}
+const block='CUSTOM TINT PACKAGE REQUEST\nFilm: '+x.film+'\nFront doors: '+x.front+'\nRear doors: '+x.rear+'\nRear windshield: '+x.back+'\nFront windshield: '+x.wind;
+if(notes){const original=notes.value||'';const cleaned=original.replace(/(?:\n\n)?CUSTOM TINT PACKAGE REQUEST\n[\s\\S]*$/,'').trim();notes.value=[cleaned,block].filter(Boolean).join('\n\n')}
 return x}
 fields.forEach(id=>$('#'+id).addEventListener('change',sync));
 ['first_name','last_name','phone','email','vehicle_year','vehicle_make','vehicle_model','vehicle_type','service','tint_package','appointment_date','appointment_time'].forEach(name=>{const el=form.elements[name];if(el)el.required=true});
