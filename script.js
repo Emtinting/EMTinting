@@ -64,6 +64,7 @@ ${notes.value}`.trim();},true);
 // EM Tinting — single BMW tint visualizer (no legacy toy car)
 (() => {
   function initialize(){
+    return; // Retired tint visualizer; shade choices remain in booking wizard.
     const form=document.getElementById('bookingForm');
     const anchor=document.getElementById('why');
     if(!form||!anchor||document.getElementById('emTintVisualizer'))return;
