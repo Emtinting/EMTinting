@@ -18,3 +18,7 @@
 #emTintVisualizer .bmw-shade-stage{aspect-ratio:3300/960!important}
 #emTintVisualizer .bmw-shade-image{width:100%!important;height:100%!important;object-fit:fill!important}
 #emTintVisualizer .bmw-window-mask{inset:0!important;width:100%!important;height:100%!important}
+
+/* Glass-only clipping: no tint on the painted body or pillars. */
+#emTintVisualizer .bmw-window-mask .em-glass-fill{fill:rgba(194,208,218,.035);transition:fill .22s ease}
+#emTintVisualizer .bmw-window-mask clipPath path{fill:#fff!important}
