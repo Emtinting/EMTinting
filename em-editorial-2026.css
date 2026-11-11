@@ -1,0 +1,55 @@
+/* EM Tinting editorial redesign — scoped, non-destructive */
+:root{--em-red:#d41120}
+body{background:#fff;color:#101114}
+.site-header{background:#fff!important;border-bottom:1px solid #e5e5e5!important;box-shadow:0 2px 8px #0000000b!important}
+.site-header .brand,.site-header .brand span,.site-header nav a{color:#111!important}
+.site-header .brand-em{color:#d41120!important}
+.site-header .btn-small{background:#d41120!important;color:white!important}
+.hero{min-height:610px!important;background-position:68% center!important}
+.hero h1{font-weight:950!important}
+.hero .btn,.btn{background:#d41120;color:#fff}
+.section-white,.why-section,.warranty-section,.faq{background:#fff!important;color:#111!important}
+.section-white h2,.why-section h2,.warranty-section h2,.faq h2{color:#101114!important}
+.section-white p,.why-section p,.warranty-section p,.faq p{color:#60636b!important}
+.service-grid{background:transparent!important;gap:16px!important;border:0!important}
+.service-card{background:#fff!important;color:#111!important;border:1px solid #dedede!important;min-height:340px!important;display:flex;flex-direction:column;justify-content:flex-end}
+.service-card h3{color:#111!important;text-transform:uppercase;font-weight:950}
+.service-card p{color:#65666a!important}
+.service-card a{color:#d41120!important}
+.service-number{color:#d41120!important}
+.em-editorial{background:#fff;color:#101114;padding:90px max(6vw,24px)}
+.em-editorial-inner{max-width:1240px;margin:auto}
+.em-editorial .eyebrow{font-size:12px;font-weight:850;letter-spacing:.19em;color:#d41120;margin:0 0 18px}
+.em-editorial h2{font-size:clamp(40px,5vw,72px);line-height:1.05;font-weight:950;letter-spacing:-.055em;margin:0 0 24px;color:#111}
+.em-editorial p{font-size:17px;line-height:1.65;color:#60636b}
+.em-editorial .red{color:#d41120}
+.em-editorial-top{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.em-editorial-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.em-editorial-actions a{padding:16px 24px;background:#d41120;color:#fff;font-weight:800;text-decoration:none}
+.em-editorial-actions a.secondary{background:#111;color:#fff}
+.em-service-photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:45px}
+.em-photo-card{border:1px solid #ddd;background:white;overflow:hidden}
+.em-photo-card img{display:block;width:100%;aspect-ratio:4/4.5;object-fit:cover}
+.em-photo-card div{padding:20px}
+.em-photo-card h3{color:#111;font-size:23px;line-height:1.1;text-transform:uppercase;margin:0 0 10px;font-weight:950}
+.em-photo-card p{font-size:14px;margin:0 0 18px}
+.em-photo-card a{font-size:12px;font-weight:800;color:#d41120;text-transform:uppercase}
+#emTintVisualizer{background:#fff!important;color:#111!important;padding:80px max(6vw,20px)!important}
+#emTintVisualizer .em-shade-wrap{max-width:1240px!important}
+#emTintVisualizer .em-shade-head h2,#emTintVisualizer .em-shade-head p{color:#111!important}
+#emTintVisualizer .em-shade-head .kicker{color:#d41120!important}
+#emTintVisualizer .em-shade-stage{background:#f4f4f4!important}
+#emTintVisualizer .em-shade-controls{background:#f7f7f7!important}
+#emTintVisualizer .em-shade-btn{color:#111!important;background:#fff!important;border:1px solid #ddd!important}
+#emTintVisualizer .em-shade-btn.active{border-color:#d41120!important;color:#d41120!important}
+#emTintVisualizer .em-shade-selected,#emTintVisualizer .em-shade-note{color:#454545!important}
+.em-view-switch{display:flex;gap:0;margin:18px 0;align-items:center}
+.em-view-switch button{background:#f3f3f3;color:#333;border:1px solid #ddd;padding:13px 18px;cursor:pointer;font-weight:750}
+.em-view-switch button[aria-pressed="true"]{background:#d41120;color:#fff;border-color:#d41120}
+.em-tint-guidance{background:#f2f2f3;border-left:3px solid #d41120;color:#333;padding:20px;margin-top:18px;font-size:14px;line-height:1.55}
+.em-tint-guidance strong{display:block;margin-bottom:5px}
+.em-tint-guidance.warning{border-color:#d41120}
+.em-inside-view .bmw-shade-image{filter:brightness(1.22) contrast(.88)}
+.em-inside-view .bmw-window-mask path{opacity:.52}
+@media(max-width:900px){.em-editorial-top{grid-template-columns:1fr;gap:24px}.em-service-photo-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.em-editorial{padding:58px 20px}.em-service-photo-grid{grid-template-columns:1fr 1fr;gap:9px}.em-photo-card div{padding:12px}.em-photo-card h3{font-size:17px}.em-photo-card p{font-size:12px}.em-photo-card img{aspect-ratio:1/1}.site-header{background:#fff!important}.site-header .brand,.site-header .brand span{color:#111!important}.site-header .btn-small{background:#d41120!important;color:#fff!important}#emTintVisualizer{padding:55px 18px!important}}
