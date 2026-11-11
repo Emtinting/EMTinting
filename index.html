@@ -9,7 +9,6 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"AutomotiveBusiness","name":"EM Tinting","telephone":"+1-346-804-9135","email":"emtinting@yahoo.com","sameAs":["https://www.instagram.com/em_tinting/"],"areaServed":["Houston, Texas","Richmond, Texas"],"description":"Professional automotive window tint, paint protection film, ceramic coating and paint correction with shop appointments.","openingHours":["Mo-Sa 18:00-18:30"],"priceRange":"Contact for quote"}</script>
 <link rel="stylesheet" href="tint-photo-visualizer.css?v=20261107-1">
 <link rel="stylesheet" href="tint-premium.css?v=20261107-fixshade4">
-<link rel="stylesheet" href="bmw-shade-visualizer.css?v=20261111-two-big-windows6">
 <link rel="stylesheet" href="site-visual-fix.css?v=20261107-glass-natural-9">
 <style id="em-no-cartoon-fix">
 #emTintVisualizer .em-shade-stage > svg:not(.bmw-window-mask),
@@ -36,10 +35,8 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 <link rel="stylesheet" href="em-option3-red.css?v=20261111-full2">
 <link rel="stylesheet" href="em-film-details.css?v=20261111-a">
 <link rel="stylesheet" href="em-premium-complete.css?v=20261111-premium1">\n
-<link rel="stylesheet" href="em-exact-selector.css?v=20261111-1">
-<link rel="stylesheet" href="em-visualizer-layout-repair.css?v=20261111-fit2">
-<link rel="stylesheet" href="em-360-showroom.css?v=20261111-show1">
 <link rel="stylesheet" href="em-booking-wizard.css?v=20261111-emoriginal1">
+<style id="em-remove-retired-widgets">#emTintVisualizer,#emPackageBuilder,.em360,.em-exact-ui{display:none!important}a[href="#emTintVisualizer"],a[href="#emPackageBuilder"]{display:none!important}</style>
 </head>
 <body>
 <header class="site-header">
@@ -154,7 +151,6 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
 <script src="em-film-details.js?v=20261111-clickfix2"></script>
 <script src="em-premium-complete.js?v=20261111-premium1"></script>
 
-<script src="em-exact-selector.js?v=20261111-fit3"></script>
-<script src="em-360-showroom.js?v=20261111-show1"></script>
 <script src="em-booking-wizard.js?v=20261111-shoponly2"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{const remove=()=>{document.querySelectorAll('#emTintVisualizer,#emPackageBuilder').forEach(el=>el.remove());document.querySelectorAll('a[href="#emTintVisualizer"],a[href="#emPackageBuilder"]').forEach(el=>el.remove());};remove();setTimeout(remove,700);});</script>
 </body></html>
