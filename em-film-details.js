@@ -11,11 +11,25 @@ const dialog=document.createElement('dialog');dialog.id='emFilmDialog';dialog.cl
 const close=()=>dialog.close();
 dialog.querySelector('.em-film-close').addEventListener('click',close);dialog.addEventListener('click',e=>{if(e.target===dialog)close()});
 function openFilm(key){const f=films[key];if(!f)return;dialog.querySelector('#emFilmTitle').textContent=f.name;dialog.querySelector('.em-film-price').textContent='Starting at '+f.price;dialog.querySelector('.em-film-tag').textContent=f.tag;dialog.querySelector('.em-film-intro').textContent=f.intro;dialog.querySelector('.em-film-points').innerHTML=f.points.map(p=>'<li>'+p+'</li>').join('');dialog.querySelector('.em-film-difference').textContent=f.difference;dialog.querySelector('.em-film-book').dataset.film=key;dialog.showModal()}
-cards.querySelectorAll('[data-film]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openFilm(a.dataset.film)}));
+cards.querySelectorAll('[data-film]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openFilm(a.dataset.film)}));dialog.addEventListener('em:open-film',e=>openFilm(e.detail.key));
 dialog.querySelector('.em-film-book').addEventListener('click',()=>{const key=dialog.querySelector('.em-film-book').dataset.film;const form=document.querySelector('#bookingForm');const sel=form?.querySelector('[name="tint_package"]');if(sel){const name=films[key].name;const opt=[...sel.options].find(o=>o.text.toLowerCase().includes(name.replace('HITEK ','').toLowerCase()));if(opt){sel.value=opt.value;sel.dispatchEvent(new Event('change',{bubbles:true}))}}close()});
 const compare=document.createElement('section');compare.className='em-film-comparison';compare.id='film-details';compare.innerHTML='<div><p class="em-film-eyebrow">WHICH FILM IS RIGHT FOR YOU?</p><h2>Compare the difference.</h2><p>From budget-friendly privacy to premium ceramic heat control.</p></div><div class="em-film-comparison-grid">'+Object.entries(films).map(([key,f])=>'<article><p>'+f.tag+'</p><h3>'+f.name+'</h3><strong>'+f.price+'</strong><p>'+f.difference+'</p><button type="button" data-compare="'+key+'">VIEW DETAILS →</button></article>').join('')+'</div><p class="em-film-disclaimer">All prices shown are starting prices. Actual pricing depends on vehicle and selected windows.</p>';
 cards.insertAdjacentElement('afterend',compare);compare.querySelectorAll('[data-compare]').forEach(b=>b.addEventListener('click',()=>openFilm(b.dataset.compare)));dialog.querySelector('.em-film-compare').addEventListener('click',()=>{close();compare.scrollIntoView({behavior:'smooth'})});
 const nav=document.querySelector('.site-header nav');if(nav){const link=nav.querySelector('a[href="#services"]');if(link){link.href='#film-details';link.textContent='FILM OPTIONS'}const filmLink=nav.querySelector('a[href="#film"]');if(filmLink)filmLink.href='#film-packages'}
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,150));else setTimeout(init,150);
+// Use event delegation so clicking a package never navigates to booking before details open.
+document.addEventListener('click',function(event){
+ const target=event.target.closest('.em-option-film a');
+ if(!target)return;
+ event.preventDefault();event.stopImmediatePropagation();
+ if(!document.getElementById('emFilmDialog'))init();
+ const cardList=document.querySelectorAll('.em-option-film a');
+ const index=Array.from(cardList).indexOf(target);
+ const key=['carbon','ir','plus'][index];
+ const details=document.querySelector('#emFilmDialog');
+ if(!details)return;
+ // Trigger the existing detail-card handler after the dialog has been initialized.
+ details.dispatchEvent(new CustomEvent('em:open-film',{detail:{key}}));
+},true);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,50));else setTimeout(init,50);
 })();
