@@ -13,3 +13,8 @@
 #emTintVisualizer .bmw-shade-stage{aspect-ratio:2048/608!important}
 #emTintVisualizer .bmw-shade-image{width:100%!important;height:100%!important;object-fit:fill!important}
 #emTintVisualizer .bmw-window-mask{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+
+/* Exact BMW native-image coordinate mapping. */
+#emTintVisualizer .bmw-shade-stage{aspect-ratio:3300/960!important}
+#emTintVisualizer .bmw-shade-image{width:100%!important;height:100%!important;object-fit:fill!important}
+#emTintVisualizer .bmw-window-mask{inset:0!important;width:100%!important;height:100%!important}
