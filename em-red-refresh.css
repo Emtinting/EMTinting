@@ -1,0 +1,41 @@
+/* EM Tinting — black and red performance refresh. Keeps original forms and CRM. */
+:root{--red:#e21a22!important;--paper:#101114!important}
+body{background:#050506!important;color:#f8f8f9!important}
+.site-header{background:rgba(5,5,6,.97)!important;border-bottom:1px solid #29292d!important}
+.site-header nav a:hover,.site-header nav a:focus-visible{color:#ff333e!important}
+.brand-em,.hero h1 span,.hitek-logo{color:#f12230!important}
+.btn,.btn-small,.em-mobile-quote{background:linear-gradient(135deg,#f32230,#aa0711)!important;color:white!important;border:1px solid #ed2531!important;border-radius:8px!important;box-shadow:0 5px 22px #9c081a33}
+.btn:hover,.btn-small:hover{background:#fb303e!important}
+.hero{min-height:670px!important;background-color:#050505!important}
+.hero-overlay{background:linear-gradient(90deg,#050505 0%,rgba(5,5,5,.95) 28%,rgba(5,5,5,.42) 68%,rgba(5,5,5,.1) 100%)!important}
+.hero h1{font-style:italic;font-weight:950!important;text-transform:uppercase;letter-spacing:-.06em!important}
+.hero-copy{max-width:560px!important}
+.hero .kicker:before,.section-heading .kicker:before{content:"";display:inline-block;width:4px;height:15px;background:#f12230;margin-right:12px;vertical-align:-2px}
+.trust-strip{max-width:none!important;border-top:1px solid #2b2b2e!important;border-bottom:1px solid #2b2b2e!important}
+.trust-strip span{color:#ddd!important}
+.section-white,.section,.hitek-strip,.cta-band{background:#09090b!important;color:#f8f8f9!important}
+.section-white h2,.section h2,.section-white h3,.section h3{color:#f8f8f9!important}
+.section-white .section-intro,.section-intro,.section-white p,.section p{color:#b5b5bd}
+.service-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+.service-card{background:linear-gradient(150deg,#1c1c21,#0d0d10)!important;border:1px solid #37373d!important;min-height:310px!important;padding:24px!important;border-radius:12px!important;color:#fff!important}
+.service-card:hover{border-color:#e21a22!important;box-shadow:0 12px 30px #ad07182b!important}
+.service-card h3{font-size:clamp(20px,2vw,28px)!important;color:white!important}
+.service-card p{color:#b6b6bf!important;font-size:14px!important}
+.service-card a,.service-number{color:#f12230!important}
+.hitek-strip{border-top:1px solid #29292d!important;border-bottom:1px solid #29292d!important}
+#emTintVisualizer{background:#060607!important;color:#fff!important}
+#emTintVisualizer .em-shade-head h2,#emTintVisualizer .em-shade-head p{color:#fff!important}
+#emTintVisualizer .em-shade-stage,#emTintVisualizer .em-shade-controls{background:#0c0c0e!important}
+#emTintVisualizer .em-shade-btn{background:#131317!important;color:#fff!important;border:1px solid #35353b!important;border-radius:9px!important}
+#emTintVisualizer .em-shade-btn.active{background:linear-gradient(90deg,#57070e,#1b0a0d)!important;color:white!important;border:1px solid #f12230!important}
+#emTintVisualizer .em-shade-selected{background:#121215!important;color:#fff!important;border-left:4px solid #e21a22!important}
+#emTintVisualizer .em-shade-note{color:#aaa!important}
+.em-view-switch button[aria-pressed="true"]{background:#e21a22!important;border-color:#e21a22!important}
+.em-tint-guidance{background:#171719!important;color:#dedee3!important}
+.em-tint-guidance a{color:#ff4b55!important}
+.em-instagram-work{background:#09090b!important}
+.em-red-quicklinks{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.em-red-quicklinks a{padding:10px 15px;border:1px solid #424249;border-radius:8px;color:#f0f0f2;font-weight:700;font-size:12px;letter-spacing:.04em}
+.em-red-quicklinks a:hover{border-color:#e21a22;color:#ff414c}
+@media(max-width:1100px){.service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:620px){.service-grid{grid-template-columns:1fr!important}.hero{min-height:650px!important}.hero h1{font-size:clamp(46px,12vw,70px)!important}.site-header{background:#050506!important}.service-card{min-height:230px!important}}
