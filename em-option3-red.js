@@ -14,10 +14,10 @@ const showcase=document.createElement('section');showcase.className='em-option-s
 trust.insertAdjacentElement('afterend',film);
 const shade=document.getElementById('emTintVisualizer');if(shade)film.insertAdjacentElement('beforebegin',shade);
 film.insertAdjacentElement('afterend',showcase);
-const services=document.getElementById('services');if(services){services.classList.add('em-option-old');services.insertAdjacentElement('beforebegin',showcase);showcase.insertAdjacentElement('beforebegin',film);film.insertAdjacentElement('beforebegin',shade||document.createComment('shade'));}
+const services=document.getElementById('services');if(services){services.classList.add('em-option-old');services.insertAdjacentElement('beforebegin',showcase);showcase.insertAdjacentElement('beforebegin',film);if(shade)film.insertAdjacentElement('beforebegin',shade);}
 // Hide long-form detail sections from homepage while retaining DOM for links and backend dependencies
 for(const sel of ['.hitek-strip','#film','.film-feature','#compare','#why','.warranty-section','.cta-band','.faq'])document.querySelectorAll(sel).forEach(el=>el.classList.add('em-option-old'));
-const old=document.querySelectorAll('.em-instagram-work');old.forEach(el=>el.classList.add('em-option-old'));
+const old=document.querySelectorAll('.em-instagram-work');old.forEach(el=>{el.classList.add('em-option-old');if(el.id==='recent-work')el.id='recent-work-archive';});
 const anchor=document.querySelector('.em-option-showcase');if(anchor&&book)anchor.insertAdjacentElement('afterend',book);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(build,0));else setTimeout(build,0);
