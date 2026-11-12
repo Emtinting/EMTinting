@@ -12,7 +12,7 @@ function ensure(){
  const cal=$('#calendarView');if(!cal)return false;
  if($('#emWebsiteLeads'))return true;
  const panel=document.createElement('section');panel.id='emWebsiteLeads';panel.className='panel';
- cal.insertBefore(panel,cal.firstChild);
+ cal.insertBefore(panel,cal.firstChild);panel.hidden=true;
  panel.addEventListener('click',event=>{
   const button=event.target.closest('[data-lead-action]');if(!button)return;
   const lead=leads.find(x=>String(x.id)===button.dataset.id);if(!lead)return;
@@ -59,14 +59,15 @@ function render(){
  $('#emShowDone').onclick=()=>{const el=$('#emLeadExtra');el.hidden=!el.hidden;el.innerHTML=done.length?done.map(card).join(''):'<p>No completed or dismissed leads.</p>'};
 }
 async function load(){
- if(!ensure()||typeof db==='undefined')return;
+ if(!ensure()||typeof db==='undefined')return;addToolbarButton();
  const {data:{session}}=await db.auth.getSession();if(!session)return;
  const {data,error}=await db.from('booking_attempts').select('*').order('last_seen_at',{ascending:false}).limit(100);
  if(error){$('#emWebsiteLeads').innerHTML='<p>Unable to load website leads: '+escapeHTML(error.message)+'</p>';return}
  leads=(data||[]).filter(x=>x.phone||x.email);
  render();
 }
-const style=document.createElement('style');style.textContent=`#emWebsiteLeads{margin-bottom:20px;padding:20px;border:1px solid #444;border-radius:15px;background:#161616;color:#f4f4f4}.em-lead-title,.em-lead-head,.em-lead-actions,.em-lead-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.em-lead-title h3{margin:0 0 5px;font-size:21px}.em-lead-title p,.em-lead-muted,.em-lead-note{color:#aaa}.em-lead-summary{margin:18px 0}.em-lead-card{border:1px solid #8b5d28;background:#241d15;border-radius:13px;padding:16px;margin:12px 0}.em-lead-head strong{font-size:19px}.em-lead-head span{color:#e6b46d}.em-lead-card p{margin:12px 0}.em-lead-actions a{color:#ff8888}.em-lead-buttons{display:flex;gap:7px;flex-wrap:wrap}#emWebsiteLeads button{cursor:pointer;border:1px solid #555;border-radius:9px;background:#2c2c2c;color:white;padding:10px 13px;font:inherit}#emWebsiteLeads button[data-lead-action=contact]{background:#bc2428;border-color:#bc2428}.em-lead-footer{margin-top:15px}.em-lead-empty{padding:20px;color:#aaa;text-align:center}.em-lead-note{display:block;margin-top:12px}@media(max-width:600px){#emWebsiteLeads{padding:13px}.em-lead-actions{align-items:flex-start}.em-lead-buttons{width:100%}}`;document.head.appendChild(style);
-function init(){ensure();setTimeout(load,700);$('#refreshBtn')?.addEventListener('click',()=>setTimeout(load,400));db.auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN')setTimeout(load,500)})}
+const style=document.createElement('style');style.textContent=`#emWebsiteLeads[hidden]{display:none!important}#emToggleWebsiteLeads{border:1px solid #555;background:#252831;color:#f7f7f7}#emToggleWebsiteLeads.active{background:#b71931;border-color:#b71931;color:white}#emWebsiteLeads{margin-bottom:20px;padding:20px;border:1px solid #444;border-radius:15px;background:#161616;color:#f4f4f4}.em-lead-title,.em-lead-head,.em-lead-actions,.em-lead-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.em-lead-title h3{margin:0 0 5px;font-size:21px}.em-lead-title p,.em-lead-muted,.em-lead-note{color:#aaa}.em-lead-summary{margin:18px 0}.em-lead-card{border:1px solid #8b5d28;background:#241d15;border-radius:13px;padding:16px;margin:12px 0}.em-lead-head strong{font-size:19px}.em-lead-head span{color:#e6b46d}.em-lead-card p{margin:12px 0}.em-lead-actions a{color:#ff8888}.em-lead-buttons{display:flex;gap:7px;flex-wrap:wrap}#emWebsiteLeads button{cursor:pointer;border:1px solid #555;border-radius:9px;background:#2c2c2c;color:white;padding:10px 13px;font:inherit}#emWebsiteLeads button[data-lead-action=contact]{background:#bc2428;border-color:#bc2428}.em-lead-footer{margin-top:15px}.em-lead-empty{padding:20px;color:#aaa;text-align:center}.em-lead-note{display:block;margin-top:12px}@media(max-width:600px){#emWebsiteLeads{padding:13px}.em-lead-actions{align-items:flex-start}.em-lead-buttons{width:100%}}`;document.head.appendChild(style);
+function addToolbarButton(){const toolbar=$('#calendarView .cal-actions');if(!toolbar||$('#emToggleWebsiteLeads'))return;const btn=document.createElement('button');btn.id='emToggleWebsiteLeads';btn.type='button';btn.className='btn ghost small';btn.textContent='✉ Web leads';btn.setAttribute('aria-expanded','false');toolbar.insertBefore(btn,toolbar.querySelector('[data-cal-new]'));btn.addEventListener('click',()=>{ensure();const panel=$('#emWebsiteLeads');panel.hidden=!panel.hidden;btn.setAttribute('aria-expanded',String(!panel.hidden));btn.classList.toggle('active',!panel.hidden);if(!panel.hidden){load();panel.scrollIntoView({behavior:'smooth',block:'nearest'})}})}
+function init(){ensure();addToolbarButton();setTimeout(load,700);$('#refreshBtn')?.addEventListener('click',()=>setTimeout(load,400));db.auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN')setTimeout(load,500)})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
