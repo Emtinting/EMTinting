@@ -23,9 +23,9 @@ function build(ids,key){
  container.append(heading,fields,manual,status);
  const group=year.closest('.ew-three')||year.closest('.form-grid')||year.parentElement;
  group.parentNode.insertBefore(container,group);
- const original=[year,make,model];let manualMode=false,serial=0;
+ const original=[year,make,model];const originalsToHide=key==='crm'?original.map(el=>el.closest('label')||el):[group];let manualMode=false,serial=0;
  function dispatch(el,value){if(el.value!==value){el.value=value;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))}}
- function toggleManual(on){manualMode=on;group.classList.toggle('em-vehicle-original-hidden',!on);manual.textContent=on?'Use vehicle dropdowns':'Vehicle not listed? Enter manually';status.textContent=on?'Type the vehicle details in the fields below.':'';if(on)year.focus()}
+ function toggleManual(on){manualMode=on;originalsToHide.forEach(el=>el.classList.toggle('em-vehicle-original-hidden',!on));manual.textContent=on?'Use vehicle dropdowns':'Vehicle not listed? Enter manually';status.textContent=on?'Type the vehicle details in the fields below.':'';if(on)year.focus()}
  manual.addEventListener('click',()=>toggleManual(!manualMode));
  async function populateMakes(selected=''){ms.replaceChildren(opt('','Loading makes…'));ms.disabled=true;try{const list=await makes();ms.replaceChildren(opt('','Select make'));list.forEach(v=>ms.append(opt(v)));if(selected&&!list.some(v=>v.toLowerCase()===selected.toLowerCase()))ms.append(opt(selected));if(selected)ms.value=list.find(v=>v.toLowerCase()===selected.toLowerCase())||selected;ms.disabled=false;status.textContent=''}catch(e){ms.replaceChildren(opt('','Select make'));makesFallback.forEach(v=>ms.append(opt(v)));ms.disabled=false;status.textContent='You can enter a vehicle manually if it is missing.'}}
  async function populateModels(selected=''){
