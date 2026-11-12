@@ -1,0 +1,28 @@
+/* EM Tinting clean calendar-first workspace; presentation only. */
+#app{--bg:#0c0d10;--panel:#15171c;--panel2:#1c1f25;--border:#30333b;--muted:#a3a7b2}
+#app .sidebar{width:238px;background:#101115;border-right:1px solid #292b32;padding:22px 12px}
+#app .sidebar-brand{font-size:23px;padding:8px 12px 24px;letter-spacing:.06em}
+#app #nav{display:flex;flex-direction:column;gap:5px}
+#app #nav .nav-item{border-radius:9px;font-size:14px;font-weight:650;min-height:43px;text-align:left;padding:11px 15px;letter-spacing:0;transition:background .15s}
+#app #nav .nav-item.active{background:#bc182d;color:#fff}
+#app #nav .nav-item:not(.active):hover{background:#25272e}
+#app #nav .nav-item[data-view="calendar"]{order:-5}
+#app #nav .nav-item[data-view="bookings"]{order:-4}
+#app #nav .nav-item[data-view="customers"]{order:-3}
+#app #nav .nav-item[data-view="jobs"]{order:-2}
+#app #nav .nav-item[data-view="quotes"]{order:-1}
+#app .main{background:#101115;min-width:0}
+#app .topbar{background:#16181e;border-bottom:1px solid #30323a;padding:20px 26px;min-height:85px}
+#app .topbar .eyebrow{font-size:10px;color:#9fa3ad;letter-spacing:.16em}
+#app #pageTitle{font-size:24px;font-weight:750;letter-spacing:-.025em}
+#app .view{padding:24px 26px}
+#app .panel{border-radius:12px;border-color:#343741;box-shadow:none}
+#app #calendarView{max-width:none}
+#app #calendarView .calendar-panel{padding:18px;min-height:72vh;background:#181a20}
+#app #calendarView .cal-toolbar{gap:14px;flex-wrap:wrap}
+#app #calendarView .cal-toolbar h3{font-size:21px}
+#app #calendarView .cal-range{font-size:18px;font-weight:750;padding:16px 0}
+#app #calendarView .btn.primary{background:#e52643;border-color:#e52643}
+#app #calendarView .cal-day,#app #calendarView .cal-week,#app #calendarView .cal-month{border-color:#353841}
+#app .stats article{box-shadow:none;border-color:#343741}
+@media(max-width:900px){#app .sidebar{width:auto}#app .topbar{padding:14px 18px}#app .view{padding:14px}#app #calendarView .calendar-panel{padding:12px}}
