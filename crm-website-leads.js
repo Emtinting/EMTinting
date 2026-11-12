@@ -70,4 +70,8 @@ const style=document.createElement('style');style.textContent=`#emWebsiteLeads[h
 function addToolbarButton(){const toolbar=$('#calendarView .cal-actions');if(!toolbar||$('#emToggleWebsiteLeads'))return;const btn=document.createElement('button');btn.id='emToggleWebsiteLeads';btn.type='button';btn.className='btn ghost small';btn.textContent='✉ Web leads';btn.setAttribute('aria-expanded','false');toolbar.insertBefore(btn,toolbar.querySelector('[data-cal-new]'));btn.addEventListener('click',()=>{ensure();const panel=$('#emWebsiteLeads');panel.hidden=!panel.hidden;btn.setAttribute('aria-expanded',String(!panel.hidden));btn.classList.toggle('active',!panel.hidden);if(!panel.hidden){load();panel.scrollIntoView({behavior:'smooth',block:'nearest'})}})}
 function init(){ensure();addToolbarButton();setTimeout(load,700);$('#refreshBtn')?.addEventListener('click',()=>setTimeout(load,400));db.auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN')setTimeout(load,500)})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+// Calendar markup may be added after this script runs; keep the toolbar button in sync.
+const toolbarObserver=new MutationObserver(()=>{if($('#calendarView .cal-actions')&&!$('#emToggleWebsiteLeads'))addToolbarButton()});
+toolbarObserver.observe(document.documentElement,{childList:true,subtree:true});
+let toolbarAttempts=0;const toolbarRetry=setInterval(()=>{addToolbarButton();if($('#emToggleWebsiteLeads')||++toolbarAttempts>30)clearInterval(toolbarRetry)},500);
 })();
