@@ -144,6 +144,13 @@ html[data-service-page="ceramic-coating"] main#top > :not(#ceramic-coating):not(
 html[data-service-page="paint-correction"] main#top > :not(#paint-correction):not(#book){display:none!important}
 html[data-service-page] #local-window-tinting{display:none!important}
 </style>
+<style>
+#services .em-service-card-link{display:flex;flex-direction:column;width:100%;height:100%;color:inherit;text-decoration:none;cursor:pointer}
+#services .em-service-card-link .em26-service-photo{width:100%}
+#services .em-service-card-cta{display:block;margin:auto 0 1rem;padding:0 .55rem;color:#b70c23;font-weight:700}
+#services .em-service-card-link:hover .em-service-card-cta{text-decoration:underline}
+#services .em-service-card-link:focus-visible{outline:3px solid #df2339;outline-offset:-4px}
+</style>
 </head>
 <body>
 <header class="site-header em26-header">
@@ -168,10 +175,10 @@ html[data-service-page] #local-window-tinting{display:none!important}
 </section>
 <section id="services" class="em26-section em26-light"><p class="em26-eyebrow">OUR SERVICES</p><h2>What We Do</h2><span id="em-service-new-tab" class="em-service-sr-only">Opens in a new tab</span>
 <div class="em26-services">
-<article class="em26-tint-card"><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80')"></div><h3>Window Tint</h3><p>Premium films for comfort, style, and privacy.</p><a class="em26-tint-service" href="/?service=window-tint#film" target="_blank" rel="noopener" aria-describedby="em-service-new-tab">Explore Window Tint →</a></article>
-<article class="em26-ppf-card"><div class="em26-service-photo em26-ppf-photo" role="img" aria-label="Black BMW receiving front-end paint protection film"></div><h3>Paint Protection Film (PPF)</h3><p>Protect against rock chips, scratches, and daily wear.</p><a href="/?service=ppf#ppf-showcase" class="em26-ppf-link" target="_blank" rel="noopener" aria-describedby="em-service-new-tab">Explore PPF Coverage →</a></article>
-<article class="em26-tint-card"><div class="em26-service-photo em26-coating-photo"></div><h3>Ceramic Coating</h3><p>Long-lasting shine and enhanced protection.</p><a class="em26-tint-service" href="/?service=ceramic-coating#ceramic-coating" target="_blank" rel="noopener" aria-describedby="em-service-new-tab">Explore Ceramic Coating →</a></article>
-<article class="em26-tint-card"><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?auto=format&fit=crop&w=800&q=80')"></div><h3>Paint Correction</h3><p>Restore clarity and bring back the gloss.</p><a class="em26-tint-service" href="/?service=paint-correction#paint-correction" target="_blank" rel="noopener" aria-describedby="em-service-new-tab">Explore Paint Correction →</a></article>
+<article class="em26-tint-card"><a class="em-service-card-link" href="/?service=window-tint#film" target="_blank" rel="noopener" aria-describedby="em-service-new-tab" aria-labelledby="em-service-title-1"><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80')"></div><h3 id="em-service-title-1">Window Tint</h3><p>Premium films for comfort, style, and privacy.</p><span class="em-service-card-cta" aria-hidden="true">Explore Window Tint →</span></a></article>
+<article class="em26-ppf-card"><a href="/?service=ppf#ppf-showcase" class="em-service-card-link" target="_blank" rel="noopener" aria-describedby="em-service-new-tab" aria-labelledby="em-service-title-2"><div class="em26-service-photo em26-ppf-photo" role="img" aria-label="Black BMW receiving front-end paint protection film"></div><h3 id="em-service-title-2">Paint Protection Film (PPF)</h3><p>Protect against rock chips, scratches, and daily wear.</p><span class="em-service-card-cta" aria-hidden="true">Explore PPF Coverage →</span></a></article>
+<article class="em26-tint-card"><a class="em-service-card-link" href="/?service=ceramic-coating#ceramic-coating" target="_blank" rel="noopener" aria-describedby="em-service-new-tab" aria-labelledby="em-service-title-3"><div class="em26-service-photo em26-coating-photo"></div><h3 id="em-service-title-3">Ceramic Coating</h3><p>Long-lasting shine and enhanced protection.</p><span class="em-service-card-cta" aria-hidden="true">Explore Ceramic Coating →</span></a></article>
+<article class="em26-tint-card"><a class="em-service-card-link" href="/?service=paint-correction#paint-correction" target="_blank" rel="noopener" aria-describedby="em-service-new-tab" aria-labelledby="em-service-title-4"><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?auto=format&fit=crop&w=800&q=80')"></div><h3 id="em-service-title-4">Paint Correction</h3><p>Restore clarity and bring back the gloss.</p><span class="em-service-card-cta" aria-hidden="true">Explore Paint Correction →</span></a></article>
 </div></section>
 <section id="ppf-showcase" class="em26-section em26-ppf-showcase" aria-labelledby="ppf-title">
   <p class="em26-eyebrow">HITEK PAINT PROTECTION FILM</p>
