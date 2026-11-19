@@ -119,6 +119,10 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 #ppf-showcase .em26-ppf-request>.em26-ppf-legend:first-child{margin:0 0 1rem}
 @media(max-width:390px){#ppf-showcase .em26-ppf-packages{grid-template-columns:minmax(0,1fr)}}
 </style>
+<style>
+.em-service-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.em26-service-detail{scroll-margin-top:8rem}
+</style>
 </head>
 <body>
 <header class="site-header em26-header">
@@ -141,12 +145,12 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 <div><b>♙</b><span><strong>Privacy</strong><small>A cleaner, safer ride</small></span></div>
 <div><b>⌖</b><span><strong>Houston &amp; Richmond</strong><small>Proudly serving our community</small></span></div>
 </section>
-<section id="services" class="em26-section em26-light"><p class="em26-eyebrow">OUR SERVICES</p><h2>What We Do</h2>
+<section id="services" class="em26-section em26-light"><p class="em26-eyebrow">OUR SERVICES</p><h2>What We Do</h2><span id="em-service-new-tab" class="em-service-sr-only">Opens in a new tab</span>
 <div class="em26-services">
-<article class="em26-tint-card"><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80')"></div><h3>Window Tint</h3><p>Premium films for comfort, style, and privacy.</p><a class="em26-tint-service" href="#film">Explore Window Tint →</a></article>
-<article class="em26-ppf-card"><div class="em26-service-photo em26-ppf-photo" role="img" aria-label="Black BMW receiving front-end paint protection film"></div><h3>Paint Protection Film (PPF)</h3><p>Protect against rock chips, scratches, and daily wear.</p><a href="#ppf-showcase" class="em26-ppf-link">Explore PPF Coverage →</a></article>
-<article><div class="em26-service-photo em26-coating-photo"></div><h3>Ceramic Coating</h3><p>Long-lasting shine and enhanced protection.</p></article>
-<article><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?auto=format&fit=crop&w=800&q=80')"></div><h3>Paint Correction</h3><p>Restore clarity and bring back the gloss.</p></article>
+<article class="em26-tint-card"><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80')"></div><h3>Window Tint</h3><p>Premium films for comfort, style, and privacy.</p><a class="em26-tint-service" href="#film" target="_blank" rel="noopener" aria-describedby="em-service-new-tab">Explore Window Tint →</a></article>
+<article class="em26-ppf-card"><div class="em26-service-photo em26-ppf-photo" role="img" aria-label="Black BMW receiving front-end paint protection film"></div><h3>Paint Protection Film (PPF)</h3><p>Protect against rock chips, scratches, and daily wear.</p><a href="#ppf-showcase" class="em26-ppf-link" target="_blank" rel="noopener" aria-describedby="em-service-new-tab">Explore PPF Coverage →</a></article>
+<article class="em26-tint-card"><div class="em26-service-photo em26-coating-photo"></div><h3>Ceramic Coating</h3><p>Long-lasting shine and enhanced protection.</p><a class="em26-tint-service" href="#ceramic-coating" target="_blank" rel="noopener" aria-describedby="em-service-new-tab">Explore Ceramic Coating →</a></article>
+<article class="em26-tint-card"><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?auto=format&fit=crop&w=800&q=80')"></div><h3>Paint Correction</h3><p>Restore clarity and bring back the gloss.</p><a class="em26-tint-service" href="#paint-correction" target="_blank" rel="noopener" aria-describedby="em-service-new-tab">Explore Paint Correction →</a></article>
 </div></section>
 <section id="ppf-showcase" class="em26-section em26-ppf-showcase" aria-labelledby="ppf-title">
   <p class="em26-eyebrow">HITEK PAINT PROTECTION FILM</p>
@@ -280,6 +284,27 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
   <details><summary>What tint is legal in Texas? Can I cover my whole windshield?</summary><p>Texas DPS says the front side windows must transmit at least 25% of visible light through the glass and film combined. DPS allows clear, untinted UV film across the front windshield. Tinted windshield strips are subject to placement and other limits.</p><p><a href="https://www.dps.texas.gov/section/vehicle-inspection/window-tinting-standards">Read the Texas DPS standards →</a></p></details>
 </div>
 </section>
+<section id="ceramic-coating" class="em26-section em26-dark em26-service-detail">
+  <p class="em26-eyebrow">PAINT CARE</p>
+  <h2>Ceramic Coating</h2>
+  <p>Give your paint a glossier finish and make routine washing easier with a coating that helps water bead and roll off.</p>
+  <div class="em26-tint-block">
+    <h3>What to expect</h3>
+    <p>We assess the finish, clean and prepare the paint, then apply the coating. If the paint has visible swirls or haze, ask about paint correction before coating.</p>
+    <p>We’ll confirm the preparation, curing time, and aftercare for your vehicle when we quote the job.</p>
+    <a class="btn" href="#book" data-service-quote="Ceramic Coating">Request a Ceramic Coating Quote</a>
+  </div>
+</section>
+<section id="paint-correction" class="em26-section em26-dark em26-service-detail">
+  <p class="em26-eyebrow">PAINT CARE</p>
+  <h2>Paint Correction</h2>
+  <p>Machine polishing can reduce the appearance of swirl marks, light scratches, and haze to bring back the paint’s clarity and gloss.</p>
+  <div class="em26-tint-block">
+    <h3>What to expect</h3>
+    <p>We inspect your paint before recommending a polishing approach. Results depend on the condition and depth of the defects. Deep chips and scratches may require other repair work.</p>
+    <a class="btn" href="#book" data-service-quote="Paint Correction">Request a Paint Correction Quote</a>
+  </div>
+</section>
 <section id="gallery" class="em26-section em26-light"><p class="em26-eyebrow">OUR WORK</p><div class="em26-heading"><h2>Recent Work</h2><a href="https://www.instagram.com/em_tinting/" target="_blank" rel="noopener noreferrer">View Full Gallery →</a></div>
 <div class="em26-gallery">
 <a href="https://www.instagram.com/em_tinting/" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="media/IMG_1549.jpeg" alt="EM Tinting vehicle gallery photo"><span><strong>EM Tinting</strong><small>Recent vehicle work</small></span></a>
@@ -391,7 +416,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
     if (previousRequest) notes.value = previousRequest + '\n' + notes.value;
     const currentStep = wizard.querySelector('.ew-step:not([hidden])').dataset.step;
     if (currentStep === '0') document.getElementById('ewNext').click();
-    if (pendingService === ppfService) {
+    if (pendingService !== 'Window Tint') {
       if (currentStep !== '2') document.getElementById('ewNext').click();
       document.getElementById('ewDate').focus({preventScroll: true});
     } else {
@@ -408,9 +433,9 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
       comparison.querySelector('summary').focus({preventScroll: true});
     }
     const isPpf = link.hasAttribute('data-ppf-quote');
-    if (!isPpf && !link.dataset.requestFilm && !link.dataset.tintRequest) return;
+    if (!isPpf && !link.dataset.requestFilm && !link.dataset.tintRequest && !link.dataset.serviceQuote) return;
 
-    pendingService = isPpf ? ppfService : 'Window Tint';
+    pendingService = isPpf ? ppfService : link.dataset.serviceQuote || 'Window Tint';
     pendingFilm = link.dataset.requestFilm;
     pendingRequest = link.dataset.tintRequest;
     if (isPpf) {
@@ -420,7 +445,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
     }
     const form = document.getElementById('bookingForm');
     form.elements.service.value = pendingService;
-    if (isPpf) form.elements.tint_package.value = '';
+    if (pendingService !== 'Window Tint') form.elements.tint_package.value = '';
     if (pendingFilm) form.elements.tint_package.value = pendingFilm;
     if (pendingRequest && !document.getElementById('emWizard')) {
       form.elements.notes.value = ('Requested service: ' + pendingRequest + '\n' + form.elements.notes.value).trimEnd();
@@ -433,6 +458,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
   }
   section.addEventListener('click', openQuote, true);
   ppf.addEventListener('click', openQuote, true);
+  document.querySelectorAll('.em26-service-detail').forEach(detail => detail.addEventListener('click', openQuote, true));
   if (location.hash === '#compare') comparison.open = true;
 })();
 </script>
