@@ -92,7 +92,7 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 .em26-ppf-preview{background:#101115;border:1px solid #393b43;border-radius:18px;padding:1rem;text-align:center}
 .em26-ppf-map{position:relative;width:100%;aspect-ratio:826 / 500;isolation:isolate;overflow:hidden;border-radius:12px;background:#24262a}
 .em26-ppf-map img{position:absolute;top:-94%;left:0;width:100%;height:auto;max-width:none;display:block;image-orientation:from-image}
-.em26-ppf-map span{position:absolute;inset:0;pointer-events:none;opacity:0;background:#ff234e;mix-blend-mode:screen;transition:opacity .18s ease}
+.em26-ppf-map span{position:absolute;inset:0;pointer-events:none;opacity:0;background:#00dce9;mix-blend-mode:screen;transition:opacity .18s ease}
 .em26-ppf-map .ppf-bumper{clip-path:polygon(3.03% 53.80%,3.75% 57.00%,5.45% 59.40%,7.63% 61.80%,12.47% 61.80%,18.28% 60.60%,21.91% 58.80%,23.24% 61.80%,22.15% 66.60%,21.55% 72.20%,21.43% 78.00%,21.43% 83.00%,20.94% 85.40%,18.28% 87.60%,14.29% 88.20%,10.41% 87.60%,7.75% 86.00%,5.69% 82.60%,3.87% 77.40%,2.91% 72.60%,2.42% 67.60%,2.54% 62.60%,3.15% 59.40%)}
 .em26-ppf-map .ppf-hood{clip-path:polygon(3.51% 51.80%,5.93% 47.40%,11.14% 42.60%,18.28% 36.20%,27.00% 31.20%,30.39% 31.00%,33.90% 33.00%,39.35% 34.80%,42.37% 35.60%,40.31% 36.80%,36.08% 38.80%,31.60% 41.20%,26.88% 44.80%,22.64% 48.80%,18.77% 53.20%,14.04% 57.40%,11.02% 59.00%,7.87% 60.00%,6.17% 58.60%,4.72% 56.20%)}
 .em26-ppf-map .ppf-partialHood{clip-path:polygon(3.51% 51.80%,5.93% 47.40%,11.14% 42.60%,15.01% 39.20%,17.19% 41.00%,19.01% 43.00%,20.82% 45.40%,22.40% 49.00%,18.77% 53.20%,14.04% 57.40%,11.02% 59.00%,7.87% 60.00%,6.17% 58.60%,4.72% 56.20%)}
@@ -106,10 +106,11 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 .em26-ppf-map .ppf-bumper,
 .em26-ppf-map[data-coverage="partial"] :is(.ppf-partialHood,.ppf-partialFender),
 .em26-ppf-map:is([data-coverage="front"],[data-coverage="full"]) :is(.ppf-hood,.ppf-fender),
-.em26-ppf-map[data-coverage="full"] :is(.ppf-side,.ppf-roof){opacity:.52}
-.em26-ppf-builder:has(input[value="Headlights"]:checked) .ppf-lights,
-.em26-ppf-builder:has(input[value="Door Cups"]:checked) .ppf-cups,
-.em26-ppf-builder:has(input[value="Door Edges"]:checked) .ppf-edges{opacity:1;background:#ffd374;mix-blend-mode:normal}
+.em26-ppf-map[data-coverage="plus"] :is(.ppf-hood,.ppf-partialFender),
+.em26-ppf-map[data-coverage="full"] :is(.ppf-side,.ppf-roof){opacity:.68}
+.em26-ppf-builder:has(input[value="Headlights"]:checked) .em26-ppf-packages label:has(input:checked) .ppf-lights,
+.em26-ppf-builder:has(input[value="Door Cups"]:checked) .em26-ppf-packages label:has(input:checked) .ppf-cups,
+.em26-ppf-builder:has(input[value="Door Edges"]:checked) .em26-ppf-packages label:has(input:checked) .ppf-edges{opacity:1;background:#ffd374;mix-blend-mode:normal}
 @media(prefers-reduced-motion:reduce){.em26-ppf-map span{transition:none}}
 .em26-ppf-options{border:0;padding:0;margin:0 0 1.2rem;min-width:0}
 .em26-ppf-options legend{font-weight:700;margin-bottom:.6rem;padding:0}
@@ -121,6 +122,18 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 .em26-ppf-faq details{border-top:1px solid #414248;padding:.9rem 0}
 .em26-ppf-faq summary{cursor:pointer;font-weight:700}
 @media(max-width:740px){.em26-ppf-builder{grid-template-columns:1fr}}
+</style>
+<style>
+#ppf-showcase .em26-ppf-builder{grid-template-columns:minmax(0,1fr);gap:1.1rem}
+#ppf-showcase .em26-ppf-packages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(.65rem,2vw,1.2rem);margin:0}
+#ppf-showcase .em26-ppf-packages legend{margin-bottom:.8rem}
+#ppf-showcase .em26-ppf-packages label{display:grid;grid-template-columns:auto minmax(0,1fr);align-content:start;align-items:center;gap:.55rem;padding:clamp(.65rem,2vw,1.1rem);margin:0}
+#ppf-showcase .em26-ppf-packages :is(.em26-ppf-map,small){grid-column:1/-1}
+#ppf-showcase .em26-ppf-packages label:has(input:checked){background:#132629;border-color:#00dce9}
+#ppf-showcase .em26-ppf-packages strong{font-size:clamp(.92rem,2vw,1.25rem)}
+#ppf-showcase .em26-ppf-request{max-width:48rem}
+#ppf-showcase .em26-ppf-request>.em26-ppf-legend:first-child{margin:0 0 1rem}
+@media(max-width:390px){#ppf-showcase .em26-ppf-packages{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -159,10 +172,13 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
   <div id="ppf-coverage" class="em26-tint-block">
     <h3>Choose your coverage</h3>
     <div class="em26-ppf-builder">
-      <div class="em26-ppf-preview">
-        <p><strong>Coverage preview</strong> · Tesla Model Y</p>
-        <div class="em26-ppf-map" data-coverage="partial">
-          <img src="media/IMG_9175.jpeg" loading="lazy" alt="Front three-quarter view of a black Tesla Model Y with the selected PPF coverage highlighted">
+      <fieldset class="em26-ppf-options em26-ppf-packages">
+        <legend>Coverage package</legend>
+        <label>
+          <input type="radio" name="ppf-coverage" value="Partial Front" checked>
+          <strong>Partial Front</strong>
+          <div class="em26-ppf-map" data-coverage="partial" aria-hidden="true">
+          <img src="media/IMG_9175.jpeg" loading="lazy" alt="">
           <span class="ppf-bumper" aria-hidden="true"></span>
           <span class="ppf-hood" aria-hidden="true"></span>
           <span class="ppf-partialHood" aria-hidden="true"></span>
@@ -174,14 +190,65 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
           <span class="ppf-cups" aria-hidden="true"></span>
           <span class="ppf-edges" aria-hidden="true"></span>
         </div>
-        <p class="em26-ppf-legend">Red shows the selected coverage. Gold marks selected add-ons. This preview shows the visible panels.</p>
-      </div>
-      <div>
-        <fieldset class="em26-ppf-options"><legend>Coverage package</legend>
-          <label><input type="radio" name="ppf-coverage" value="Partial Front" data-preview="partial" checked><span><strong>Partial Front</strong><small>Front bumper plus the leading portions of the hood and front fenders. This targets the areas most exposed to road debris.</small></span></label>
-          <label><input type="radio" name="ppf-coverage" value="Full Front" data-preview="front"><span><strong>Full Front</strong><small>Front bumper, full hood, and full front fenders. Choose this for more front-end protection without a film line across the hood.</small></span></label>
-          <label><input type="radio" name="ppf-coverage" value="Full Vehicle" data-preview="full"><span><strong>Full Vehicle</strong><small>Coverage for the exterior painted panels, including the doors, rear quarters, and rear bumper. We confirm the exact panel list for your vehicle.</small></span></label>
-        </fieldset>
+          <small>Front bumper, leading hood section, and leading front fender sections.</small>
+        </label>
+        <label>
+          <input type="radio" name="ppf-coverage" value="Full Front">
+          <strong>Full Front</strong>
+          <div class="em26-ppf-map" data-coverage="front" aria-hidden="true">
+          <img src="media/IMG_9175.jpeg" loading="lazy" alt="">
+          <span class="ppf-bumper" aria-hidden="true"></span>
+          <span class="ppf-hood" aria-hidden="true"></span>
+          <span class="ppf-partialHood" aria-hidden="true"></span>
+          <span class="ppf-fender" aria-hidden="true"></span>
+          <span class="ppf-partialFender" aria-hidden="true"></span>
+          <span class="ppf-side" aria-hidden="true"></span>
+          <span class="ppf-roof" aria-hidden="true"></span>
+          <span class="ppf-lights" aria-hidden="true"></span>
+          <span class="ppf-cups" aria-hidden="true"></span>
+          <span class="ppf-edges" aria-hidden="true"></span>
+        </div>
+          <small>Front bumper, full hood, and full front fenders.</small>
+        </label>
+        <label>
+          <input type="radio" name="ppf-coverage" value="Partial Plus">
+          <strong>Partial Plus</strong>
+          <div class="em26-ppf-map" data-coverage="plus" aria-hidden="true">
+          <img src="media/IMG_9175.jpeg" loading="lazy" alt="">
+          <span class="ppf-bumper" aria-hidden="true"></span>
+          <span class="ppf-hood" aria-hidden="true"></span>
+          <span class="ppf-partialHood" aria-hidden="true"></span>
+          <span class="ppf-fender" aria-hidden="true"></span>
+          <span class="ppf-partialFender" aria-hidden="true"></span>
+          <span class="ppf-side" aria-hidden="true"></span>
+          <span class="ppf-roof" aria-hidden="true"></span>
+          <span class="ppf-lights" aria-hidden="true"></span>
+          <span class="ppf-cups" aria-hidden="true"></span>
+          <span class="ppf-edges" aria-hidden="true"></span>
+        </div>
+          <small>Request the front bumper and full hood with partial front fender coverage. We’ll confirm availability for your vehicle.</small>
+        </label>
+        <label>
+          <input type="radio" name="ppf-coverage" value="Full Coverage">
+          <strong>Full Coverage</strong>
+          <div class="em26-ppf-map" data-coverage="full" aria-hidden="true">
+          <img src="media/IMG_9175.jpeg" loading="lazy" alt="">
+          <span class="ppf-bumper" aria-hidden="true"></span>
+          <span class="ppf-hood" aria-hidden="true"></span>
+          <span class="ppf-partialHood" aria-hidden="true"></span>
+          <span class="ppf-fender" aria-hidden="true"></span>
+          <span class="ppf-partialFender" aria-hidden="true"></span>
+          <span class="ppf-side" aria-hidden="true"></span>
+          <span class="ppf-roof" aria-hidden="true"></span>
+          <span class="ppf-lights" aria-hidden="true"></span>
+          <span class="ppf-cups" aria-hidden="true"></span>
+          <span class="ppf-edges" aria-hidden="true"></span>
+        </div>
+          <small>Exterior painted panels, including doors, rear quarters, and rear bumper. Exact coverage varies by vehicle.</small>
+        </label>
+      </fieldset>
+      <div class="em26-ppf-request">
+        <p class="em26-ppf-legend">Blue shows the visible panels covered. Gold marks add-ons on your selected example.</p>
         <fieldset class="em26-ppf-options em26-ppf-extras"><legend>Optional add-ons</legend>
           <label><input type="checkbox" name="ppf-addon" value="Headlights"><span><strong>Headlights</strong><small>Helps protect compatible lenses from road debris.</small></span></label>
           <label><input type="checkbox" name="ppf-addon" value="Door Cups"><span><strong>Door Cups</strong><small>Helps reduce fingernail scratches behind handles.</small></span></label>
@@ -396,12 +463,6 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
       document.getElementById('ewFilm').focus({preventScroll: true});
     }
   }
-
-  ppf.addEventListener('change', event => {
-    if (event.target.name === 'ppf-coverage') {
-      ppf.querySelector('.em26-ppf-map').dataset.coverage = event.target.dataset.preview;
-    }
-  });
 
   function openQuote(event) {
     const link = event.target.closest('a');
