@@ -52,3 +52,37 @@ body{margin:0;background:#070809!important;font-family:Inter,Arial,sans-serif!im
 .booking-section{background:#101114!important}
 @media(max-width:950px){.em26-header{gap:12px!important}.em26-header nav{gap:12px!important}.em26-header nav a{font-size:11px!important}.em26-phone{display:none!important}.em26-services{grid-template-columns:repeat(2,1fr)}.em26-benefits{grid-template-columns:repeat(2,1fr)}.em26-benefits>div:nth-child(2){border-right:0}}
 @media(max-width:650px){.em26-header{height:auto!important;min-height:65px!important;flex-wrap:wrap!important;padding:10px 5vw!important}.em26-header nav{order:3;width:100%;overflow-x:auto!important;gap:19px!important;padding:7px 0!important}.em26-header .brand{font-size:18px!important}.em26-header .brand-em{font-size:30px!important}.em26-header .btn-small{margin-left:auto;font-size:12px!important;padding:11px!important}.em26-hero{min-height:540px!important;background-position:58% center!important}.em26-hero .hero-content{padding:60px 5vw!important}.em26-hero h1{font-size:clamp(37px,9vw,53px)!important}.em26-hero .hero-copy{font-size:14px!important}.em26-benefits{padding:17px 3vw}.em26-benefits>div{padding:12px 8px;gap:9px}.em26-benefits b{font-size:25px}.em26-benefits strong{font-size:11px}.em26-benefits small{font-size:10px}.em26-section{padding:35px 5vw!important}.em26-services{gap:10px}.em26-service-photo{height:100px}.em26-services h3{font-size:14px}.em26-services p{font-size:11px}.em26-films,.em26-gallery{grid-template-columns:1fr}.em26-gallery a{height:230px}.em26-heading{align-items:flex-start}.em26-heading a{font-size:11px}.em26-films article{min-height:0}}
+
+/* Desktop Black Edition refinement — intentionally scoped to desktop only */
+@media(min-width:951px){
+ .site-header.em26-header{height:82px!important;padding:0 clamp(32px,5vw,100px)!important;border-bottom:1px solid #ffffff19!important;gap:clamp(18px,2vw,36px)!important}
+ .em26-header nav{gap:clamp(17px,2vw,34px)!important}
+ .em26-header nav a{font-size:13px!important;font-weight:600!important;transition:color .2s ease}
+ .em26-header .btn-small,.em26-hero .hero-actions .btn{background:#df1028!important;border-color:#df1028!important;border-radius:4px!important;box-shadow:none!important}
+ .hero.em26-hero{min-height:min(790px,calc(100svh - 82px))!important;background-image:linear-gradient(90deg,#050608 0%,rgba(5,6,8,.96) 21%,rgba(5,6,8,.68) 43%,rgba(5,6,8,.12) 77%),url('https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=2400&q=90')!important;background-size:cover!important;background-position:center 48%!important}
+ .em26-hero .hero-content{padding:95px clamp(40px,7vw,130px)!important;max-width:980px!important}
+ .em26-hero h1{font-size:clamp(58px,5.4vw,90px)!important;line-height:1.04!important;max-width:850px!important;margin:20px 0 24px!important}
+ .em26-hero .hero-copy{font-size:17px!important;max-width:650px!important;color:#e0e0e0!important}
+ .em26-hero .hero-actions{margin-top:32px!important;gap:16px!important}
+ .em26-hero .hero-actions a{min-height:50px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important}
+ .em26-benefits{padding:25px clamp(40px,7vw,130px)!important}
+ .em26-section{padding:85px clamp(40px,7vw,130px) 95px!important}
+ .em26-section h2{font-size:clamp(40px,3.5vw,58px)!important;margin-bottom:34px!important}
+ .em26-services{gap:22px!important}
+ .em26-services article{border-radius:7px!important;transition:transform .2s ease,box-shadow .2s ease}
+ .em26-services article:hover{transform:translateY(-4px);box-shadow:0 16px 34px #00000020}
+ .em26-service-photo{height:clamp(165px,15vw,260px)!important}
+ .em26-services h3{font-size:19px!important;margin-top:20px!important}
+ .em26-services p{font-size:14px!important;margin-bottom:24px!important}
+ .em26-films{gap:24px!important}
+ .em26-films article{padding:36px 32px!important;min-height:290px!important}
+ .em26-gallery{gap:24px!important}
+ .em26-gallery a{height:clamp(250px,24vw,390px)!important}
+ .em26-review{padding:95px 6vw!important}
+ .em26-ppf-gallery{gap:24px!important}
+}
+@media(min-width:951px) and (max-width:1200px){
+ .em26-header .em26-phone{display:none!important}
+ .em26-header nav{gap:15px!important}
+ .em26-hero h1{font-size:clamp(55px,5.5vw,75px)!important}
+}
