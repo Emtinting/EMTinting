@@ -1,0 +1,36 @@
+/* Mobile correction: Black Edition 2026, applied last */
+html,body{width:100%!important;max-width:100%!important;overflow-x:clip!important}
+.em26-header{width:100%!important;max-width:100vw!important;min-width:0!important;overflow:hidden!important}
+.em26-header nav{min-width:0!important}
+.em26-hero{overflow:hidden!important}
+.em26-hero .hero-content{box-sizing:border-box!important}
+.mobile-contact-bar{box-sizing:border-box!important;max-width:100vw!important}
+@media(max-width:700px){
+.site-header.em26-header{position:sticky!important;top:0!important;z-index:999!important;display:grid!important;grid-template-columns:1fr auto!important;grid-template-areas:"logo book" "nav nav"!important;align-items:center!important;height:auto!important;min-height:0!important;padding:10px 16px 7px!important;gap:7px 10px!important;background:#070708!important}
+.em26-header .brand{grid-area:logo!important;min-width:0!important;justify-self:start!important;transform:none!important;margin:0!important}
+.em26-header .brand-em{font-size:29px!important}
+.em26-header .btn-small{grid-area:book!important;justify-self:end!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:auto!important;min-width:0!important;max-width:155px!important;height:42px!important;margin:0!important;padding:8px 13px!important;font-size:12px!important;letter-spacing:0!important;white-space:nowrap!important}
+.em26-header nav{grid-area:nav!important;order:unset!important;display:flex!important;flex-wrap:nowrap!important;justify-content:space-between!important;width:100%!important;max-width:100%!important;min-width:0!important;gap:10px!important;overflow-x:auto!important;overflow-y:hidden!important;padding:5px 0 2px!important;scrollbar-width:none!important}
+.em26-header nav::-webkit-scrollbar{display:none!important}
+.em26-header nav a{flex:0 0 auto!important;font-size:11px!important;line-height:22px!important;padding:0!important}
+.em26-phone{display:none!important}
+.hero.em26-hero{min-height:640px!important;max-height:none!important;background-image:linear-gradient(180deg,rgba(5,5,7,.35) 0%,rgba(5,5,7,.12) 30%,rgba(5,5,7,.78) 59%,#08090b 100%),url('https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1100&q=90')!important;background-size:cover!important;background-position:62% top!important;display:flex!important;align-items:flex-end!important}
+.hero.em26-hero:before{display:none!important}
+.em26-hero .hero-content{width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:260px 22px 32px!important;text-align:left!important;position:relative!important;z-index:2!important}
+.em26-hero .kicker{font-size:10px!important;letter-spacing:.15em!important;margin:0 0 12px!important}
+.em26-hero h1{font-family:Inter,Arial,sans-serif!important;font-size:clamp(33px,8.3vw,46px)!important;line-height:1.08!important;font-style:normal!important;font-weight:900!important;text-transform:none!important;letter-spacing:-.055em!important;max-width:100%!important;margin:0 0 13px!important;overflow-wrap:normal!important}
+.em26-hero h1 span{display:inline!important}
+.em26-hero .hero-copy{font-size:13px!important;line-height:1.45!important;margin:0 0 17px!important;max-width:340px!important}
+.em26-hero .hero-actions{display:flex!important;flex-direction:row!important;justify-content:flex-start!important;align-items:stretch!important;gap:9px!important;margin:0!important}
+.em26-hero .hero-actions .btn,.em26-hero .hero-actions .em26-outline{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;width:auto!important;flex:1 1 0!important;margin:0!important;padding:12px 8px!important;font-size:12px!important;text-align:center!important;line-height:1.3!important;white-space:nowrap!important}
+.em26-hero .em26-trust{font-size:11px!important;margin:17px 0 0!important}
+.em26-hero .em26-trust span{font-size:14px!important}
+.em26-benefits{grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:12px 10px!important}
+.em26-benefits>div{min-width:0!important}
+.em26-services{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.em26-section h2{font-size:32px!important}
+.em26-gallery{grid-template-columns:1fr!important}
+.mobile-contact-bar{position:fixed!important;bottom:0!important;left:0!important;right:0!important;width:100%!important;height:54px!important;z-index:90!important}
+body{padding-bottom:54px!important}
+}
+@media(max-width:380px){.em26-hero h1{font-size:32px!important}.em26-hero .hero-content{padding-left:16px!important;padding-right:16px!important}.em26-header nav a{font-size:10px!important}.em26-hero .hero-actions .btn,.em26-hero .hero-actions .em26-outline{font-size:10px!important}}
