@@ -46,7 +46,16 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 <link rel="stylesheet" href="em-booking-wizard.css?v=20261111-emoriginal1">
 <style id="em-remove-retired-widgets">#emTintVisualizer,#emPackageBuilder,.em360,.em-exact-ui{display:none!important}a[href="#emTintVisualizer"],a[href="#emPackageBuilder"]{display:none!important}</style>
 <link rel="stylesheet" href="em-black-edition.css?v=20261111-black1">
-<link rel="stylesheet" href="em-vehicle-selectors.css?v=20261112-2"><link rel="stylesheet" href="em-black-edition-2026.css?v=20261119-2"><link rel="stylesheet" href="em26-layout.css?v=20261119-1"><link rel="stylesheet" href="em26-mobile-fix.css?v=20261119-3"><link rel="stylesheet" href="em26-ppf-update.css?v=20261119-2"></head>
+<link rel="stylesheet" href="em-vehicle-selectors.css?v=20261112-2"><link rel="stylesheet" href="em-black-edition-2026.css?v=20261119-2"><link rel="stylesheet" href="em26-layout.css?v=20261119-1"><link rel="stylesheet" href="em26-mobile-fix.css?v=20261119-3"><link rel="stylesheet" href="em26-ppf-update.css?v=20261119-2"><style>
+.em26-film-request::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.em26-films article:has(.em26-film-request:is(:hover,:focus-visible)){outline:2px solid #ff3449;outline-offset:3px}
+.em26-film-comparison{margin-top:1.25rem;scroll-margin-top:8rem}
+.em26-film-comparison summary{cursor:pointer;font-weight:700;color:#ff3449}
+.em26-film-comparison dt{font-weight:700;margin-top:1rem}
+.em26-film-comparison dd{margin:0.25rem 0;color:#c8c8c8}
+#book{scroll-margin-top:8rem}
+</style>
+</head>
 <body>
 <header class="site-header em26-header">
 <a class="brand" href="#top"><span class="brand-em">EM</span><span>TINTING</span></a>
@@ -78,11 +87,22 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 <section id="ppf-showcase" class="em26-section em26-ppf-showcase"><p class="em26-eyebrow">PAINT PROTECTION FILM</p><h2>Protect Your Paint.<br>Preserve Your Investment.</h2><p class="em26-ppf-intro">See real front-end PPF installation work. Help protect your vehicle against road debris, rock chips and everyday wear.</p><div class="em26-ppf-gallery"><figure><img src="media/IMG_1540.jpeg" loading="lazy" alt="Front view of black BMW during paint protection film installation"><figcaption>Front-end PPF installation</figcaption></figure><figure><img src="media/IMG_1539.jpeg" loading="lazy" alt="Angled view of black BMW during paint protection film installation"><figcaption>Precision paint protection work</figcaption></figure></div><a class="btn" href="#book">Get a PPF Quote</a></section>
 <section id="film" class="em26-section em26-dark"><p class="em26-eyebrow">PREMIUM WINDOW FILMS</p><div class="em26-heading"><h2>Choose Your Film</h2><a href="#compare">Compare Films →</a></div>
 <div class="em26-films">
-<article><h3>Carbon</h3><p class="em26-price">Starting at <b>$160</b></p><p>Classic style and privacy at an excellent value.</p><div class="em26-meter"><span>Carbon window film</span></div><a href="#book">Request Carbon →</a></article>
-<article class="em26-featured"><div class="em26-popular">MOST POPULAR</div><h3>Ceramic IR</h3><p class="em26-price">Starting at <b>$300</b></p><p>Superior heat rejection, clarity and long-term performance.</p><div class="em26-meter"><span>75% IR rejection*</span><i style="width:75%"></i></div><a href="#book">Request Ceramic IR →</a></article>
-<article><h3>Ceramic Plus</h3><p class="em26-price">Starting at <b>$450</b></p><p>Premium heat protection for maximum comfort.</p><div class="em26-meter"><span>Up to 92% IR rejection*</span><i style="width:92%"></i></div><a href="#book">Request Ceramic Plus →</a></article>
+<article><h3>Carbon</h3><p class="em26-price">Starting at <b>$160</b></p><p>Classic style and privacy at an excellent value.</p><div class="em26-meter"><span>Carbon window film</span></div><a class="em26-film-request" href="#book" data-request-film="HITEK Carbon">Request Carbon →</a></article>
+<article class="em26-featured"><div class="em26-popular">MOST POPULAR</div><h3>Ceramic IR</h3><p class="em26-price">Starting at <b>$300</b></p><p>Superior heat rejection, clarity and long-term performance.</p><div class="em26-meter"><span>75% IR rejection*</span><i style="width:75%"></i></div><a class="em26-film-request" href="#book" data-request-film="HITEK Ceramic IR">Request Ceramic IR →</a></article>
+<article><h3>Ceramic Plus</h3><p class="em26-price">Starting at <b>$450</b></p><p>Premium heat protection for maximum comfort.</p><div class="em26-meter"><span>Up to 92% IR rejection*</span><i style="width:92%"></i></div><a class="em26-film-request" href="#book" data-request-film="HITEK Ceramic Plus">Request Ceramic Plus →</a></article>
 </div><p class="em26-fine">*Film performance depends on the selected product, shade, glass and measurement method. Ask for the applicable HITEK specifications.</p>
-<div id="compare" class="em26-compare"><strong>All packages professionally installed.</strong><span>Ask about available shades, windshield tint, and warranty coverage.</span><a href="#book">Get My Quote →</a></div>
+<div class="em26-compare"><strong>All packages professionally installed.</strong><span>Ask about available shades, windshield tint, and warranty coverage.</span><a href="#book">Get My Quote →</a></div>
+<details id="compare" class="em26-film-comparison">
+  <summary>Compare film options</summary>
+  <dl>
+    <dt>Carbon · Starting at $160</dt>
+    <dd>Classic tint for privacy and glare reduction.</dd>
+    <dt>Ceramic IR · Starting at $300</dt>
+    <dd>Ceramic film for everyday heat control, with up to 75% IR rejection.</dd>
+    <dt>Ceramic Plus · Starting at $450</dt>
+    <dd>Premium ceramic film with up to 92% IR rejection.</dd>
+  </dl>
+</details>
 </section>
 <section id="gallery" class="em26-section em26-light"><p class="em26-eyebrow">OUR WORK</p><div class="em26-heading"><h2>Recent Work</h2><a href="https://www.instagram.com/em_tinting/" target="_blank" rel="noopener noreferrer">View Full Gallery →</a></div>
 <div class="em26-gallery">
@@ -145,4 +165,47 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
 <script src="em-booking-wizard-fixed-20261111.js?v=yearselect-timefix-20261111-2"></script>
 <script>document.addEventListener('DOMContentLoaded',()=>{const remove=()=>{document.querySelectorAll('#emTintVisualizer,#emPackageBuilder').forEach(el=>el.remove());document.querySelectorAll('a[href="#emTintVisualizer"],a[href="#emPackageBuilder"]').forEach(el=>el.remove());};remove();setTimeout(remove,700);});</script>
 <script src="em-black-edition.js?v=20261111-black1"></script>
-<script src="em-vehicle-selectors.js?v=20261112-simple3"></script></body></html>
+<script src="em-vehicle-selectors.js?v=20261112-simple3"></script><script>
+(() => {
+  const section = document.getElementById('film');
+  const comparison = document.getElementById('compare');
+  const booking = document.getElementById('book');
+  let pendingFilm;
+  const wizardObserver = new MutationObserver(applyFilm);
+
+  function applyFilm() {
+    const wizard = document.getElementById('emWizard');
+    if (!wizard) return;
+    wizardObserver.disconnect();
+
+    wizard.querySelector('[data-key="service"] [data-value="Window Tint"]').click();
+    document.getElementById('ewFilm').value = pendingFilm;
+    const currentStep = wizard.querySelector('.ew-step:not([hidden])').dataset.step;
+    if (currentStep === '0') document.getElementById('ewNext').click();
+    if (currentStep === '2') document.getElementById('ewBackBtn').click();
+    document.getElementById('ewFilm').focus({preventScroll: true});
+  }
+
+  section.addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (link.hash === '#compare') {
+      comparison.open = true;
+      comparison.querySelector('summary').focus({preventScroll: true});
+    }
+    if (!link.dataset.requestFilm) return;
+
+    pendingFilm = link.dataset.requestFilm;
+    const form = document.getElementById('bookingForm');
+    form.elements.service.value = 'Window Tint';
+    form.elements.tint_package.value = pendingFilm;
+    if (document.getElementById('emWizard')) {
+      applyFilm();
+    } else {
+      wizardObserver.observe(booking, {childList: true});
+    }
+  }, true);
+  if (location.hash === '#compare') comparison.open = true;
+})();
+</script>
+</body></html>
