@@ -10,3 +10,29 @@
 .em26-ppf-gallery figcaption{position:absolute;bottom:0;left:0;right:0;padding:32px 18px 16px;color:white;font-size:13px;font-weight:700;background:linear-gradient(transparent,#000b)}
 .em26-ppf-showcase>.btn{display:inline-flex!important;width:auto!important;padding:14px 24px!important;text-decoration:none}
 @media(max-width:650px){.em26-ppf-gallery{grid-template-columns:1fr;gap:12px}.em26-ppf-gallery figure{min-height:0}.em26-ppf-gallery img{height:300px;min-height:0}.em26-ppf-showcase>.btn{width:100%!important;justify-content:center}}
+
+/* 2026-11-19: prevent PPF preview from forcing desktop-width mobile layout */
+#ppf-showcase, #ppf-showcase *, #ppf-coverage, #ppf-coverage * {box-sizing:border-box}
+#ppf-showcase, #ppf-coverage, #ppf-showcase .em26-tint-block,
+#ppf-showcase .em26-ppf-builder, #ppf-showcase .em26-ppf-preview,
+#ppf-showcase .em26-ppf-map, #ppf-showcase .em26-ppf-options {min-width:0;max-width:100%}
+#ppf-showcase .em26-ppf-builder{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+#ppf-showcase .em26-ppf-preview>p{max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+#ppf-showcase .em26-ppf-preview>p:first-child{font-size:clamp(14px,2.4vw,18px)!important}
+#ppf-showcase .em26-ppf-legend{font-size:clamp(12px,1.5vw,14px)!important;line-height:1.55!important;text-align:left}
+#ppf-showcase .em26-ppf-options legend{font-size:clamp(18px,2.6vw,24px)!important;line-height:1.25;white-space:normal}
+#ppf-showcase .em26-ppf-options label{min-width:0}
+#ppf-showcase .em26-ppf-options label span{min-width:0;overflow-wrap:anywhere}
+#ppf-showcase .em26-ppf-map{width:100%;aspect-ratio:826/500}
+#ppf-showcase .em26-ppf-map img{width:100%;max-width:none}
+@media(max-width:740px){
+ #ppf-showcase .em26-ppf-builder{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:20px!important}
+ #ppf-showcase .em26-ppf-preview{width:100%!important;padding:12px!important;border-radius:12px}
+ #ppf-showcase .em26-ppf-map{width:100%!important;aspect-ratio:826/500!important;border-radius:9px}
+ #ppf-showcase .em26-ppf-preview>p:first-child{font-size:15px!important;margin:0 0 10px!important}
+ #ppf-showcase .em26-ppf-legend{font-size:12px!important;margin-top:10px!important}
+ #ppf-showcase .em26-ppf-options legend{font-size:20px!important}
+ #ppf-showcase .em26-ppf-options label{padding:12px!important}
+ #ppf-showcase .em26-ppf-options small{font-size:12px!important}
+ #ppf-showcase .em26-tint-nav{max-width:100%;flex-wrap:wrap}
+}
