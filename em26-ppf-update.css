@@ -1,5 +1,12 @@
-/* Temporary visual placeholders until original BMW PPF photos are uploaded to media/ */
-.em26-ppf-photo{background-image:linear-gradient(0deg,rgba(0,0,0,.1),rgba(0,0,0,.1)),url('https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=900&q=85')!important;background-color:#171717!important}
-.em26-coating-photo{background-image:url('https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?auto=format&fit=crop&w=900&q=85')!important;background-color:#171717!important}
-.em26-ppf-link{display:inline-block;color:#c81023!important;font-size:12px;font-weight:800;text-decoration:none;margin:0 0 18px}
-.em26-ppf-card{display:flex;flex-direction:column;align-items:center}.em26-ppf-card .em26-service-photo{width:100%}
+/* EM Tinting genuine PPF photos and responsive showcase */
+.em26-ppf-photo{background-image:url('media/IMG_1540.jpeg')!important;background-size:cover!important;background-position:center 55%!important;background-color:#161616!important}
+.em26-coating-photo{background-image:url('media/IMG_9175.jpeg')!important;background-size:cover!important;background-position:center!important;background-color:#171717!important}
+.em26-ppf-showcase{background:#0b0c0e!important;color:#fff!important}
+.em26-ppf-showcase h2{color:#fff!important;line-height:1.08!important}
+.em26-ppf-intro{color:#c8c8c8!important;max-width:660px;margin:0 0 24px!important}
+.em26-ppf-gallery{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin:18px 0 26px}
+.em26-ppf-gallery figure{margin:0;position:relative;overflow:hidden;border-radius:10px;background:#181818;min-height:280px}
+.em26-ppf-gallery img{display:block;width:100%;height:100%;max-height:460px;min-height:280px;object-fit:cover;object-position:center}
+.em26-ppf-gallery figcaption{position:absolute;bottom:0;left:0;right:0;padding:32px 18px 16px;color:white;font-size:13px;font-weight:700;background:linear-gradient(transparent,#000b)}
+.em26-ppf-showcase>.btn{display:inline-flex!important;width:auto!important;padding:14px 24px!important;text-decoration:none}
+@media(max-width:650px){.em26-ppf-gallery{grid-template-columns:1fr;gap:12px}.em26-ppf-gallery figure{min-height:0}.em26-ppf-gallery img{height:300px;min-height:0}.em26-ppf-showcase>.btn{width:100%!important;justify-content:center}}
