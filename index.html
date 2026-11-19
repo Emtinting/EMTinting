@@ -83,6 +83,38 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 #tint-guides details{border-top:1px solid #414248;padding:.9rem 0}
 #tint-guides summary{cursor:pointer;font-weight:700}
 </style>
+<style>
+#ppf-showcase{scroll-margin-top:8rem}
+.em26-ppf-card{position:relative}
+.em26-ppf-card .em26-ppf-link::after{content:"";position:absolute;inset:0}
+.em26-ppf-card:focus-within{outline:2px solid #d81b33;outline-offset:3px}
+.em26-ppf-builder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(1rem,4vw,3rem);align-items:start}
+.em26-ppf-preview{background:#101115;border:1px solid #393b43;border-radius:18px;padding:1rem;text-align:center}
+.em26-ppf-map{display:grid;grid-template-columns:1fr 1.75fr 1fr;grid-template-areas:"bumper bumper bumper" "lf hood rf" "ls glass rs" "ls roof rs" "ls rear-glass rs" "rear rear rear";gap:4px;max-width:325px;margin:1.5rem auto}
+.em26-ppf-map span{display:grid;place-items:center;font-size:clamp(.68rem,1.3vw,.85rem);min-height:34px;background:#30323a;color:#fff;border-radius:6px;padding:4px}
+.em26-ppf-map .ppf-bumper{grid-area:bumper;border-radius:40% 40% 7px 7px}
+.em26-ppf-map .ppf-hood{grid-area:hood;min-height:76px}
+.em26-ppf-map .ppf-left-fender{grid-area:lf}
+.em26-ppf-map .ppf-right-fender{grid-area:rf}
+.em26-ppf-map .ppf-glass{grid-area:glass;background:#19242e}
+.em26-ppf-map .ppf-roof{grid-area:roof;min-height:72px}
+.em26-ppf-map .ppf-left-side{grid-area:ls}
+.em26-ppf-map .ppf-right-side{grid-area:rs}
+.em26-ppf-map .ppf-rear-glass{grid-area:rear-glass;background:#19242e}
+.em26-ppf-map .ppf-rear{grid-area:rear;border-radius:7px 7px 28% 28%}
+.em26-ppf-map .ppf-bumper,.em26-ppf-map:is([data-coverage="full"],[data-coverage="front"]) :is(.ppf-hood,.ppf-left-fender,.ppf-right-fender),.em26-ppf-map[data-coverage="full"] :is(.ppf-roof,.ppf-left-side,.ppf-right-side,.ppf-rear){background:#b81730}
+.em26-ppf-map[data-coverage="partial"] :is(.ppf-hood,.ppf-left-fender,.ppf-right-fender){background:linear-gradient(to bottom,#b81730 38%,#30323a 38%)}
+.em26-ppf-options{border:0;padding:0;margin:0 0 1.2rem;min-width:0}
+.em26-ppf-options legend{font-weight:700;margin-bottom:.6rem;padding:0}
+.em26-ppf-options label{display:flex;gap:.7rem;align-items:flex-start;padding:.7rem .8rem;margin-bottom:.4rem;border:1px solid #525257;border-radius:9px;cursor:pointer}
+.em26-ppf-options label:has(input:checked){border-color:#ff536a;background:#2c1820}
+.em26-ppf-options input{width:1rem!important;height:1rem!important;margin:.2rem 0 0!important;flex:none;accent-color:#f22442}
+.em26-ppf-options small{display:block;color:#ccc;line-height:1.45;margin-top:.15rem}
+.em26-ppf-legend{font-size:.85rem;margin:.65rem 0 0}
+.em26-ppf-faq details{border-top:1px solid #414248;padding:.9rem 0}
+.em26-ppf-faq summary{cursor:pointer;font-weight:700}
+@media(max-width:740px){.em26-ppf-builder{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="site-header em26-header">
@@ -108,11 +140,65 @@ observer.observe(document.documentElement,{childList:true,subtree:true});
 <section id="services" class="em26-section em26-light"><p class="em26-eyebrow">OUR SERVICES</p><h2>What We Do</h2>
 <div class="em26-services">
 <article class="em26-tint-card"><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80')"></div><h3>Window Tint</h3><p>Premium films for comfort, style, and privacy.</p><a class="em26-tint-service" href="#film">Explore Window Tint →</a></article>
-<article class="em26-ppf-card"><div class="em26-service-photo em26-ppf-photo" role="img" aria-label="Black BMW receiving front-end paint protection film"></div><h3>Paint Protection Film (PPF)</h3><p>Protect against rock chips, scratches, and daily wear.</p><a href="#book" class="em26-ppf-link">Get a PPF Quote →</a></article>
+<article class="em26-ppf-card"><div class="em26-service-photo em26-ppf-photo" role="img" aria-label="Black BMW receiving front-end paint protection film"></div><h3>Paint Protection Film (PPF)</h3><p>Protect against rock chips, scratches, and daily wear.</p><a href="#ppf-showcase" class="em26-ppf-link">Explore PPF Coverage →</a></article>
 <article><div class="em26-service-photo em26-coating-photo"></div><h3>Ceramic Coating</h3><p>Long-lasting shine and enhanced protection.</p></article>
 <article><div class="em26-service-photo" style="background-image:url('https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?auto=format&fit=crop&w=800&q=80')"></div><h3>Paint Correction</h3><p>Restore clarity and bring back the gloss.</p></article>
 </div></section>
-<section id="ppf-showcase" class="em26-section em26-ppf-showcase"><p class="em26-eyebrow">PAINT PROTECTION FILM</p><h2>Protect Your Paint.<br>Preserve Your Investment.</h2><p class="em26-ppf-intro">See real front-end PPF installation work. Help protect your vehicle against road debris, rock chips and everyday wear.</p><div class="em26-ppf-gallery"><figure><img src="media/IMG_1540.jpeg" loading="lazy" alt="Front view of black BMW during paint protection film installation"><figcaption>Front-end PPF installation</figcaption></figure><figure><img src="media/IMG_1539.jpeg" loading="lazy" alt="Angled view of black BMW during paint protection film installation"><figcaption>Precision paint protection work</figcaption></figure></div><a class="btn" href="#book">Get a PPF Quote</a></section>
+<section id="ppf-showcase" class="em26-section em26-ppf-showcase" aria-labelledby="ppf-title">
+  <p class="em26-eyebrow">HITEK PAINT PROTECTION FILM</p>
+  <h2 id="ppf-title">Paint Protection Film for Houston &amp; Richmond</h2>
+  <p class="em26-ppf-intro">Clear PPF helps protect your finish from rock chips, road debris, and light surface scratches. Compare coverage for the roads you drive in Houston and Richmond.</p>
+  <nav class="em26-tint-nav" aria-label="PPF sections"><a href="#ppf-coverage">Compare coverage</a><a href="#ppf-work">See our work</a><a href="#ppf-care">Film &amp; care</a></nav>
+  <div id="ppf-coverage" class="em26-tint-block">
+    <h3>Choose your coverage</h3>
+    <div class="em26-ppf-builder">
+      <div class="em26-ppf-preview">
+        <p><strong>Coverage preview</strong> · Front of vehicle at top</p>
+        <div class="em26-ppf-map" data-coverage="partial" aria-hidden="true">
+          <span class="ppf-bumper">Front bumper</span>
+          <span class="ppf-hood">Hood</span>
+          <span class="ppf-left-fender">Front fender</span>
+          <span class="ppf-right-fender">Front fender</span>
+          <span class="ppf-glass">Windshield</span>
+          <span class="ppf-left-side">Doors</span>
+          <span class="ppf-right-side">Doors</span>
+          <span class="ppf-roof">Roof</span>
+          <span class="ppf-rear-glass">Rear glass</span>
+          <span class="ppf-rear">Rear panels</span>
+        </div>
+        <p class="em26-ppf-legend">Red highlights the painted surfaces included. Coverage varies by vehicle.</p>
+      </div>
+      <div>
+        <fieldset class="em26-ppf-options"><legend>Coverage package</legend>
+          <label><input type="radio" name="ppf-coverage" value="Partial Front" data-preview="partial" checked><span><strong>Partial Front</strong><small>Front bumper plus the leading portions of the hood and front fenders. This targets the areas most exposed to road debris.</small></span></label>
+          <label><input type="radio" name="ppf-coverage" value="Full Front" data-preview="front"><span><strong>Full Front</strong><small>Front bumper, full hood, and full front fenders. Choose this for more front-end protection without a film line across the hood.</small></span></label>
+          <label><input type="radio" name="ppf-coverage" value="Full Vehicle" data-preview="full"><span><strong>Full Vehicle</strong><small>Coverage for the exterior painted panels, including the doors, rear quarters, and rear bumper. We confirm the exact panel list for your vehicle.</small></span></label>
+        </fieldset>
+        <fieldset class="em26-ppf-options em26-ppf-extras"><legend>Optional add-ons</legend>
+          <label><input type="checkbox" name="ppf-addon" value="Headlights"><span><strong>Headlights</strong><small>Helps protect compatible lenses from road debris.</small></span></label>
+          <label><input type="checkbox" name="ppf-addon" value="Door Cups"><span><strong>Door Cups</strong><small>Helps reduce fingernail scratches behind handles.</small></span></label>
+          <label><input type="checkbox" name="ppf-addon" value="Door Edges"><span><strong>Door Edges</strong><small>Helps protect painted edges from everyday contact.</small></span></label>
+        </fieldset>
+        <a class="btn" href="#book" data-ppf-quote>Request My PPF Quote</a>
+        <p class="em26-ppf-legend">We confirm pricing, film availability, and turnaround for your vehicle.</p>
+      </div>
+    </div>
+  </div>
+  <div id="ppf-work" class="em26-tint-block"><h3>PPF installation at EM Tinting</h3><div class="em26-ppf-gallery"><figure><img src="media/IMG_1540.jpeg" loading="lazy" alt="Front view of black BMW during paint protection film installation"><figcaption>Front-end PPF installation</figcaption></figure><figure><img src="media/IMG_1539.jpeg" loading="lazy" alt="Angled view of black BMW during paint protection film installation"><figcaption>Precision paint protection work</figcaption></figure></div></div>
+  <div id="ppf-care" class="em26-tint-block">
+    <h3>HITEK film, installation &amp; care</h3>
+    <ol class="em26-tint-process">
+      <li><strong>Choose what to protect.</strong> We review paint condition and which panels see the most wear.</li>
+      <li><strong>Prepare and fit the film.</strong> We clean the panels, fit the clear film to the selected areas, and check the edges and finish.</li>
+      <li><strong>Review the installation.</strong> We explain washing, curing, and the warranty for the film quoted.</li>
+    </ol>
+    <div class="em26-ppf-faq">
+      <details><summary>How is PPF different from ceramic coating?</summary><p>PPF is a physical film that helps protect covered panels from chips and light abrasion. Ceramic coating can make a surface easier to clean and adds gloss.</p></details>
+      <details><summary>Will I see an edge on Partial Front coverage?</summary><p>A film edge may be visible where the partial hood and fender coverage ends. Full Front covers the entire hood and front fenders.</p></details>
+      <details><summary>Can you install PPF over existing chips or scratches?</summary><p>We assess existing damage first. Film follows the surface underneath, so visible defects may need attention before installation.</p></details>
+    </div>
+  </div>
+</section>
 <section id="film" class="em26-section em26-dark"><p class="em26-eyebrow">PREMIUM WINDOW FILMS</p><div class="em26-heading"><h2>Choose Your Film</h2><a href="#compare">Compare Films →</a></div>
 <nav class="em26-tint-nav" aria-label="Window tint sections"><a href="#film-selector">Film details</a><a href="#windshield-tint">Windshield tint</a><a href="#tint-installation">Installation &amp; care</a><a href="#tint-guides">Guides &amp; FAQs</a></nav>
 <div class="em26-films">
@@ -271,6 +357,9 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
   selectProfile(0);
   picker.hidden = false;
 
+  const ppf = document.getElementById('ppf-showcase');
+  const ppfService = 'Paint Protection Film (PPF)';
+  let pendingService;
   let pendingFilm;
   let pendingRequest;
   let previousRequest;
@@ -281,7 +370,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
     if (!wizard) return;
     wizardObserver.disconnect();
 
-    wizard.querySelector('[data-key="service"] [data-value="Window Tint"]').click();
+    wizard.querySelector('[data-key="service"] [data-value="' + pendingService + '"]').click();
     if (pendingFilm) document.getElementById('ewFilm').value = pendingFilm;
     const notes = document.getElementById('ewNotes');
     if (previousRequest && notes.value.startsWith(previousRequest + '\n')) {
@@ -291,23 +380,42 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
     if (previousRequest) notes.value = previousRequest + '\n' + notes.value;
     const currentStep = wizard.querySelector('.ew-step:not([hidden])').dataset.step;
     if (currentStep === '0') document.getElementById('ewNext').click();
-    if (currentStep === '2') document.getElementById('ewBackBtn').click();
-    document.getElementById('ewFilm').focus({preventScroll: true});
+    if (pendingService === ppfService) {
+      if (currentStep !== '2') document.getElementById('ewNext').click();
+      document.getElementById('ewDate').focus({preventScroll: true});
+    } else {
+      if (currentStep === '2') document.getElementById('ewBackBtn').click();
+      document.getElementById('ewFilm').focus({preventScroll: true});
+    }
   }
 
-  section.addEventListener('click', event => {
+  ppf.addEventListener('change', event => {
+    if (event.target.name === 'ppf-coverage') {
+      ppf.querySelector('.em26-ppf-map').dataset.coverage = event.target.dataset.preview;
+    }
+  });
+
+  function openQuote(event) {
     const link = event.target.closest('a');
     if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     if (link.hash === '#compare') {
       comparison.open = true;
       comparison.querySelector('summary').focus({preventScroll: true});
     }
-    if (!link.dataset.requestFilm && !link.dataset.tintRequest) return;
+    const isPpf = link.hasAttribute('data-ppf-quote');
+    if (!isPpf && !link.dataset.requestFilm && !link.dataset.tintRequest) return;
 
+    pendingService = isPpf ? ppfService : 'Window Tint';
     pendingFilm = link.dataset.requestFilm;
     pendingRequest = link.dataset.tintRequest;
+    if (isPpf) {
+      const coverage = ppf.querySelector('[name="ppf-coverage"]:checked').value;
+      const extras = [...ppf.querySelectorAll('[name="ppf-addon"]:checked')].map(input => input.value);
+      pendingRequest = 'PPF ' + coverage + (extras.length ? ' with ' + extras.join(', ') : '');
+    }
     const form = document.getElementById('bookingForm');
-    form.elements.service.value = 'Window Tint';
+    form.elements.service.value = pendingService;
+    if (isPpf) form.elements.tint_package.value = '';
     if (pendingFilm) form.elements.tint_package.value = pendingFilm;
     if (pendingRequest && !document.getElementById('emWizard')) {
       form.elements.notes.value = ('Requested service: ' + pendingRequest + '\n' + form.elements.notes.value).trimEnd();
@@ -317,7 +425,9 @@ form.addEventListener('submit',async e=>{e.preventDefault();statusEl.textContent
     } else {
       wizardObserver.observe(booking, {childList: true});
     }
-  }, true);
+  }
+  section.addEventListener('click', openQuote, true);
+  ppf.addEventListener('click', openQuote, true);
   if (location.hash === '#compare') comparison.open = true;
 })();
 </script>
