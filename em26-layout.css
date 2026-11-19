@@ -1,0 +1,54 @@
+/* EM Tinting 2026 Black Edition layout */
+:root{--em26-red:#ed1025}
+body{margin:0;background:#070809!important;font-family:Inter,Arial,sans-serif!important}
+.em26-header{height:70px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;padding:0 4vw!important;gap:24px;background:#050506!important;box-sizing:border-box}
+.em26-header .brand{display:flex!important;align-items:baseline!important;gap:5px!important;text-decoration:none!important;color:white!important;font-style:italic!important;font-weight:900!important;font-size:23px!important;white-space:nowrap}
+.em26-header .brand-em{color:white!important;font-size:37px!important;line-height:1!important;letter-spacing:-.1em!important}
+.em26-header nav{display:flex!important;align-items:center!important;gap:25px!important;overflow:visible!important}
+.em26-header nav a{font-size:13px!important;color:#f3f3f3!important;text-decoration:none!important;letter-spacing:0!important;white-space:nowrap}
+.em26-header nav a:hover,.em26-heading a{color:var(--em26-red)!important}
+.em26-phone{color:white!important;text-decoration:none!important;font-size:13px!important;font-weight:700!important;white-space:nowrap}
+.em26-header .btn-small{white-space:nowrap}
+.em26-hero{min-height:540px!important;display:flex!important;align-items:center!important;position:relative!important;background:linear-gradient(90deg,#060608 0%,rgba(6,6,8,.94) 24%,rgba(6,6,8,.42) 59%,rgba(6,6,8,.1) 100%),url('https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=2000&q=90') center 52%/cover no-repeat!important}
+.em26-hero:before{background:linear-gradient(0deg,#13050833,transparent 70%)!important}
+.em26-hero .hero-content{padding:75px 4vw!important;max-width:800px!important}
+.em26-hero h1{font-size:clamp(40px,5vw,69px)!important;line-height:1.07!important;letter-spacing:-.05em!important;text-transform:none!important;margin:15px 0!important}
+.em26-hero h1 span{color:#ed1025!important}
+.em26-hero .kicker{color:#e9e9e9!important;font-size:12px!important;letter-spacing:.22em!important}
+.em26-hero .hero-copy{font-size:16px!important;line-height:1.5!important;max-width:670px!important;color:#fff!important}
+.em26-hero .hero-actions{display:flex!important;gap:14px!important;align-items:center!important;margin-top:22px!important;flex-wrap:wrap}
+.em26-outline{border:1px solid white;color:white!important;text-decoration:none;padding:15px 26px;border-radius:5px;font-weight:700}
+.em26-trust{margin-top:24px!important;color:#ddd!important;font-size:13px!important}.em26-trust span{color:#ffbc32;font-size:19px;letter-spacing:2px}
+.em26-benefits{background:#08090a;color:#fff;display:grid;grid-template-columns:repeat(4,1fr);padding:20px 4vw;gap:0}
+.em26-benefits>div{display:flex;align-items:center;gap:15px;padding:5px 22px;border-right:1px solid #2b2b2b}.em26-benefits>div:last-child{border:0}
+.em26-benefits b{font-size:34px;font-weight:400}.em26-benefits strong{display:block;font-size:13px}.em26-benefits small{display:block;color:#a9a9a9;font-size:11px;margin-top:5px}
+.em26-section{padding:45px 4vw 52px!important}
+.em26-section h2,.em26-review h2{font-size:clamp(32px,4vw,46px)!important;letter-spacing:-.05em!important;line-height:1.15!important;margin:7px 0 22px!important;font-weight:850!important}
+.em26-eyebrow{font-size:11px!important;font-weight:800!important;letter-spacing:.14em!important;color:#e71126!important;margin:0!important}
+.em26-light{background:#f6f6f6!important;color:#080808!important}
+.em26-light h2,.em26-light h3{color:#0b0b0b!important}
+.em26-dark{background:#090a0b!important;color:#fff!important}
+.em26-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}.em26-heading a{font-size:13px;text-decoration:none;font-weight:700;white-space:nowrap}
+.em26-services{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.em26-services article{background:#fff;border:1px solid #e9e9e9;border-radius:10px;overflow:hidden;text-align:center;box-shadow:0 4px 15px #0000000a}
+.em26-service-photo{height:135px;background-position:center;background-size:cover}
+.em26-services h3{font-size:17px;margin:14px 8px 7px}.em26-services p{font-size:13px;color:#555!important;line-height:1.5;margin:0 auto 20px;max-width:230px;padding:0 10px}
+.em26-films{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin-top:10px}
+.em26-films article{position:relative;background:linear-gradient(135deg,#1c1d20,#111214);border:1px solid #383838;border-radius:9px;padding:28px 23px 23px;min-height:230px;box-sizing:border-box}
+.em26-films .em26-featured{border:2px solid #e71126;box-shadow:0 0 20px #e7112625}
+.em26-popular{position:absolute;top:-13px;left:20px;background:#e71126;color:white;padding:6px 13px;border-radius:5px;font-size:10px;font-weight:800}
+.em26-films h3{font-size:24px;margin:0 0 4px;color:white}.em26-films p{color:#c8c8c8!important;font-size:13px;line-height:1.5;max-width:290px}.em26-price{margin:0 0 12px!important;color:#fff!important}.em26-price b{color:#f02439;font-size:20px}
+.em26-meter{position:relative;margin:22px 0 15px;border-bottom:7px solid #323337;padding-bottom:11px}.em26-meter span{font-size:12px;color:#fff}.em26-meter i{position:absolute;bottom:-7px;left:0;height:7px;border-radius:8px;background:#ed1025}
+.em26-films article>a{font-size:12px;color:#fff;text-decoration:none;font-weight:700}
+.em26-fine{font-size:11px!important;color:#9a9a9a!important;margin-top:18px!important}
+.em26-compare{display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-top:1px solid #333;margin-top:30px;padding-top:22px;font-size:13px}.em26-compare span{color:#aaa}.em26-compare a{color:#ff3449;margin-left:auto}
+.em26-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.em26-gallery a{display:block;position:relative;overflow:hidden;border-radius:10px;height:225px;color:white;text-decoration:none;background:#171717}
+.em26-gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}.em26-gallery a:hover img{transform:scale(1.04)}
+.em26-gallery a:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#000b)}
+.em26-gallery a span{position:absolute;z-index:2;bottom:16px;left:15px;display:grid;gap:3px}.em26-gallery strong{font-size:16px}.em26-gallery small{font-size:12px}
+.em26-gallery-note{font-size:11px!important;color:#666!important;margin:12px 0 0!important}
+.em26-review{padding:45px 4vw;background:#0a0a0c;color:#fff;text-align:center}.em26-review p:not(.em26-eyebrow){color:#c7c7c7!important;margin:0 auto 22px;max-width:620px}
+.booking-section{background:#101114!important}
+@media(max-width:950px){.em26-header{gap:12px!important}.em26-header nav{gap:12px!important}.em26-header nav a{font-size:11px!important}.em26-phone{display:none!important}.em26-services{grid-template-columns:repeat(2,1fr)}.em26-benefits{grid-template-columns:repeat(2,1fr)}.em26-benefits>div:nth-child(2){border-right:0}}
+@media(max-width:650px){.em26-header{height:auto!important;min-height:65px!important;flex-wrap:wrap!important;padding:10px 5vw!important}.em26-header nav{order:3;width:100%;overflow-x:auto!important;gap:19px!important;padding:7px 0!important}.em26-header .brand{font-size:18px!important}.em26-header .brand-em{font-size:30px!important}.em26-header .btn-small{margin-left:auto;font-size:12px!important;padding:11px!important}.em26-hero{min-height:540px!important;background-position:58% center!important}.em26-hero .hero-content{padding:60px 5vw!important}.em26-hero h1{font-size:clamp(37px,9vw,53px)!important}.em26-hero .hero-copy{font-size:14px!important}.em26-benefits{padding:17px 3vw}.em26-benefits>div{padding:12px 8px;gap:9px}.em26-benefits b{font-size:25px}.em26-benefits strong{font-size:11px}.em26-benefits small{font-size:10px}.em26-section{padding:35px 5vw!important}.em26-services{gap:10px}.em26-service-photo{height:100px}.em26-services h3{font-size:14px}.em26-services p{font-size:11px}.em26-films,.em26-gallery{grid-template-columns:1fr}.em26-gallery a{height:230px}.em26-heading{align-items:flex-start}.em26-heading a{font-size:11px}.em26-films article{min-height:0}}
