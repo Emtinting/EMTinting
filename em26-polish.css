@@ -1,0 +1,8 @@
+/* EM Tinting homepage polish — loaded last. */
+/* Services: light tile section so the "What We Do" heading is readable */
+#services.em26-light{background:#f6f6f6!important;color:#080808!important}
+#services.em26-light h2{color:#0b0b0b!important}
+/* Booking form line icons (replace emoji) */
+#emWizard .ew-service button{display:inline-flex;align-items:center;justify-content:center;gap:.6rem}
+#emWizard .ew-ico{flex:none;color:#ff3449}
+#emWizard .ew-service button.chosen .ew-ico{color:#fff}
